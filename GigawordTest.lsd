@@ -1,0 +1,16 @@
+// The URL to the LDC's Gigaword DataSource.
+ldcUrl='http://grid.ldc.upenn.edu:8080/doc_service/services/DocumentDataSource'
+
+// We are not accessing the service through the service manager so we do not
+// need a username or password.
+gigaword = new DataSourceClient(ldcUrl, null, null)
+
+String[] index = gigaword.list()
+println "Gigaword contains ${index.size()} documents."
+index.each { String key ->
+	println "Fetching ${key}"
+	Data doc = gigaword.get(key)
+	println "Document type is ${DiscriminatorRegistry.get(doc.discriminator)}"
+}
+
+println "Done."

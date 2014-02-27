@@ -1,0 +1,24 @@
+/*
+ * LAPPS services available on the Brandeis node.
+ */
+ 
+include 'Servers'
+
+// Helper function for declaring services.
+def newService = { String serviceID ->
+	return Service {
+		server servers.brandeis
+		name "brandeis_eldrad_grid_1:${serviceID}"
+	}
+}
+
+BrandeisFactory = [:]
+BrandeisFactory.create = { kind ->
+	def services = [:]
+	services.splitter = newService("${kind}.splitter")	
+	services.tokenizer = newService("${kind}.tokenizer")	
+	services.tagger = newService("${kind}.postagger")	
+	services.parser = newService("${kind}.parser")	
+	services.ner = newService("${kind}.namedentityrecognizer")	
+	return services
+}

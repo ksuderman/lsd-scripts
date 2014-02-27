@@ -1,0 +1,51 @@
+/*
+ * Servers that are part of the LAPPS grid.
+ */
+
+servers = [:]
+
+// For testing and debugging.
+servers.localhost = Server {
+    url "http://localhost:8080"
+    username "operator"
+    password "operator"
+}
+
+servers.vassar = Server {
+    url "http://grid.anc.org:8080"
+    username "temporary"
+    password "temporary"
+}
+
+servers.brandeis = Server {
+	url "http://eldrad.cs-i.brandeis.edu:8080"
+	username "eldrad"
+	password "eldrad"
+}
+
+servers.ldc = Server {
+	url  'http://grid.ldc.upenn.edu:8080'
+	username 'operator'
+	password 'operator'
+
+}
+
+if (args.server) {
+	def serverName = args.server
+	if (servers[serverName] != null) {
+		servers.default = servers[serverName]
+	}
+	else {
+		println "Unknown server ${serverName}"
+		System.exit(1)
+	}
+}
+else {
+	// If the user hasn't explicitly set a server to use 
+	// assume localhost
+	servers.default = servers.localhost
+}
+
+if (args.debug) {
+	println "Default server is ${servers.default.url}"
+}

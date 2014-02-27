@@ -1,0 +1,40 @@
+/*
+ * This script prints the annotations that each Stanford service
+ * requires and produces.
+ */
+ 
+vassar = Server {
+	url 'http://grid.anc.org:8080'
+	username 'temporary'
+	password 'temporary'
+}
+
+services = [:]
+
+// Create ServiceClients for all the Stanford services available on
+// the Vassar service node.
+['splitter', 'tokenizer', 'tagger', 'ner'].each { serviceName ->
+	services[serviceName] = Service {
+		server vassar
+		name "anc:stanford.${serviceName}_1.3.0"
+	}
+}
+
+// Define a helper method to get the Discriminator names for each
+// discriminator in the list.
+String toString(types) {
+	def names = []
+	types.each { type ->
+		names.add(DiscriminatorRegistry.get(type))
+	}
+	return names.join(", ")
+}
+
+// Display what each service requires and produces.
+services.each { name, service ->
+	println "${name}"
+	println "\trequires ${toString(service.requires())}"
+	println "\tproduces ${toString(service.produces())}"
+	println()
+}
+	

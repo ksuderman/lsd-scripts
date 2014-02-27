@@ -1,0 +1,22 @@
+vassar = Server {
+	url 'http://grid.anc.org:8080'
+	username 'temporary'
+	password 'temporary'
+}
+
+def masc = Datasource {
+	server vassar
+	name 'anc:masc.text_1.3.0'
+}
+
+def annie = Service {
+	server vassar
+	name 'anc:gate.annie_1.3.0'
+}
+
+def index = masc.list()
+def document = masc.get(index[0])
+def result = annie.execute(document)
+
+println result.payload
+

@@ -1,0 +1,41 @@
+/*
+ * An example of running a MASC document through some of the GATE services.
+ */
+ 
+def vassar = Server {
+	url 'http://grid.anc.org:8080'
+	username 'temporary'
+	password 'temporary'
+}
+
+// Populate a map with the GATE services we want to invoke.
+def gate = [:]
+def services = [ 'tokenizer', 'gazetteer', 'splitter', 'tagger', 'ner']
+services.each { service ->
+	gate[service] = Service {
+		server vassar
+		name "anc:gate.${service}_1.3.0"
+	}
+}
+
+// Create a pipeline and add the GATE processing resources.
+Pipeline pipeline = new Pipeline()
+pipeline.add(gate.tokenizer)
+pipeline.add(gate.gazetteer)
+pipeline.add(gate.splitter)
+pipeline.add(gate.tagger)
+pipeline.add(gate.ner)
+
+// Get a document from the MASC text DataSource.
+def datasource = Datasource {
+	server vassar
+	name 'anc:masc.text_1.3.0'
+}
+
+String[] keys = datasource.list()
+Data document = datasource.get(keys[0])
+
+// Run the document through the pipeline and print the result.
+Data result = pipeline.execute(document, false)
+println result.payload
+
