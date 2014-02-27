@@ -20,7 +20,7 @@ servers.vassar = Server {
 servers.brandeis = Server {
 	url "http://eldrad.cs-i.brandeis.edu:8080"
 	username "eldrad"
-	password "eldrad"
+	password "******"
 }
 
 servers.ldc = Server {
