@@ -1,0 +1,9 @@
+/*
+ * Prints all arguments passed in from the command line.
+ */
+ 
+args.each { name, value ->
+	println "${name} = '${value}'"
+}
+
+	

@@ -1,0 +1,94 @@
+/*
+ * Summarizes the annotations in a directory of files.
+ */
+if (!args.path) {
+	println "No directory specified."
+	return
+}
+
+ext = args.ext ?: 'json'
+
+summarizer = new Summarizer()
+
+include 'Servers'
+convert = Service {
+	server servers.localhost
+	name 'picard:convert.gate2json_0.3.0'
+}
+
+void scan(File directory) {
+	def pattern = ".*\\.${ext}"
+	println "Scanning ${directory.path}"
+	directory.eachFileMatch(~/.*\.${ext}$/) { file ->
+		process(file)
+	}
+}
+
+void process(File file) {
+	println "Processing ${file.path}"
+	Container container
+	if (file.name.endsWith(".xml")) {
+		Data data = new Data(Types.GATE, file.text)
+		data = convert.execute(data)
+		container = new Container(data.payload)
+	}
+	else {
+		container = new Container(file.text)
+	}
+	summarizer.summarize(container)
+}
+
+File directory = new File(args.path)
+if (!directory.exists()) {
+	println "Directory not found."
+	return
+}
+
+if (directory.isDirectory()) {
+	directory.eachDirRecurse { dir->
+		scan(dir)
+	}	
+	scan(directory)
+}
+else {
+	process(directory)
+}
+println()
+summarizer.print()
+
+return
+
+class Summarizer {
+	def annotations = [:]
+	def providers = new HashSet()
+	void summarize(Container container) {
+		container.steps.each { ProcessingStep step ->
+			def provider = step.metadata.producedBy
+			if (provider) {
+				provider.split(", ").each { 				
+					providers << it
+				}
+			}
+			step.annotations.each { a ->
+				Counter count = annotations[a.label]
+				if (count == null) {
+					count = new Counter()
+					annotations[a.label] = count
+				}
+				count.increment()
+			}
+		}
+	}
+	
+	void print() {
+		println "Annotation Providers:"
+		providers.each { println it }
+		println()
+		
+		println "Annotations"
+		annotations.each { name, value ->
+			println "${name} ${value}"
+		}
+		println()
+	}
+}

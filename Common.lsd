@@ -107,3 +107,18 @@ check = { data, type=null ->
 	}
 		
 }
+
+/*
+ * Checks that each of the values present in requires is also present
+ * in actual.
+ */
+checkArgs = { actual, required ->
+	boolean result = true
+	required.each { name ->
+		if (actual[name] == null) {
+			println "Missing parameter: ${name}"
+			result = false
+		}
+	}
+	return result
+}

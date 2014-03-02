@@ -1,0 +1,45 @@
+/*
+ * Runs all of the MASC documents through one of the GATE pipeline applications.
+ * Possible applications are: annie, opennlp, and lingpipe.
+ */
+import util.DataSourceIterator
+import org.anc.util.StopWatch
+import java.text.SimpleDateFormat
+
+include 'Servers'
+include 'Common'
+
+if (!checkArgs(args, ['out', 'gapp', 'version'])) {
+	return
+}
+
+def gridId = servers.default == servers.vassar ? 'anc' : 'picard'
+
+def masc = Datasource {
+	server servers.default
+	name "${gridId}:masc.text_1.4.0"
+}
+
+def gapp = Service {
+	server servers.vassar
+	name = "${gridId}:gate.${args.gapp}_${args.version}"
+}
+
+StopWatch timer = new StopWatch()
+def destination = createDir(args.out)
+def iterator = new util.DataSourceIterator(masc)
+int count = 0
+timer.start()
+while (iterator.hasNext()) {
+	++count
+	String key = iterator.key()
+	String title = getTitle(key)
+	println "${count}. [${key}] ${title}"
+	Data data = gapp.execute(iterator.next())
+	new File(destination, "${key}.xml").text = data.payload
+}
+timer.stop()
+println "Time : " + new SimpleDateFormat("mm:ss:SSS").format(timer.elapsed())
+
+
+	

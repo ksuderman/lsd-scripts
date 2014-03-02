@@ -1,8 +1,6 @@
 /*
- * A simple lsd script to exercise a datasource and services. 
+ * A simple lsd script to exercise a datasource and a service. 
  */
-
-println "Staring Simple.lsd"
 
 vassar = Server {
 	url 'http://grid.anc.org:8080'
@@ -17,7 +15,7 @@ masc = Datasource {
 	name 'anc:masc.text_1.4.0'
 }
 
-// Creates an org.lappsgrid.client.ServiceClient Java object for the Stanford
+// Create an org.lappsgrid.client.ServiceClient Java object for the Stanford
 // tokenizer service.
 tokenizer = Service {
 	server vassar
@@ -29,6 +27,8 @@ String[] keys = masc.list()
 Data document = masc.get(keys[0])
 Data result = tokenizer.execute(document)
 
-// We only create a new Container object so we can call toPrettyJson()
+// We only create a new Container object so we can call the toPrettyJson()
+// method; otherwise we get one big long line of JSON gibberish with no
+// whitespace.
 Container container = new Container(result.payload)
 println container.toPrettyJson()

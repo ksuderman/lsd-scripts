@@ -1,49 +1,38 @@
 import groovy.xml.*
+import util.DataSourceIterator
+import util.ServiceProvider
 
 include 'Servers'
-include 'Classes'
 include 'Common'
-include 'Stanford'
-include 'Masc'
 
-if (!args.version) {
-	println "No version number specified."
-	return	
+def masc = Datasource {
+	server servers.localhost
+	name 'picard:masc.text_1.3.0'
 }
+def ds = new DataSourceIterator(masc, 0, 20)
 
-def masc = MascFactory.new(servers.localhost, '1.3.0')
-def dsIt = DatasourceIterator.new(masc.text, 0, 20)
+def services = [ 'splitter', 'tokenizer', 'tagger', 'ner' ]
+def stanford = new ServiceProvider(servers.localhost, 'stanford', '1.3.0', services)
 
-//def id = servers.default == servers.vassar ? 'anc' : 'picard'
-//def version = args.version ?: '1.2.0'
-def stanford = StanfordServices.new(servers.localhost, args.version)
+Pipeline pipeline = new Pipeline()
+pipeline.add stanford.splitter
+pipeline.add stanford.tokenizer
+pipeline.add stanford.tagger
+pipeline.add stanford.ner
 
-def pipeline = ApplicationFactory.create()
-pipeline.verbose()
-pipeline << stanford.splitter
-pipeline << stanford.tokenizer
-pipeline << stanford.tagger
-pipeline << stanford.ner
-
-File destination = new File('/tmp/stanford')
-if (!destination.exists()) {
-	if (!destination.mkdirs()) {
-		println "Unable to create ${destination.path}"
-		System.exit(1)
-	}
-}
+File destination = createDir('/tmp/stanford')
 
 int counter = 0
-while (dsIt.hasNext()) {
-	String key = dsIt.key()
+while (ds.hasNext()) {
+	String key = ds.key()
 	String title = getTitle(key)
 	++counter
 	println "${counter}. Processing ${title} (${key})"
 
-	Data document = dsIt.next()
-	Data result = pipeline.execute(document)
+	Data document = ds.next()
+	Data result = pipeline.execute(document, false)
 	check(result)
-	File file = new File(destination, "${title}.json")
+	File file = new File(destination, "${key}.json")
 	file.text = new Container(result.payload).toPrettyJson()
 	println "Wrote ${file.path}"
 }
