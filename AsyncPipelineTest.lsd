@@ -1,0 +1,87 @@
+import concurrent.AsyncPipeline
+import concurrent.Packet
+
+include 'Servers'
+
+def masc = Datasource {
+	server servers.localhost
+	name 'picard:masc.text_1.4.0'
+}
+
+// This closure will be added to the head of the pipeline to fetch documents from
+// the Datasource and feed them into the pipeline.
+def reader = { packet ->
+	println "${packet.id}: reading ${packet.key}"
+	packet.data = masc.get(packet.key)
+	return packet
+}
+
+// This closure will be added to the tail of the pipeline and will write the result
+// to a file.
+def writer = { packet ->
+	println "${packet.id}: writing ${packet.key}"
+	String filename = "/Users/suderman/Projects/LAPPS/output/stanford/${packet.key}.json"
+	new File(filename).text = packet.data.payload
+	println "Wrote ${filename}"
+	return packet 
+}
+
+// Create a list of the service we want in the pipeline. In this context a service is
+// a closure that accepts and returns Packets, or an object that implements WebService.
+def stanford = []
+stanford << reader
+['tokenizer', 'splitter', 'tagger', 'ner'].each { service ->
+	stanford << Service {
+		server servers.localhost
+		name "picard:stanford.${service}_1.3.0"
+	}
+}
+// The PrettyPrintService formats the json in the data.payload. See below.
+stanford << new PrettyPrintService()
+stanford << writer
+
+def pipeline = new AsyncPipeline(stanford)
+
+String[] keys = masc.list()
+String waitFor
+keys[21..22].each { key ->
+	pipeline << new MascPacket(key:key)
+	waitFor = key
+}
+
+println "Waiting for ${waitFor}"
+boolean waiting = true
+while (waiting) {
+	//println "Waiting for ${waitFor}"
+	Packet packet = pipeline.value()
+	println "Pipeline returned ${packet.id}: ${packet.key}"
+	waiting = packet.key != waitFor
+	sleep(250)
+}
+println "Done."
+return
+
+class MascPacket extends Packet {
+	String key
+}
+
+class PrettyPrintService implements WebService {
+	String endpoint = "PrettyPrinterService"
+	
+	long[] requires() {
+		return [ Types.JSON ] as long[]
+	}
+	
+	long[] produces() {
+		return [ Types.JSON ] as long[]
+	}
+	
+	Data execute(Data input) {
+		input.payload = new Container(input.payload).toPrettyJson()
+		return input
+	}
+	
+	Data configure(Data input) {
+		return input
+	}
+}

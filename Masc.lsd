@@ -1,0 +1,15 @@
+include 'Servers'
+
+MascData = [:]
+MascData.new = { _server, version ->
+	def id = _server == servers.vassar ? 'anc' : 'picard'
+	def masc = [:]
+	['text', 'gold', 'headers'].each { type ->
+		masc[type] = Datasource {
+			server _server
+			name "${id}:masc.${type}_${version}"
+		}
+	}
+	
+	return masc
+}

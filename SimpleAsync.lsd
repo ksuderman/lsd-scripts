@@ -1,0 +1,105 @@
+/*
+ * An example of using the GPars library for parallelism.
+ *
+ * This example uses the GPars Dataflow to ensure each service in a pipeline
+ * is kept as busy as possible.
+ */
+@Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
+import groovyx.gpars.*
+import groovyx.gpars.dataflow.*
+
+if (!args.path) {
+	println "No output path provided. You can specify the output location with the -path option."
+	return
+}
+
+include 'Servers'
+include 'Common'
+
+// This is the data that will be passed along the dataflow to maintain all 
+// the information we are interested in.
+class Packet {
+	Data data // The data being worked on.
+	File dest // Where the result will be written.
+	String key // The MASC index key of the original document.
+}
+
+datasource = Datasource {
+	server servers.localhost
+	name 'picard:masc.text_1.3.0'
+}
+
+// Create the service clients and store them in a map.
+services = [:]
+[ 'tokenizer', 'splitter', 'tagger', 'ner' ].each { name ->
+	def id = "picard:stanford.${name}_1.3.0".toString()
+	services[name] = Service {
+		server servers.localhost
+		//name id
+	}
+}
+
+// Create directories for the output.
+File dest = createDir(args.path)
+
+/*
+ * Define one closure for each stage in the dataflow.  In essence each closure will
+ * be run in its own thread.
+ */
+
+def get = { packet ->
+	println "Getting data for key ${packet.key}"
+	packet.data = datasource.get(packet.key)
+	return packet
+}
+
+def tokenizer = { packet ->
+	println "Tokenizing ${packet.key}"
+	packet.data = services.tokenizer.execute(packet.data)
+	return packet
+}
+
+def splitter = { packet ->
+	println "Splitting ${packet.key}"
+	packet.data = services.splitter.execute(packet.data)
+	return packet
+}
+
+def tagger = { packet ->
+	println "Tagging ${packet.key}"
+	packet.data = services.tagger.execute(packet.data)
+	return packet
+}
+
+def writer = { packet ->
+	println "Saving ${packet.key}"
+	File file = new File(packet.dest, "${packet.key}.json")
+	file.text = packet.data.payload
+	println "Wrote ${file.path}"
+	// The last thing in the pipeline returns the key. This is what will show up
+	// in channel.val below.
+	return packet.key
+}
+
+
+GParsPool.withPool {
+	
+	// Build our data flow.
+	DataflowQueue queue = new DataflowQueue()
+	DataflowReadChannel channel = queue | tokenizer | splitter | tagger | writer	
+
+	// Add packets to the queue.	
+	String[] keys = datasource.list()
+	String lastKey = null
+	keys[0..9].each { key ->		
+		Packet packet = new Packet(key:key, dest:dest)
+		queue << packet
+		lastKey = key
+	} 
+	
+	// Wait for the channel to return the last key value submitted.
+	println "The last key is ${lastKey}"
+	while (channel.val !=  lastKey) { sleep 100 }	
+}
+println "Done."
+return

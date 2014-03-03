@@ -1,0 +1,17 @@
+include 'Servers'
+include 'Masc'
+include 'Test'
+
+masc = MascData.new(servers.localhost, '1.4.0')
+
+String[] text = masc.text.list()
+String[] gold = masc.gold.list()
+String[] headers = masc.headers.list()
+
+test("Wrong number of sources available.", masc.size() == 3)
+test("text != gold", text.size() == gold.size())
+test("text != headers", text.size() == headers.size())
+test("headers != gold", headers.size() == gold.size())
+
+println "Tests passed: ${passed}"
+println "Tests failed:: ${failed}"

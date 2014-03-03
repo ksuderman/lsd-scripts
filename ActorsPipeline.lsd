@@ -1,0 +1,125 @@
+import util.ServiceProvider
+@Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
+import groovyx.gpars.*
+import groovyx.gpars.dataflow.*
+
+masc = Datasource {
+	server servers.localhost
+	name 'picard:masc.text_1.4.0'
+}
+
+gate = new ServiceProvider(servers.default, 'gate', '1.3.0', ['tokenizer', 'splitter', 'tagger', 'ner'])
+
+class DataSourceService implements WebService {
+	def datasource
+	String[] keys 
+	int index
+	
+	public DataSourceService(datasource) {
+		this.datasource = datasource
+		keys = datasource.list()
+		index = 0
+	}
+	
+	long[] requires() {
+		return [] as long[]
+	}
+	
+	long[] produces() {
+		return [Types.TEXT] as long[]
+	}
+	
+	Data execute(Data ignored) {
+		if (index < keys.size()) {
+			return dataSource.get(keys[index++])
+		}	
+		return ignored	
+	}
+	
+	Data configure(Data ignored) {
+		
+	}
+}
+
+class ActorPipeline {
+	def actors
+	def services = []
+	int id = 0
+	
+	void leftShift(service) {
+		add(service)
+	}
+	
+	void add(service) {
+		services << service
+	}
+	
+	void setup() {
+		if (services.size() == 0) {
+			throw new LappsException("No services have been added to the pipeline.")
+		}
+		else {
+			actors = new ArrayList(services.size())
+			def next = null
+			for (int i = services.size() -1; i >= 0; --i) {
+				def current = new ServiceActor(services[i], next)
+				actors[i] = current
+				next = current
+			}
+		}
+	}
+
+	void leftShift(Packet packet) {
+		if (!actors) {
+			setup()
+		}
+		actors[0] << packet
+	}
+	
+	void join() {
+		actors*.join()
+	}		
+}
+
+class Packet {
+	int id
+	String key
+	Data data
+	File dest
+}
+
+class ServiceActor extends DefaultActor {
+	def service
+	def nextActor
+	
+	public SericeActor(service) {
+		this.service = service
+	}
+	
+	public ServiceActor(service, next) {
+		this.service = service
+		this.nextActor = next
+	}
+	
+	void act() {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "Running ${service.endpoint} on ${packet.key}"
+					packet.data = service.execute(packet.data)
+					if (packet.data.discriminator == Types.ERROR) {
+						println "ERROR:${service.endpoint}"
+						println package.data.payload
+					}
+					else if (nextActor) {
+						nextActor << packet
+					}
+				}
+				else {				
+					if (nextActor) nextActor << packet
+					stop()
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+passed = 0
+failed = 0
+
+test = { condition ->
+	if (!condition) {
+		println("Assertion failed.")
+		++failed
+	}
+	else {
+		++passed
+	}
+}
+
+test = { message, condition ->
+	if (!condition) {
+		println message
+		++failed
+	}
+	else {
+		++passed
+	}
+}

@@ -1,0 +1,97 @@
+/*
+ * An example of using the GPars library for parallelism.
+ */
+import util.DataSourceIterator
+import util.ServiceProvider
+@Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
+import groovyx.gpars.*
+import groovyx.gpars.actor.*
+import static groovyx.gpars.actor.Actors.*
+
+// The objects the Actors will pass back and forth.
+class Packet {
+	String key
+	Data data
+	File file
+}
+
+include 'Servers'
+include 'Common'
+
+def datasource = Datasource {
+	server servers.localhost
+	name 'picard:masc.text_1.4.0'
+}
+
+// These are the common services between the two providers we want to invoke.
+def services = [ 'tokenizer', 'splitter', 'tagger', 'ner' ]
+
+// Get the service clients.
+//def provider = new ServiceProvider(servers.vassar, 'gate', '1.3.1', services)
+def provider = new ServiceProvider(servers.vassar, 'stanford', '1.3.0', services)
+
+GParsPool.withPool {
+	saver = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "Saving ${packet.file.path}"
+					packet.file.text = packet.data.payload
+				}
+				else {
+					println "Stopping the saver"
+					stop()
+				}
+			}
+		}
+	}
+
+	splitter = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "Splitting ${packet.key}"
+					packet.data = provider.splitter.execute(packet.data)
+					saver << packet
+				}
+				else {
+					println "Stopping the splitter"
+					saver << packet
+					stop()
+				}
+			}
+		}
+	}
+
+	tokenizer = actor { 
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "Tokenizing ${packet.key}"
+					packet.data = provider.tokenizer.execute(packet.data)
+					splitter << packet
+				}
+				else {
+					println "Stopping the tokenizer."
+					splitter << packet
+					stop()
+				}
+			}
+		}
+	}
+
+
+	String[] keys = datasource.list()
+	keys[100..110].each { key ->
+		Data data = datasource.get(key)
+		File file = new File("/Users/suderman/Projects/LAPPS/output/test/${key}.json")
+		tokenizer << new Packet(key:key, data:data, file:file)
+	}
+	// An empty packet is the "poison pill" used to kill the actors.
+	tokenizer << new Packet()
+	
+	// Wait for all Actors to finish.
+	[tokenizer,splitter,saver]*.join()
+}
+println "Done."
+
