@@ -3,10 +3,17 @@
  */
 if (!args.path) {
 	println "No directory specified."
-	return
+//	return
 }
 
-ext = args.ext ?: 'json'
+ext = 'json'
+['txt', 'xml', 'csv', 'json'].each {
+	if (args[it]) {
+		ext = it
+	}
+}
+
+path = args.path ?: '/Users/suderman/Projects/LAPPS/output/stanford'
 
 summarizer = new Summarizer()
 
@@ -17,7 +24,6 @@ convert = Service {
 }
 
 void scan(File directory) {
-	def pattern = ".*\\.${ext}"
 	println "Scanning ${directory.path}"
 	directory.eachFileMatch(~/.*\.${ext}$/) { file ->
 		process(file)
@@ -38,7 +44,7 @@ void process(File file) {
 	summarizer.summarize(container)
 }
 
-File directory = new File(args.path)
+File directory = new File(path)
 if (!directory.exists()) {
 	println "Directory not found."
 	return
@@ -70,12 +76,15 @@ class Summarizer {
 				}
 			}
 			step.annotations.each { a ->
-				Counter count = annotations[a.label]
-				if (count == null) {
-					count = new Counter()
-					annotations[a.label] = count
+				AnnotationInfo info = annotations[a.label]
+				if (info == null) {
+					info = new AnnotationInfo(label:a.label)
+					annotations[a.label] = info
 				}
-				count.increment()
+				info.increment()
+				a.features.each { name,value ->
+					info.addFeature(name)
+				}
 			}
 		}
 	}
@@ -86,9 +95,35 @@ class Summarizer {
 		println()
 		
 		println "Annotations"
-		annotations.each { name, value ->
-			println "${name} ${value}"
+		annotations.each { name,info ->
+			info.print()
 		}
 		println()
+	}
+}
+
+class AnnotationInfo {
+	String label
+	int count = 0
+	Map features = [:]
+	
+	void increment() {
+		++count
+	}
+	
+	void addFeature(String name) {
+		Counter count = features[name]
+		if (count == null) {
+			count = new Counter()
+			features[name] = count
+		}
+		count.increment()
+	}
+	
+	void print() {
+		println "${label} : ${count}"
+		features.each { name, count ->
+			println "\t${name} : ${count}"
+		}
 	}
 }
