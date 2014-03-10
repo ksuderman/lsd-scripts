@@ -1,22 +1,28 @@
-vassar = Server {
-	url 'http://grid.anc.org:8080'
-	username 'temporary'
-	password 'temporary'
+include 'LAPPS'
+
+def node = Nodes.localhost
+if (args.vassar) {
+	node = Nodes.vassar
 }
 
 def masc = Datasource {
-	server vassar
-	name 'anc:masc.text_1.3.0'
+	server node.server
+	name "${node.id}:masc.text_1.3.0"
 }
 
 def annie = Service {
-	server vassar
-	name 'anc:gate.annie_1.3.0'
+	server node.server
+	name "${node.id}:gate.annie_1.3.0"
 }
 
 def index = masc.list()
-def document = masc.get(index[0])
-def result = annie.execute(document)
+index[0..9].each { key ->
+	def document = masc.get(key)
+	def result = annie.execute(document)
+	def file = new File("/tmp/annie/${key}.xml")
+	file.text = result.payload
+	println "Wrote ${file.path}"
+}
 
-println result.payload
+println "Done."
 

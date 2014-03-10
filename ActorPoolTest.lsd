@@ -1,0 +1,64 @@
+import concurrent.ActorPool
+import java.util.concurrent.*
+
+include 'LAPPS'
+include 'Masc'
+include 'Common'
+
+class Packet {
+    Data data
+    File file
+    boolean getPoison() {
+        return data == null
+    }
+}
+
+def node = Nodes.getNode()
+def service = args.service ?: 'gate.annie_1.3.1-RC1'
+def path = args.out ?: args.path ?: '/tmp'
+
+def masc = MascData.new(node, '1.4.0')
+
+def getService(node, service) {
+    return Service {
+        server node.server
+        name "${node.id}:${service}"
+    }
+}
+
+final localService = getService(Nodes.localhost, service)
+final remoteService = getService(Nodes.vassar, service)
+
+def local = { Packet packet ->
+    packet.data = localService.execute(packet.data)
+    packet.file.text = packet.data.payload
+    println "Local ${packet.file.path}"
+}
+
+def remote = { Packet packet ->
+    packet.data = remoteService.execute(packet.data)
+    packet.file.text = packet.data.payload
+    println "Remote ${packet.file.path}"
+}
+
+BlockingQueue<Packet> queue = new SynchronousQueue<Packet>()
+Thread.start {
+    def keys = masc.text.list()
+    keys[0..19].each { key ->
+        println "Fetching ${key}"
+        Packet packet = new Packet()
+        packet.data = masc.text.get(key)
+        packet.file = new File(path, "${key}.json")
+        queue.put(packet)
+    }
+    queue.put(new Packet())
+    queue.put(new Packet())
+    println "Data queue thread halted."
+}
+
+//Thread.start {
+    println "Starting the actor pool."
+    new ActorPool().start(queue, [local])
+    println "Actor pool thread halted."
+//}
+System.exit(0)

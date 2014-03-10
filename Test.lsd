@@ -1,9 +1,9 @@
 passed = 0
 failed = 0
 
-test = { condition ->
+test = { condition, message=null ->
 	if (!condition) {
-		println("Assertion failed.")
+		println message ?: 'Test failed.'
 		++failed
 	}
 	else {
@@ -11,12 +11,7 @@ test = { condition ->
 	}
 }
 
-test = { message, condition ->
-	if (!condition) {
-		println message
-		++failed
-	}
-	else {
-		++passed
-	}
+printTestResults = {
+	println "Passed: ${passed}"
+	println "Failed: ${failed}"
 }

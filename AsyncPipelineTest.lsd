@@ -1,11 +1,16 @@
 import concurrent.AsyncPipeline
 import concurrent.Packet
 
-include 'Servers'
+class MascPacket extends Packet {
+	String key
+}
 
+include 'LAPPS'
+
+def node = Nodes.localhost
 def masc = Datasource {
-	server servers.localhost
-	name 'picard:masc.text_1.4.0'
+	server node.server
+	name "${node.id}:masc.text_1.4.0"
 }
 
 // This closure will be added to the head of the pipeline to fetch documents from
@@ -20,8 +25,9 @@ def reader = { packet ->
 // to a file.
 def writer = { packet ->
 	println "${packet.id}: writing ${packet.key}"
+	String json = new Container(packet.data.payload).toPrettyJson()
 	String filename = "/Users/suderman/Projects/LAPPS/output/stanford/${packet.key}.json"
-	new File(filename).text = packet.data.payload
+	new File(filename).text = json
 	println "Wrote ${filename}"
 	return packet 
 }
@@ -32,8 +38,8 @@ def stanford = []
 stanford << reader
 ['tokenizer', 'splitter', 'tagger', 'ner'].each { service ->
 	stanford << Service {
-		server servers.localhost
-		name "picard:stanford.${service}_1.3.0"
+		server node.server
+		name "${node.id}:stanford.${service}_1.3.0"
 	}
 }
 // The PrettyPrintService formats the json in the data.payload. See below.
@@ -60,10 +66,6 @@ while (waiting) {
 }
 println "Done."
 return
-
-class MascPacket extends Packet {
-	String key
-}
 
 class PrettyPrintService implements WebService {
 	String endpoint = "PrettyPrinterService"

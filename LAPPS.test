@@ -1,0 +1,13 @@
+include 'LAPPS'
+include 'Test'
+
+Nodes.each { name, node ->
+	println "${name}\t${node.id}\t${node.server.url}"
+}
+
+test(Nodes.localhost != null)
+test(Nodes.size() == 3)
+test(Nodes.vassar.id == 'anc')
+test(Nodes.localhost.id == 'picard')
+println "Tests passed."
+

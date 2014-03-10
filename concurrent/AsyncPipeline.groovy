@@ -36,6 +36,7 @@ class AsyncPipeline {
 			throw LappsException("Cannot add ${service.class.name} to an AsyncPipeline.")
 		}
 		
+		// Add this service to the end the channel.		
 		if (channel) {
 			channel = channel.chainWith(cl)
 		}

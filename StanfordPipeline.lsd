@@ -2,17 +2,24 @@ import groovy.xml.*
 import util.DataSourceIterator
 import util.ServiceProvider
 
-include 'Servers'
+include 'LAPPS'
 include 'Common'
 
+def node = Nodes.localhost
+if (args.vassar) {
+	node = Nodes.vassar
+}
+
+def path = args.out ?: '/tmp/stanford'
+
 def masc = Datasource {
-	server servers.localhost
-	name 'picard:masc.text_1.3.0'
+	server node.server
+	name "${node.id}:masc.text_1.4.0"
 }
 def ds = new DataSourceIterator(masc, 0, 20)
 
 def services = [ 'splitter', 'tokenizer', 'tagger', 'ner' ]
-def stanford = new ServiceProvider(servers.localhost, 'stanford', '1.3.0', services)
+def stanford = new ServiceProvider(node.server, 'stanford', '1.3.0', services)
 
 Pipeline pipeline = new Pipeline()
 pipeline.add stanford.splitter
@@ -20,7 +27,7 @@ pipeline.add stanford.tokenizer
 pipeline.add stanford.tagger
 pipeline.add stanford.ner
 
-File destination = createDir('/tmp/stanford')
+File destination = createDir(path)
 
 int counter = 0
 while (ds.hasNext()) {

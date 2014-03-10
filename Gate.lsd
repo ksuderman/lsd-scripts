@@ -1,21 +1,18 @@
 /*
  * Defines a factory that creates ServiceClients for all of the Gate services.
  */
-include 'Servers'
-include 'Common'
 
-def services = ['tokenizer', 'gazetteer', 'splitter', 'tagger', 'ner', 
-	'npchunker', 'vpchunker', 'ortho', 'coref', 'annie', 'opennlp', 'lingpipe']
 
 GateServices = [:]
-GateServices.get = { _server, version ->
-	def id = _server == servers.vassar ? 'anc' : 'picard'
+GateServices.new = { node, version ->
+    println "WARNING: Gate.lsd will be deprecated soon."
 	def gate = [:]
-
+	def services = ['tokenizer', 'gazetteer', 'splitter', 'tagger', 'ner',
+		'npchunker', 'vpchunker', 'ortho', 'coref', 'annie', 'opennlp', 'lingpipe']
 	services.each { service ->
 		gate[service] = Service {
-			server _server
-			name = "${id}:gate.${service}_${version}"
+			server node.server
+			name "${node.id}:gate.${service}_${version}"
 		}
 	}
 	return gate

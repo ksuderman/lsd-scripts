@@ -4,12 +4,13 @@ import groovyx.gpars.actor.*
 import static groovyx.gpars.actor.Actors.*
 import java.util.concurrent.atomic.AtomicInteger
 
-include 'Servers'
+include 'LAPPS'
+include 'Common'
 include 'Gate'
 include 'Masc'
 
-gate = GateServices.get(servers.localhost, '1.3.1-SNAPSHOT')
-masc = MascData.new(servers.localhost, '1.4.0')
+gate = GateServices.new(Nodes.localhost, '1.3.1-SNAPSHOT')
+masc = MascData.new(Nodes.localhost, '1.4.0')
 
 File opennlpDest = createDir('/Users/suderman/Projects/LAPPS/stresstest/opennlp')
 File lingpipeDest = createDir('/Users/suderman/Projects/LAPPS/stresstest/lingpipe')
@@ -26,7 +27,8 @@ class Packet {
 }
 
 // The writer thread needs to wait for a poison pill from each of the worker threads
-// before it is safe for it to shutdown.
+// before it is safe for it to shutdown. The killed counter keeps track of how many
+//  workers have been killed.
 killed = new AtomicInteger()
 
 GParsPool.withPool {
@@ -42,7 +44,7 @@ GParsPool.withPool {
 				}
 				else {
 					packet.file.text = packet.data.payload
-					println "${packet.id}: Wrote ${file.path}"
+					println "${packet.id}: Wrote ${packet.file.path}"
 				} 
 			}
 		}
