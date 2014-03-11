@@ -1,25 +1,26 @@
 include 'LAPPS'
+include 'Common'
 
-def node = Nodes.localhost
-if (args.vassar) {
-	node = Nodes.vassar
-}
+def node = Nodes.getNode()
 
 def masc = Datasource {
 	server node.server
-	name "${node.id}:masc.text_1.3.0"
+	name "${node.id}:masc.text_1.4.0"
 }
 
 def annie = Service {
 	server node.server
-	name "${node.id}:gate.annie_1.3.0"
+	name "${node.id}:gate.annie_1.3.2-SNAPSHOT"
 }
 
+def path = args.path ?: '/tmp/annie'
+File dest = createDir(path)
+
 def index = masc.list()
-index[0..9].each { key ->
+index.each { key ->
 	def document = masc.get(key)
 	def result = annie.execute(document)
-	def file = new File("/tmp/annie/${key}.xml")
+	def file = new File(dest, "${key}.xml")
 	file.text = result.payload
 	println "Wrote ${file.path}"
 }

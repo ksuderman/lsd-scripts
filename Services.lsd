@@ -14,7 +14,7 @@ ServiceFactory = [:]
 ServiceFactory.create = { Map node, String provider, List<String> services, String version ->
     def map = [:]
     services.each { service ->
-        map[ service] = Service {
+        map[service] = Service {
             server node.server
             name "${node.id}:${provider}.${service}_${version}"
         }
