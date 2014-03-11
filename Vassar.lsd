@@ -1,4 +1,14 @@
 GATE_SERVICES = ['tokenizer', 'gazetteer', 'splitter', 'tagger', 'ner',
     'npchunker', 'vpchunker', 'ortho', 'coref', 'annie', 'opennlp', 'lingpipe']
 
-STANFORD_SERVICES =  = ['tokenizer', 'splitter', 'tagger', 'ner']
+STANFORD_SERVICES = ['tokenizer', 'splitter', 'tagger', 'ner']
+
+include 'Services'
+
+VassarServices = [:]
+VassarServices.getGateServices = { node, version ->
+    return ServiceFactory.create(node, 'gate', GATE_SERVICES, version)
+}
+VassarServices.getStanfordServices = { node, version ->
+    return ServiceFactory.create(node, 'stanford', STANFORD_SERVICES, version)
+}

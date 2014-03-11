@@ -1,0 +1,80 @@
+import java.util.concurrent.*
+import java.util.concurrent.atomic.AtomicInteger
+
+include 'LAPPS'
+include 'Common'
+include 'Masc'
+
+def service = args.service ?: 'gate.annie:1.3.0'
+def destination = args.dest ?: '/tmp/lsd'
+
+WebService getService(node) {
+	return Service {
+		server node.server
+		name "${node.id}:${service}"
+	}
+}
+
+def source = MascData.new(Nodes.getNode(), '1.4.0')
+
+BlockingQueue<Packet> queue = new SynchronousQueue<Packet>()
+BlockingQueue<Packet> toBeWritten = new SynchronousQueue<Packet>()
+
+AtomicInteger killed = new AtomicInteger()
+
+def local = getService(Nodes.localhost)
+def remote = getService(Nodes.vassar)
+int dead = 0
+
+Worker localWorker = new Worker(source:queue, service:local)
+Worker remoteWorker = new Worker(source:queue, service:remote)
+
+new Thread(localWorker).start()
+new Thread(remoteWorker).start()
+// Producer
+Thread.start {
+	println "Starting producer thread."
+	def keys = source.text.list()
+	keys.each { key	->
+		println "Fetching ${key}"
+		Data data = source.text.get(key)
+		queue.put(new Packet(key:key, data:data))
+	}
+	queue.put(new Packet())
+	queue.put(new Packet())
+	dead.increment()
+}
+
+while(dead.get() < 3) {
+	sleep(500)
+}
+
+class Packet {
+	String key
+	Data data
+}
+
+class Worker implements Runnable {
+	BlockingQueue<Data> source
+	BlockingQueue<Data> target
+	def service
+	
+	void run() {
+		println "Staring ${service.endpoint}"
+		boolean running = true
+		while (running) {
+			Packet packet = source.take()
+			if (packet.data) {
+				packet.data = service.execute(packet.data)
+				File file = new File("/tmp/stanford/${key}.json")
+				file.text = packet.data.payload
+				println "Wrote ${file.path}"
+			}
+			else {
+				running = false;
+			}
+		}
+		dead.increment()
+		println "Stopping producer thread ${service.endpoint}"
+	}
+}

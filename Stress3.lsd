@@ -1,0 +1,102 @@
+@Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
+import groovyx.gpars.*
+import groovyx.gpars.actor.*
+import static groovyx.gpars.actor.Actors.*
+import java.util.concurrent.atomic.AtomicInteger
+import org.anc.util.StopWatch
+import java.text.SimpleDateFormat
+
+/*
+ * This script uses the Actor Model and the GPars Actors.* classes to manage a pool of worker threads that
+ * process MASC in parallel using the three GATE pipelines: annie, opennlp, and lingpipe.
+ */
+include 'LAPPS'
+include 'Common'
+
+version = '1.3.2-SNAPSHOT'
+def node = Nodes.getNode()
+
+def getClient(String name) {
+    return new ServiceClient("http://localhost:8080/GateServices${version}/services/${name}", null, null)
+}
+
+annie = lingpipe = opennlp = null
+
+int procs = 0
+if (args.size() == 0) {
+    annie = getClient('Annie')
+    lingpipe = getClient('LingPipe')
+    opennlp = getClient('OpenNlp')
+    procs = 3
+}
+if (args.annie) {
+    annie = getClient('Annie')
+    ++procs
+}
+if (args.lingpipe) {
+    lingpipe = getClient('LingPipe')
+    ++procs
+}
+if (args.opennlp) {
+    opennlp = getClient('OpenNlp')
+    ++procs
+}
+
+if (procs == 0) {
+    println "No processors specified."
+    return
+}
+
+//masc = MascData.new(Nodes.localhost, '1.4.0')
+masc = new DataSourceClient("http://localhost:8080/MascDataSource/1.4.0/services/MascTextSource", null, null)
+
+File opennlpDest = createDir('/Users/suderman/Projects/LAPPS/stresstest/opennlp')
+File lingpipeDest = createDir('/Users/suderman/Projects/LAPPS/stresstest/lingpipe')
+File annieDest = createDir('/Users/suderman/Projects/LAPPS/stresstest/annie')
+
+int count = 0
+List threads = []
+StopWatch timer = new StopWatch()
+String[] keys = masc.list()
+timer.start()
+keys[100..199].each { key ->
+    if (key.startsWith('OANC')) {
+        println "${count}. Skipping ${key}"
+    }
+    else {
+        println "${++count}. Processing ${key}"
+        Data data = masc.get(key)
+        if (annie) {
+            threads << Thread.start {
+                println "Running Annie"
+                Data result = annie.execute(data)
+                File file = new File(annieDest, "${key}.xml")
+                file.text = result.payload
+                println "Wrote ${file.path}"
+            }
+        }
+        if (opennlp) {
+            threads << Thread.start {
+                println "Running OpenNLP"
+                Data result = opennlp.execute(data)
+                File file = new File(opennlpDest, "${key}.xml")
+                file.text = result.payload
+                println "Wrote ${file.path}"
+            }
+        }
+        if (lingpipe) {
+            threads << Thread.start {
+                println "Running Lingpipe"
+                Data result = lingpipe.execute(data)
+                File file = new File(lingpipeDest, "${key}.xml")
+                file.text = result.payload
+                println "Wrote ${file.path}"
+            }
+        }
+        println "Waiting on ${key}."
+        threads*.join()
+        threads.clear()
+    }
+}
+timer.stop()
+println "Time " + new SimpleDateFormat("mm:ss:SSS").format(timer.elapsed())

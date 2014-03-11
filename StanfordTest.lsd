@@ -1,0 +1,21 @@
+include 'Servers'
+
+text = Datasource {
+	server servers.vassar
+	name 'anc:masc.text_1.4.0'
+}
+
+tokenizer = Service {
+	server servers.vassar
+	name 'anc:stanford.tokenizer_1.3.0'
+}
+
+println "Listing datasource"
+def keys = text.list()
+
+println "Getting data."
+Data data = text.get(keys[0])
+
+println "Executing tokenizer."
+data = tokenizer.execute(data)
+println new Container(data.payload).toPrettyJson()

@@ -1,0 +1,12 @@
+include 'Servers'
+
+Nodes = [ 
+	vassar: [id:'anc', server:servers.vassar],
+	localhost: [id:'picard', server:servers.localhost],
+	brandeis: [id:'brandeis_eldrad_grid_1', server:servers.brandeis],
+	getNode: { 
+		if (args.vassar) return Nodes.vassar
+		if (args.brandeis) return Nodes.brandeis
+		return Nodes.localhost
+	} 
+]

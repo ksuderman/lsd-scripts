@@ -1,0 +1,79 @@
+import util.ServiceProvider
+
+include 'Servers'
+include 'Common'
+
+/*******
+if (!args.version) {
+	println "No version provided. Please specify the version of the Stanford services to use."
+	return
+}
+
+def masc = Datasource {
+	server servers.localhost
+	name 'anc:masc.text_1.4.0'
+}
+
+def iterator = new DatasourceIterator(masc.text)
+
+def services = ['tokenizer', 'splitter', 'tagger', 'ner']
+def stanford = new ServiceProvider(servers.vassar, 'stanford', '1.3.0', services)
+def convert = new ServiceProvider(servers.vassar, 'convert', '0.3.1', ['gate2json', 'json2gate'])
+********/
+
+// Returns the ProcessingStep containing the NE annotations.
+ProcessingStep findNerStep(Container container) {
+	ProcessingStep result = null
+	container.steps.each { ProcessingStep step ->
+		def meta = step.metadata
+		def value = meta.contains ?: '<nothing>'
+		if (value.contains('ner')) {
+			result = step
+			return
+		}
+	}
+	return result
+}
+
+// Counts the number of named entities in the processing step and updates
+// the counts in the entities Map.
+void summarize(ProcessingStep step, Map entities) {
+	step.annotations.each { Annotation a ->
+		def ner = a.features.ner
+		if (ner) {
+			// Counter is in the org.anc.common module.
+			Counter counter = entities[ner]
+			if (counter == null) {
+				counter = new Counter()
+				entities[ner] = counter
+			}
+			counter.increment()
+		}
+	}
+}
+
+def entities = [:]
+while (iterator.hasNext()) {
+	String key = iterator.key()
+	String title = getTitle(key)
+	Data document = iterator.next()
+	Data result = stanford.run(document)
+	check(result)
+	Container container = new Container(result.payload)
+	File file = new File("/tmp/stanford/${title}.json")
+	file.text = container.toPrettyJson()
+	println "Wrote ${file.path}"
+	ProcessingStep step = findNerStep(container)
+	if (step) {
+		summarize(step, entities)
+	}
+	else {
+		println "!!! No processing step contains NER annotations !!!"
+		println()
+	}
+}
+
+println "All named entity types in MASC"
+entities.each { name, value ->
+	println "${name} : ${value}"
+}

@@ -1,0 +1,16 @@
+def vassar = Server {
+	url 'http://grid.anc.org:8080'
+	username 'temporary'
+	password 'temporary'
+}
+
+def tokenizer = Service {
+	server vassar
+	name 'anc:stanford.tokenizer_1.3.0'
+}
+
+def text = "This is some text. It should be tokenized."
+def data = new Data(3, text)
+def result = tokenizer.execute(data)
+println new Container(result.payload).toPrettyJson()
+println "TEXT: ${Types.TEXT}"

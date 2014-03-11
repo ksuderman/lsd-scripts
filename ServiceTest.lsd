@@ -1,0 +1,29 @@
+/*
+ *
+ */
+include 'LAPPS'
+include 'Masc'
+include 'Common'
+
+def node = Nodes.getNode()
+	
+def masc = MascData.new(node, '1.4.0')
+
+def provider = {
+	if (args.gate) return 'gate'
+	if (args.stanford) return 'stanford'
+	args.provider ?: args.p ?: 'stanford'
+}() 
+
+def version = args.v ?: args.version ?: '1.3.0'
+def service = args.s ?: args.service ?: 'tokenizer'
+def tokenizer = Service {
+	server node.server
+	name "${node.id}:${provider}.${service}_${version}"
+}
+
+def data = masc.text.get("MASC1-00000")
+check(data)
+data = tokenizer.execute(data)
+check(data)
+println data.payload
