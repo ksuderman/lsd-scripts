@@ -10,35 +10,39 @@ import java.text.SimpleDateFormat
  * This script uses the Actor Model and the GPars Actors.* classes to manage a pool of worker threads that
  * process MASC in parallel using the three GATE pipelines: annie, opennlp, and lingpipe.
  */
-include 'LAPPS'
+//include 'LAPPS'
 include 'Common'
+include 'Tomcat'
 
 version = '1.3.2-SNAPSHOT'
-def node = Nodes.getNode()
+//def node = Nodes.getNode()
+gate = getGateServices('http://localhost:8080', version)
+converter = getConverters('http://localhost:8080', '0.3.1-SNAPSHOT')
 
 def getClient(String name) {
-    return new ServiceClient("http://localhost:8080/GateServices${version}/services/${name}", null, null)
+    //return new ServiceClient("http://localhost:8080/GateServices${version}/services/${name}", null, null)
+    return gate[name]
 }
 
 annie = lingpipe = opennlp = null
 
 int procs = 0
 if (args.size() == 0) {
-    annie = getClient('Annie')
-    lingpipe = getClient('LingPipe')
+    annie = getClient('annie')
+    lingpipe = getClient('lingpipe')
     opennlp = getClient('OpenNlp')
     procs = 3
 }
 if (args.annie) {
-    annie = getClient('Annie')
+    annie = getClient('annie')
     ++procs
 }
 if (args.lingpipe) {
-    lingpipe = getClient('LingPipe')
+    lingpipe = getClient('lingpipe')
     ++procs
 }
 if (args.opennlp) {
-    opennlp = getClient('OpenNlp')
+    opennlp = getClient('opennlp')
     ++procs
 }
 
@@ -58,8 +62,28 @@ int count = 0
 List threads = []
 StopWatch timer = new StopWatch()
 String[] keys = masc.list()
+
+int start = 0
+int end = keys.size()
+if (args.start) {
+    start = args.start as int
+}
+if (args.end) {
+    end = args.end as int
+    if (end > keys.size()) {
+        end = keys.size()
+    }
+}
+
+lock = new Object()
+convert = { data ->
+    synchronized(lock) {
+        return converter.gate2json.execute(data)
+    }
+}
+
 timer.start()
-keys[100..199].each { key ->
+keys[start..end-1].each { key ->
     if (key.startsWith('OANC')) {
         println "${count}. Skipping ${key}"
     }
@@ -70,6 +94,7 @@ keys[100..199].each { key ->
             threads << Thread.start {
                 println "Running Annie"
                 Data result = annie.execute(data)
+                result = convert(result)
                 File file = new File(annieDest, "${key}.xml")
                 file.text = result.payload
                 println "Wrote ${file.path}"
@@ -79,6 +104,7 @@ keys[100..199].each { key ->
             threads << Thread.start {
                 println "Running OpenNLP"
                 Data result = opennlp.execute(data)
+                result = convert(result)
                 File file = new File(opennlpDest, "${key}.xml")
                 file.text = result.payload
                 println "Wrote ${file.path}"
@@ -88,6 +114,7 @@ keys[100..199].each { key ->
             threads << Thread.start {
                 println "Running Lingpipe"
                 Data result = lingpipe.execute(data)
+                result = convert(result)
                 File file = new File(lingpipeDest, "${key}.xml")
                 file.text = result.payload
                 println "Wrote ${file.path}"
@@ -99,4 +126,4 @@ keys[100..199].each { key ->
     }
 }
 timer.stop()
-println "Time " + new SimpleDateFormat("mm:ss:SSS").format(timer.elapsed())
+println "Time ${timer}"

@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15386718-681f-46a9-af55-56e19c645956" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GateServices.test" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ActorPoolTest.lsd" afterPath="$PROJECT_DIR$/experimental/ActorPoolTest.lsd" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Actors.lsd" afterPath="$PROJECT_DIR$/experimental/Actors.lsd" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ActorsPipeline.lsd" afterPath="$PROJECT_DIR$/experimental/ActorsPipeline.lsd" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GPars.lsd" afterPath="$PROJECT_DIR$/experimental/GPars.lsd" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Gate.lsd" afterPath="$PROJECT_DIR$/deprecated/Gate.lsd" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GatePipeline.lsd" afterPath="$PROJECT_DIR$/experimental/GatePipeline.lsd" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GateTests.lsd" afterPath="$PROJECT_DIR$/experimental/GateTests.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Annie.lsd" afterPath="$PROJECT_DIR$/Annie.lsd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tomcat.lsd" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/TomcatTests.lsd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gapps.lsd" afterPath="$PROJECT_DIR$/Gapps.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Services.lsd" afterPath="$PROJECT_DIR$/Services.lsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stress2.lsd" afterPath="$PROJECT_DIR$/Stress2.lsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stress3.lsd" afterPath="$PROJECT_DIR$/Stress3.lsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="LSD Scripts.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,40 +75,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProducesRequires.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ProducesRequires.lsd">
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="36" selection-start="808" selection-end="808" vertical-scroll-proportion="-11.962963" vertical-offset="374" max-vertical-offset="1190">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="170">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gate.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GatePipeline.lsd" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experimental/GatePipeline.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="81" max-vertical-offset="1411">
+            <state line="23" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1411">
               <folding />
             </state>
           </provider>
@@ -120,29 +86,65 @@
       </file>
       <file leaf-file-name="MascDataSources.test" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MascDataSources.test">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+              <folding />
+            </state>
+          </provider>
           <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="391">
-              <folding />
-            </state>
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stress3.lsd" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Stress3.lsd" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Stress3.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="4" selection-start="1691" selection-end="1691" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
+            <state line="117" column="0" selection-start="3319" selection-end="3319" vertical-scroll-proportion="1.1128134" vertical-offset="1190" max-vertical-offset="2295">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Services.lsd" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Tomcat.lsd" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tomcat.lsd">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="0" selection-start="1483" selection-end="1483" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TomcatTests.lsd" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/TomcatTests.lsd">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="40" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Stress2.lsd" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Stress2.lsd">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="32" selection-start="1217" selection-end="1217" vertical-scroll-proportion="0.0" vertical-offset="130" max-vertical-offset="2142">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gapps.lsd" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gapps.lsd">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="34" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0" vertical-offset="744" max-vertical-offset="1462">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Services.lsd" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Services.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="12" selection-start="646" selection-end="646" vertical-scroll-proportion="0.42618385" vertical-offset="0" max-vertical-offset="718">
+            <state line="18" column="12" selection-start="646" selection-end="646" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
               <folding />
             </state>
           </provider>
@@ -150,13 +152,13 @@
       </file>
       <file leaf-file-name="ServiceTest.lsd" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ServiceTest.lsd">
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state line="14" column="8" selection-start="218" selection-end="218" vertical-scroll-proportion="-8.814815" vertical-offset="0" max-vertical-offset="595">
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -164,18 +166,6 @@
         <entry file="file://$PROJECT_DIR$/Dataflow.lsd">
           <provider selected="true" editor-type-id="text-editor">
             <state line="13" column="7" selection-start="443" selection-end="447" vertical-scroll-proportion="0.0" vertical-offset="931" max-vertical-offset="1649">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Annie.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Annie.lsd">
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="31" selection-start="440" selection-end="440" vertical-scroll-proportion="-13.851851" vertical-offset="0" max-vertical-offset="595">
               <folding />
             </state>
           </provider>
@@ -209,19 +199,47 @@
         <option value="$PROJECT_DIR$/ProducesRequires.lsd" />
         <option value="$PROJECT_DIR$/StressTest.lsd" />
         <option value="$PROJECT_DIR$/Vassar.lsd" />
-        <option value="$PROJECT_DIR$/Stress2.lsd" />
-        <option value="$PROJECT_DIR$/Stress3.lsd" />
         <option value="$PROJECT_DIR$/Annie.lsd" />
-        <option value="$PROJECT_DIR$/Gapps.lsd" />
         <option value="$PROJECT_DIR$/Services.lsd" />
+        <option value="$PROJECT_DIR$/Stress2.lsd" />
+        <option value="$PROJECT_DIR$/Gapps.lsd" />
+        <option value="$PROJECT_DIR$/Tomcat.lsd" />
+        <option value="$PROJECT_DIR$/test/TomcatTests.lsd" />
+        <option value="$PROJECT_DIR$/Stress3.lsd" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="284" />
-    <option name="y" value="118" />
+    <option name="x" value="145" />
+    <option name="y" value="64" />
     <option name="width" value="1536" />
     <option name="height" value="887" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>IntelliJ IDEA Platform Inspections</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Plugin DevKit</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -250,7 +268,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -276,6 +293,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lsd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LSD Scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lsd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LSD Scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lsd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -323,6 +368,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -363,6 +409,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -389,19 +448,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -472,14 +518,17 @@
       <workItem from="1394033292754" duration="23181000" />
       <workItem from="1394295668017" duration="14531000" />
       <workItem from="1394495325598" duration="6106000" />
+      <workItem from="1394503879472" duration="292000" />
+      <workItem from="1394558272239" duration="2623000" />
+      <workItem from="1394636799971" duration="10266000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43818000" />
+    <option name="totallyTimeSpent" value="56999000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="284" y="118" width="1536" height="887" extended-state="0" />
+    <frame x="145" y="64" width="1536" height="887" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -527,6 +576,76 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experimental/GatePipeline.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="391" max-vertical-offset="1411">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MascDataSources.test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stress3.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="4" selection-start="1691" selection-end="1691" vertical-scroll-proportion="0.0" vertical-offset="1037" max-vertical-offset="1836">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="12" selection-start="646" selection-end="646" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ServiceTest.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="8" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="595">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dataflow.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="7" selection-start="443" selection-end="447" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1649">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Annie.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="31" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="595" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Summary.lsd">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="22" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2482" />
@@ -537,9 +656,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experimental/Actors.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="42" selection-start="124" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1751">
-          <folding />
-        </state>
+        <state line="8" column="42" selection-start="124" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1751" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/concurrent/ActorPool.groovy">
@@ -549,9 +666,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experimental/ActorPoolTest.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1173">
-          <folding />
-        </state>
+        <state line="9" column="13" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1173" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/concurrent/Packet.groovy">
@@ -568,23 +683,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Gapps.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="261" selection-end="261" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1037">
-          <folding />
-        </state>
+        <state line="10" column="0" selection-start="261" selection-end="261" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1037" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Masc.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Servers.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="952">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="952" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
@@ -648,144 +757,74 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Vassar.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <folding />
-        </state>
+        <state line="5" column="0" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/StressTest.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="17" selection-start="0" selection-end="3042" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2380">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stress2.lsd">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="26" selection-start="2981" selection-end="2981" vertical-scroll-proportion="0.0" vertical-offset="1713" max-vertical-offset="2567">
-          <folding />
-        </state>
+        <state line="28" column="17" selection-start="0" selection-end="3042" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2380" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Stanford.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="61" selection-start="245" selection-end="290" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <folding />
-        </state>
+        <state line="8" column="61" selection-start="245" selection-end="290" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/TokenizeExample.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691" />
+      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experimental/ActorsPipeline.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2210">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2210" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Annie.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="31" selection-start="440" selection-end="440" vertical-scroll-proportion="-13.851851" vertical-offset="0" max-vertical-offset="595">
-          <folding />
-        </state>
+        <state line="22" column="31" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="595" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stress3.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="4" selection-start="1691" selection-end="1691" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gapps.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="32" selection-start="1055" selection-end="1055" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1071">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experimental/ActorPoolTest.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="51" selection-start="701" selection-end="701" vertical-scroll-proportion="0.75766015" vertical-offset="0" max-vertical-offset="1173">
-          <folding />
-        </state>
+        <state line="32" column="51" selection-start="701" selection-end="701" vertical-scroll-proportion="0.75766015" vertical-offset="0" max-vertical-offset="1173" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experimental/Actors.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0055710305" vertical-offset="268" max-vertical-offset="1751">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dataflow.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="7" selection-start="443" selection-end="447" vertical-scroll-proportion="0.0" vertical-offset="931" max-vertical-offset="1649">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <folding />
-        </state>
+        <state line="16" column="0" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0055710305" vertical-offset="268" max-vertical-offset="1751" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Masc.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lingpipe.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="544" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experimental/GatePipeline.lsd">
+    <entry file="file://$PROJECT_DIR$/Servers.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="1411">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="3.3703704" vertical-offset="91" max-vertical-offset="952" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MascDataSources.test">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ProducesRequires.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="36" selection-start="808" selection-end="808" vertical-scroll-proportion="-11.962963" vertical-offset="374" max-vertical-offset="1190">
+        <state line="41" column="36" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="1190">
           <folding />
         </state>
       </provider>
@@ -800,14 +839,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Servers.lsd">
+    <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="3.3703704" vertical-offset="91" max-vertical-offset="952">
+        <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experimental/GatePipeline.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="1411">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MascDataSources.test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="12" selection-start="646" selection-end="646" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ServiceTest.lsd">
@@ -820,11 +880,52 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Services.lsd">
+    <entry file="file://$PROJECT_DIR$/Stress2.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="12" selection-start="646" selection-end="646" vertical-scroll-proportion="0.42618385" vertical-offset="0" max-vertical-offset="718">
+        <state line="45" column="32" selection-start="1217" selection-end="1217" vertical-scroll-proportion="0.0" vertical-offset="130" max-vertical-offset="2142">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gapps.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="34" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0" vertical-offset="744" max-vertical-offset="1462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tomcat.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="1483" selection-end="1483" vertical-scroll-proportion="0.0" vertical-offset="166" max-vertical-offset="952">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/TomcatTests.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="40" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dataflow.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="7" selection-start="443" selection-end="447" vertical-scroll-proportion="0.0" vertical-offset="931" max-vertical-offset="1649">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stress3.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="0" selection-start="3319" selection-end="3319" vertical-scroll-proportion="1.1128134" vertical-offset="1190" max-vertical-offset="2295">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
   </component>
