@@ -1,0 +1,77 @@
+import concurrent.AsyncPipeline
+import concurrent.Packet
+import org.anc.util.StopWatch
+
+include 'Common'
+include 'LAPPS'
+include 'Gate'
+include 'Masc'
+
+def node = Nodes.getNode()
+
+def gate = GateServices.new(node, '1.3.2-SNAPSHOT')
+def masc = MascData.new(node, '1.4.0')
+def convert = Service {
+	server node.server
+	name "${node.id}:convert.gate2json_0.3.1-SNAPSHOT"
+}
+
+def path = args.path ?: '/tmp'
+destination = createDir(path)
+
+def reader = { packet ->
+    println "${packet.id}. Reading ${packet.key}"
+    packet.data = masc.text.get(packet.key)
+    return packet
+}
+
+def writer = { packet ->
+    File file = new File(destination, "${packet.key}.json")
+    file.text = new Container(packet.data.payload).toPrettyJson()
+    println "${packet.id}. Wrote: ${file.path}"
+    return packet.key
+}
+
+def pipeline = new AsyncPipeline()
+pipeline << reader
+pipeline << gate.tokenizer
+pipeline << gate.gazetteer
+pipeline << gate.splitter
+pipeline << gate.tagger
+pipeline << gate.ner
+pipeline << convert
+pipeline << writer
+
+def keys = masc.text.list()
+int start = 0
+int end = keys.size()
+if (args.start) start = args.start as int
+if (args.end) end = args.end as int
+
+// The last key submitted to the pipeline.  We can't exit the script until this key
+// comes out the end of the pipeline.
+String lastKey
+
+StopWatch timer = new StopWatch()
+timer.start()
+keys[start..end-1].each { key ->
+    lastKey = key
+    //def data = masc.text.get(key)
+    println "Submitting ${key}"
+    pipeline << new GatePacket(key:key)
+}
+
+// Wait for the lastKey to come out the end of the pipeline.
+boolean done = false
+while (!done) {
+    sleep(250)
+    String produced = pipeline.value()
+    println "Pipeline produced ${produced}"
+    done = produced.equals(lastKey)
+}
+timer.stop()
+println "Time: ${timer}"
+
+class GatePacket extends Packet {
+    String key
+}

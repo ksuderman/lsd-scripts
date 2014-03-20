@@ -1,0 +1,17 @@
+/*
+ * Creates service clients for each of the GATE services deploy to the 
+ * Vassar service node.
+ */
+	
+GateServices = [:]
+GateServices.new = { node, version ->
+	def map = [:]
+	[ 'coref', 'gazetteer', 'ner', 'npchunker', 'ortho', 'tagger', 
+	'splitter', 'tokenizer', 'vpchunker'].each { id ->
+		map[id] = Service {
+			server node.server
+			name "${node.id}:gate.${id}_${version}"
+		}
+	}
+	return map
+}

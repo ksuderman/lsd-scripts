@@ -1,0 +1,112 @@
+import org.lappsgrid.vocabulary.*
+import org.anc.util.StopWatch
+import static util.Wrappers.wrap
+include 'Brandeis'
+include 'Common'
+include 'Masc'
+include 'LAPPS'
+include 'Align'
+
+def serviceType = 'opennlp'
+if (args.stanford) {
+	serviceType = 'stanfordnlp'
+}
+
+def services = BrandeisFactory.new(serviceType)
+def masc = MascData.new(Nodes.localhost, '1.4.0')
+
+def path = args.out ?: '/tmp/brandeis'
+//def destination = createDir('/Users/suderman/Projects/LAPPS/output/stanfordB')
+def destination = createDir(path)
+
+int count = 0
+def keys = masc.text.list()
+//def keys = [ 'MASC3-0203' ]
+int start = 0
+int end = keys.size()
+if (args.start) start = args.start as int
+if (args.end) end = args.end as int
+
+def timer = new StopWatch()
+timer.start()
+keys[start..end-1].each { key ->
+	++count
+	def data = masc.text.get(key)
+	def text = data.payload
+
+	println "${count}. Processing ${key}"
+	//println "Splitting."
+	//def sentenceData = services.splitter.execute(data)
+	//def sentences = wrap(sentenceData, 's', 'Sentence')
+	//sentences.steps[0].metadata.producedBy = "Sentence:${services.splitter.endpoint}"
+	//sentences = align(sentences, text)
+
+
+	println "Tokenizing."
+	def tokenData = services.tokenizer.execute(data)
+	def tokens = wrap(tokenData, 'tok', 'Token')
+	tokenData.payload = unwrap(tokens)
+	
+	println "Tagging."
+	def tagData = services.tagger.execute(tokenData)
+	// Add the POS tags as features of the tokens.
+	def it = tokens.steps[0].annotations.iterator()
+	String[] tags = tagData.payload.split('\n+')
+	tags.each { tag ->
+		def token = it.next()
+		token.features['pos'] = tag
+	}
+	tokens = align(tokens, text)
+	tokens.steps[0].metadata.producedBy = "Token:${services.tokenizer.endpoint} @pos:${services.tagger.endpoint}"
+	sentences.steps.add(tokens.steps[0])
+	new File(destination, "${key}.json").text = sentences.toPrettyJson()
+}
+
+timer.stop()
+println "Time: ${timer}"
+
+/****
+Container wrap(Data data, String type) {
+	return wrap(data, type, type)
+}
+
+Container wrap(Data data, String idPrefix, String label) {
+	int id = 0
+	Container container = new Container()
+	StringBuilder buffer = new StringBuilder()
+	ProcessingStep step = new ProcessingStep()	
+	step.metadata['contains'] = label
+	data.payload.split('\n').each { line ->
+		Annotation a = new Annotation()
+		a.id = "${idPrefix}${++id}"	
+		a.start = buffer.size()
+		buffer.append(line)
+		a.end = buffer.size()
+		buffer.append('\n')
+		a.label = label
+		step.annotations.add(a)		
+	}
+	container.steps.add(step)
+	container.text = buffer.toString()
+	//System.err.println "Container.text: ${container.text}"
+	return container
+}
+
+String unwrap(Container container) {
+	return unwrap(container, 0)
+}
+
+String unwrap(Container container, int step) {
+	StringBuilder buffer = new StringBuilder()
+	def result = []
+	def sorted = container.steps[step].annotations.sort { it.start }
+	sorted.each { a ->
+		String text = container.text.substring((int)a.start, (int)a.end)
+		//buffer.append(a.id)
+		//buffer.append(": ")
+		buffer.append(text)
+		buffer.append('\n')		
+	}
+	return buffer.toString()
+}	
+****/

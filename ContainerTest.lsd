@@ -1,0 +1,3 @@
+Container container = new Container()
+container.text = "Hello world"
+println container.toPrettyJson()

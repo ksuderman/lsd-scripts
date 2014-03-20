@@ -1,10 +1,4 @@
-@Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
-import groovyx.gpars.*
-import groovyx.gpars.actor.*
-import static groovyx.gpars.actor.Actors.*
-import java.util.concurrent.atomic.AtomicInteger
 import org.anc.util.StopWatch
-import java.text.SimpleDateFormat
 
 /*
  * This script uses the Actor Model and the GPars Actors.* classes to manage a pool of worker threads that

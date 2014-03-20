@@ -1,0 +1,8 @@
+include 'Align'
+
+def json = new File('/tmp/test.json').text
+def text = new File('/tmp/test.txt').text
+
+def original = new Container(json)
+def aligned = align(json, text)
+println aligned.toPrettyJson()

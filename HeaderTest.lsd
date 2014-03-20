@@ -1,0 +1,27 @@
+import grooyvx.xml.*
+import util.Record
+
+include 'Tomcat'
+
+def server = 'http://localhost:9080'
+def masc = getMasc(server, '1.4.0')
+
+XmlParser parser = new XmlParser()
+//def records = []
+
+def keys = masc.headers.list()
+keys.each { key ->
+    def headerData = masc.headers.get(key)
+    def textData = masc.text.get(key)
+    def size = textData.payload?.size() ?: 0
+    def header = parser.parseText(headerData.payload)
+    def words = header.fileDesc.extent.@count[0] as int
+    def cat =  header.profileDesc.textClass.@catRef[0].split(' ')
+    //println "${key}\t${size}\t${cat[0]}\t${cat[1]}"
+    println new Record(key:key, size:size, words:words, category:cat[0], genre:cat[1])
+}
+
+//records.sort()
+//records.each { println it }
+//println "Done."
+

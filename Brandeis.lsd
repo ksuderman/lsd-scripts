@@ -13,7 +13,7 @@ def newService = { String serviceID ->
 }
 
 BrandeisFactory = [:]
-BrandeisFactory.create = { kind ->
+BrandeisFactory.new = { kind ->
 	def services = [:]
 	services.splitter = newService("${kind}.splitter")	
 	services.tokenizer = newService("${kind}.tokenizer")	

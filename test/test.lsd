@@ -1,0 +1,6 @@
+
+def c = new Container()
+c.text = 'hello world'
+c.metadata.parameters = 'x=y'
+
+println c.toPrettyJson()

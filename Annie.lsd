@@ -1,6 +1,9 @@
+import org.anc.util.StopWatch
+
 include 'LAPPS'
 include 'Common'
 
+/*
 def node = Nodes.getNode()
 
 def masc = Datasource {
@@ -12,18 +15,51 @@ def annie = Service {
 	server node.server
 	name "${node.id}:gate.annie_1.3.2-SNAPSHOT"
 }
+*/
+
+def masc = new DataSourceClient("http://localhost:8080/MascDataSource/1.4.0/services/MascTextSource", null, null)
+def annie = new ServiceClient("http://localhost:8080/Annie/1.0.0-SNAPSHOT/services/Annie")
+def convert = new ServiceClient("http://localhost:8080/GateConverter/0.3.1-SNAPSHOT/services/GateToJson")
 
 def path = args.path ?: '/tmp/annie'
 File dest = createDir(path)
 
 def index = masc.list()
-index.each { key ->
-	def document = masc.get(key)
-	def result = annie.execute(document)
-	def file = new File(dest, "${key}.xml")
-	file.text = result.payload
-	println "Wrote ${file.path}"
+int start = 0
+int end = index.size()
+if (args.start) {
+    start = args.start as int
+}
+if (args.end) {
+    end = args.end as int
 }
 
-println "Done."
+long now() {
+    return System.currentTimeMillis()
+}
+
+def keys = ['MASC2-0043', 'MASC2-0034', 'MASC2-0035']
+StopWatch timer = new StopWatch()
+StopWatch loopTimer = new StopWatch()
+int count = 0
+timer.start()
+//index[start..end-1].each { key ->
+keys.each { key ->
+    loopTimer.start()
+    ++count
+    long startTime = now()
+    printf "%2d. Processing %s", count, key
+	def document = masc.get(key)
+	print "\tsize: ${document.payload.size()}"
+	def result = annie.execute(document)
+	check(result)
+	result = convert.execute(result)
+	check(result)
+	def file = new File(dest, "${key}.json")
+	file.text = result.payload
+	loopTimer.stop()
+	println "\ttime : ${loopTimer}sec"
+}
+timer.stop()
+println "Total time: ${timer}"
 

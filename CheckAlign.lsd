@@ -1,0 +1,11 @@
+
+File file = new File('/tmp/aligned.json')
+
+Container container = new Container(file.text)
+String text = container.text
+container.steps[0].annotations.each { ann ->
+	def string = text.substring(ann.start as int, ann.end as int)
+	if (!string.equals(ann.features.string)) {
+		println "\t${ann.features.string}\t${string}"
+	}
+}
