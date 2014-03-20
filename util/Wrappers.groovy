@@ -1,11 +1,10 @@
 package util
 
 class Wrappers {
-	static Container wrap(Data data, String type) {
-		return wrap(data, type, type)
-	}
-
-	static Container wrap(Data data, String idPrefix, String label) {
+	String prefix
+	String label
+	
+	Container wrap(Data data) {
 		int id = 0
 		Container container = new Container()
 		StringBuilder buffer = new StringBuilder()
@@ -25,7 +24,7 @@ class Wrappers {
 				line = line.replaceAll('-LRB-', '(')
 				line = line.replaceAll('-RRB-', ')')
 				Annotation a = new Annotation()
-				a.id = "${idPrefix}${++id}"	
+				a.id = "${prefix}${++id}"	
 				a.start = buffer.size()
 				buffer.append(line)
 				a.end = buffer.size()
@@ -42,12 +41,11 @@ class Wrappers {
 		return container
 	}
 
-	static String unwrap(Container container) {
+	String unwrap(Container container) {
 		return unwrap(container, 0)
 	}
-
-	static String unwrap(Container container, int step) {
-		//StringBuilder buffer = new StringBuilder()
+	
+	String unwrap(Container container, int step) {
 		def result = []
 		def sorted = container.steps[step].annotations.sort { it.start }
 		sorted.each { a ->
@@ -59,12 +57,7 @@ class Wrappers {
 				text = '-RRB-'
 			}
 			result << text
-			//buffer.append(a.id)
-			//buffer.append(": ")
-			//buffer.append(text)
-			//buffer.append('\n')		
 		}
-		//return buffer.toString()
 		return result.join('\n')
 	}	
 }

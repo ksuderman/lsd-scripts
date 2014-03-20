@@ -1,5 +1,3 @@
-include 'Servers'
-
 MascData = [:]
 MascData.new = { node, version ->
 	def masc = [:]

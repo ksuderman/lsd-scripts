@@ -1,3 +1,7 @@
+/*
+ * Run this script to start a Jetty server that serves up the scriptlets from the webapp directory.
+ */
+
 @Grab('org.eclipse.jetty.aggregate:jetty-all-server:8.1.0.v20120127')
 import org.eclipse.jetty.servlet.ServletContextHandler
 import groovy.servlet.GroovyServlet

@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15386718-681f-46a9-af55-56e19c645956" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Gate.lsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GatePipeline.lsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GateTomcat.lsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HeaderTest.lsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/IndexTest.lsd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/util/Record.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/masc.index" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Annie.lsd" afterPath="$PROJECT_DIR$/Annie.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/concurrent/AsyncPipeline.groovy" afterPath="$PROJECT_DIR$/concurrent/AsyncPipeline.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Brandeis.lsd" afterPath="$PROJECT_DIR$/Brandeis.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Servers.lsd" afterPath="$PROJECT_DIR$/Servers.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/ServiceProvider.groovy" afterPath="$PROJECT_DIR$/util/ServiceProvider.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Services.lsd" afterPath="$PROJECT_DIR$/Services.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StanfordPipeline.lsd" afterPath="$PROJECT_DIR$/StanfordPipeline.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stress3.lsd" afterPath="$PROJECT_DIR$/Stress3.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Summary.lsd" afterPath="$PROJECT_DIR$/Summary.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test.lsd" afterPath="$PROJECT_DIR$/Test.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tomcat.lsd" afterPath="$PROJECT_DIR$/Tomcat.lsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/HttpServer.groovy" afterPath="$PROJECT_DIR$/test/HttpServer.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/webapp/echo.groovy" afterPath="$PROJECT_DIR$/test/webapp/echo.groovy" />
     </list>
     <ignored path="LSD Scripts.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,10 +70,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Tomcat.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tomcat.lsd">
+      <file leaf-file-name="Gate.lsd" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gate.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="179" selection-end="535" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="1088">
+            <state line="16" column="1" selection-start="401" selection-end="401" vertical-scroll-proportion="-10.074074" vertical-offset="0" max-vertical-offset="374">
               <folding />
             </state>
           </provider>
@@ -99,49 +82,48 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stanford.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Stanford.lsd">
+      <file leaf-file-name="echo.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/webapp/echo.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="61" selection-start="245" selection-end="290" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="391">
+            <state line="19" column="17" selection-start="392" selection-end="392" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Services.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Services.lsd">
+      <file leaf-file-name="reverse.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/webapp/reverse.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="1" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="476">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GatePipeline.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GatePipeline.lsd">
+      <file leaf-file-name="HttpServer.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/HttpServer.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="432" selection-end="796" vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="1394">
+            <state line="1" column="99" selection-start="102" selection-end="102" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="765">
+              <folding>
+                <element signature="e#108#232#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Wrappers.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/Wrappers.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Brandeis.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Brandeis.lsd">
+      <file leaf-file-name="AsyncPipeline.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/concurrent/AsyncPipeline.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="19" selection-start="296" selection-end="296" vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="510">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Align.lsd" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Align.lsd">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="1751">
+            <state line="6" column="27" selection-start="170" selection-end="170" vertical-scroll-proportion="0.11805555" vertical-offset="17" max-vertical-offset="1445">
               <folding />
             </state>
           </provider>
@@ -150,7 +132,7 @@
       <file leaf-file-name="AlignTest.lsd" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AlignTest.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
+            <state line="8" column="0" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="238">
               <folding />
             </state>
           </provider>
@@ -165,10 +147,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BrandeisTests.lsd" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BrandeisTests.lsd" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BrandeisTests.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="0" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.4906205" vertical-offset="527" max-vertical-offset="1989">
+            <state line="51" column="0" selection-start="1368" selection-end="1368" vertical-scroll-proportion="-12.592592" vertical-offset="527" max-vertical-offset="1989">
               <folding />
             </state>
           </provider>
@@ -177,10 +159,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServiceProvider.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/ServiceProvider.groovy">
+      <file leaf-file-name="Gate.lsd" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="10" selection-start="309" selection-end="309" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="833">
+            <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
               <folding />
             </state>
           </provider>
@@ -233,12 +215,14 @@
         <option value="$PROJECT_DIR$/concurrent/AsyncPipeline.groovy" />
         <option value="$PROJECT_DIR$/Brandeis.lsd" />
         <option value="$PROJECT_DIR$/BrandeisTests.lsd" />
+        <option value="$PROJECT_DIR$/test/webapp/echo.groovy" />
+        <option value="$PROJECT_DIR$/test/HttpServer.groovy" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="94" />
-    <option name="y" value="98" />
+    <option name="x" value="286" />
+    <option name="y" value="97" />
     <option name="width" value="1536" />
     <option name="height" value="887" />
   </component>
@@ -294,8 +278,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -348,20 +330,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LSD Scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lsd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="experimental" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -396,6 +364,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -424,6 +394,12 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails" singleton="true">
       <module name="" />
       <setting name="vmparams" value="" />
@@ -432,12 +408,6 @@
       <setting name="passParentEnv" value="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <setting name="launchBrowser" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -463,6 +433,19 @@
       </option>
       <option name="moduleName" value="" />
       <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -491,19 +474,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -617,14 +587,15 @@
       <workItem from="1394932349549" duration="9214000" />
       <workItem from="1395063640489" duration="9919000" />
       <workItem from="1395162405278" duration="1388000" />
+      <workItem from="1395283982723" duration="815000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86722000" />
+    <option name="totallyTimeSpent" value="87537000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="94" y="98" width="1536" height="887" extended-state="0" />
+    <frame x="286" y="97" width="1536" height="887" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -672,29 +643,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../lsd-work/DifferTest.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="5" selection-start="1704" selection-end="1704" vertical-scroll-proportion="0.0" vertical-offset="685" max-vertical-offset="1428" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../lsd-work/Convert.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="5" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1173" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThreadTest.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="508" selection-end="508" vertical-scroll-proportion="2.6666667" vertical-offset="429" max-vertical-offset="1445" />
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/concurrent/ActorPool.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="37" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LAPPS.test">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720" />
@@ -752,11 +700,6 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="718" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Stress3.lsd">
@@ -882,21 +825,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gate.lsd">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="1" selection-start="401" selection-end="401" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LAPPS.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="306">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="306" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
@@ -904,9 +835,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MascDataSources.test">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="391">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="391" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
@@ -964,13 +893,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/concurrent/AsyncPipeline.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="27" selection-start="170" selection-end="170" vertical-scroll-proportion="0.11805555" vertical-offset="17" max-vertical-offset="1462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GatePipeline.lsd">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="0" selection-start="432" selection-end="796" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
@@ -980,7 +902,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Brandeis.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="19" selection-start="296" selection-end="296" vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="510">
+        <state line="15" column="19" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="510">
           <folding />
         </state>
       </provider>
@@ -1011,12 +933,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BrandeisTests.lsd">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.4906205" vertical-offset="527" max-vertical-offset="1989">
+        <state line="51" column="0" selection-start="1368" selection-end="1368" vertical-scroll-proportion="-12.592592" vertical-offset="527" max-vertical-offset="1989">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deprecated/Gate.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="87" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gate.lsd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="1" selection-start="401" selection-end="401" vertical-scroll-proportion="-10.074074" vertical-offset="0" max-vertical-offset="374">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/webapp/reverse.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/webapp/echo.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="17" selection-start="392" selection-end="392" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/HttpServer.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="99" selection-start="102" selection-end="102" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="765">
+          <folding>
+            <element signature="e#108#232#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/Wrappers.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/concurrent/AsyncPipeline.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="27" selection-start="170" selection-end="170" vertical-scroll-proportion="0.11805555" vertical-offset="17" max-vertical-offset="1462">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
