@@ -1,7 +1,7 @@
 @Grab('org.lappsgrid:vocabulary:0.9.4')
 import org.lappsgrid.vocabulary.*
 import org.anc.util.StopWatch
-import util.AlignmentService
+import util.LocalAlignmentService
 import util.OnePerLineWrapperService
 
 include 'Brandeis'
@@ -16,7 +16,7 @@ if (args.stanford) {
 
 def services = BrandeisFactory.new(serviceType)
 def masc = MascData.new(Nodes.vassar, '1.4.0')
-align = new AlignmentService()
+align = new LocalAlignmentService()
 wrap = new OnePerLineWrapperService()
 
 def path = args.out ?: '/tmp/brandeis'
