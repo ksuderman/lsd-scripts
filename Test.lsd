@@ -1,3 +1,6 @@
 File file = new File('examples/bartok1.json')
 Container c = new Container(file.text)
 println c.text
+
+
+write "Foo"

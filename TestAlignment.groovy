@@ -53,6 +53,9 @@ class TestAlignment {
             try { output.close(); } catch (IOException logOrIgnore) {}
         }
         InputStream response = connection.getInputStream();
-        System.out.println(convertStreamToString(response));
+        def json = convertStreamToString(response);
+        //println json
+        
+        println new Container(json).toPrettyJson()
     }
 }

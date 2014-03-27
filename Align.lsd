@@ -1,35 +1,15 @@
 
 align = { container, text, step=0 ->
-	//if (!container.metatdata.original) {
-	//	println "No original text found in the container."
-	//	return null
-	//}
-	//text = container.metadata.original
-	//container.metatdata.orginal = null
-	
 	int index = 0
 	def sorted = container.steps[step].annotations.sort { it.start }
-	String space = "${160 as char}"
+	// non-breaking space character.
+	String nbspace = "${160 as char}"
 	sorted.each {
 		int start = it.start as int
 		int end = it.end as int
 		def string = container.text.substring(start,end)
 		string = string.replaceAll(space, ' ')
 		//println "${start}-${end} ${string} (${index})"
-		/*
-		if (string == '-LRB-') {
-			string = '('
-		}
-		else if (string == '-RRB-') {
-			string = ')'
-		}
-		if (!text.substring(index).startsWith(string)) {
-			--index
-			if (!text.substring(index).startsWith(string)) {
-				throw new LappsException("Unable to match ${string} at ${index}")
-			}
-		}
-		*/
 		def before = index
 		index = text.indexOf(string, index)
 		if (index < 0) {
@@ -51,7 +31,6 @@ align = { container, text, step=0 ->
 			println "Actual ${before} '${actual}'"
 			throw new LappsException("Unable to match '${string}' at offset ${before}")
 		}
-		//println text[0..index]
 		it.start = index
 		it.end = it.start + string.length()
 		def matched = text.substring(it.start as int, it.end as int)
@@ -61,37 +40,3 @@ align = { container, text, step=0 ->
 	container.text = text
 	return container
 }
-
-/*
-
-json = newContainer.toPrettyJson()
-new File('/tmp/aligned.json').text = json
-println json
-
-def body = new JsonBuilder([json:json, text:text]).toString()
-println body
-return
-
-def url = new URL('http://stanfordneralign.appspot.com')
-def con = url.openConnection()
-con.setRequestMethod('POST')
-con.setRequestProperty('User-Agent', 'LAPP Services DSL')
-con.doOutput = true
-con.outputStream << body
-def response
-con.inputStream >> response
-println response
-
-@GrabResolver(name='codehaus', root='http://repository.codehaus.org')
-@Grab('org.codehaus.groovy.modules.http-builder:http-builder:0.7')
-@GrabExclude('commons-beanutils:commons-beanutils') 
-import groovyx.net.http.HTTPBuilder
-import static groovyx.net.http.ContentType.URLENC
-import groovyx.net.http.HTTPBuilder
-import static groovyx.net.http.ContentType.URLENC
-
-def http = new HTTPBuilder('http://stanfordneralign.appspot.com')
-http.post(path:'api', body:body) { response ->
-	println response.data
-}
-*/

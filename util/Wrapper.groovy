@@ -1,17 +1,17 @@
 package util
 
-class Wrappers {
-	String prefix
-	String label
+class Wrapper {
+	//String prefix
+	//String label
 	
-	Container wrap(Data data) {
+	static Container wrap(String prefix, String label, String data) {
 		int id = 0
 		Container container = new Container()
 		StringBuilder buffer = new StringBuilder()
 		ProcessingStep step = new ProcessingStep()	
 		step.metadata['contains'] = label
 		boolean skip = false
-		data.payload.split('\n+').each { line ->
+		data.split('\n+').each { line ->
 			def string = line
 			boolean add = true
 			if (skip) {
@@ -41,11 +41,11 @@ class Wrappers {
 		return container
 	}
 
-	String unwrap(Container container) {
+	static String unwrap(Container container) {
 		return unwrap(container, 0)
 	}
 	
-	String unwrap(Container container, int step) {
+	static String unwrap(Container container, int step) {
 		def result = []
 		def sorted = container.steps[step].annotations.sort { it.start }
 		sorted.each { a ->

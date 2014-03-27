@@ -4,8 +4,8 @@
 
 @Grab('org.eclipse.jetty.aggregate:jetty-all-server:8.1.0.v20120127')
 import org.eclipse.jetty.servlet.ServletContextHandler
-import groovy.servlet.GroovyServlet
 import org.eclipse.jetty.server.Server
+import groovy.servlet.GroovyServlet
 
 def params = [:]
 args.each { arg ->
@@ -26,7 +26,7 @@ if (params.port) {
 }
 
 println "String Jetty server on port ${port}"
-ServletContextHandler context = new ServletContextHandler(ServletContextHandler.NO_SESSIONS)
+ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS)
 context.with {
     contextPath = path
     resourceBase = base

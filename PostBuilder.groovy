@@ -19,12 +19,12 @@ def http = new HTTPBuilder(url)
 http.request( POST ) { 
 	body = "json=${json_data}&text=${text_data}"
 	requestContentType = URLENC
-	//requestAccept = "text/plain, application/xml, application/json, text/html"
-	response.success = { resp, reader ->
+	requestAccept = "text/plain"
+	response.success = { resp, json ->
 		// response handling here
 		println "POST response status: ${resp.statusLine}"
 		println "${resp.class.name}"
-		println reader
+		println json
 	}
 	response.'400' = { resp ->
 		println "Bad Request."

@@ -1,0 +1,13 @@
+include 'Common'
+
+def json = read('examples/bartok.json')
+def text = read('examples/bartok.txt')
+
+def container = new Container(json)
+def alignParams = [:]
+alignParams.originalText = text
+alignParams.step = 0
+
+container.metadata.alignParams = alignParams
+write('/Users/suderman/Desktop/composite.json', container.toPrettyJson())
+println 'Done.'

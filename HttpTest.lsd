@@ -1,0 +1,58 @@
+import util.Http
+
+include 'LAPPS'
+include 'Common'
+
+def node = Nodes.localhost
+def convert = Service {
+	server node.server
+	name "${node.id}:convert.json2gate_0.3.1"
+}
+
+def converter = new ServiceClient('http://localhost:8080/service_manager/invoker/picard:convert.json2gate_0.3.1', 'operator', 'operator')
+
+//def http = new Http('http://localhost:9999/greet.groovy')
+def http = new Http('http://stanfordneralign.appspot.com/api')
+http.accept 'application/json'
+
+//def response = http.get('/greet.groovy', [who:'Keith'])
+
+def text = read('examples/bartok.txt')
+def json = read('examples/bartok.json')
+
+//def response = http.post(who:'Keith Suderman')
+println "Aligning."
+def response = http.post(text:text, json:json, step:0)
+if (response.code != 200) {
+	println "${response.code} ${response.body}"
+	return
+}
+
+Container container = new Container(response.body)
+container.text = text
+
+container.steps.each { ProcessingStep step ->
+	step.metadata.each { name,value ->
+		println "${name} ${value}"
+	}
+	step.annotations.each { annotation ->
+		String string = container.text.substring((int)annotation.start, (int)annotation.end)
+		println "${annotation.start}-${annotation.end} ${annotation.label} ${string}"
+	}
+}
+
+println "Converter endpoint is ${convert.endpoint}"
+println "Converting."
+Data data = new Data(Types.JSON, container.toJson())
+Data result = converter.execute(data)
+if (result.discriminator == Types.ERROR) {
+	println result.payload
+	return
+}
+
+println "Saving."
+write('/Users/suderman/Desktop/Bartok.xml', result.payload)
+
+println "Done."
+
+	

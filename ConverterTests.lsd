@@ -1,0 +1,17 @@
+include 'LAPPS'
+
+//def url = 'http://grid.anc.org:9080/GateConverter/0.3.1/services/JsonToGate'
+//def client = new ServiceClient(url)
+
+def node = Nodes.vassar
+def client = Service {
+	server node.server
+	name "${node.id}:convert.json2gate_0.3.1"
+}
+
+Data data = new Data()
+data.discriminator = Types.JSON
+data.payload = new File('examples/bartok.json').text
+
+Data result = client.execute(data)
+println result.payload

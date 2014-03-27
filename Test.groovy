@@ -1,2 +1,11 @@
-url='https://signin.verizon.com/sso/VOLPortalLogin?SAMLRequest=fVLLbtswEPwVYu962kpkwnLgxghqwG3UWMmhl4Km1g4BiXS5lPv4%2BlKy47pI4Ss5OzM7s9O7n23DDmhJGV1AEsbAUEtTK70r4Ll6CHK4m01JtE265%2FPOveon%2FN4hOeYHNfHjTwGd1dwIUsS1aJG4k3w9%2F7TiaRjzvTXOSNMAmxOhdV7q3mjqWrRrtAcl8flpVcCrc3viUUT7UHihUNRmg6E0rX%2BJep2oZ3xHAWzh7Sgt3LDCmUXttNKhX039NvpIQyZ6eVyVxjrRrMxOaWAPxkoc9ipgKxpCYMtFAd8yTOub%2FDYJ4lRsgjGOkkDcZiLIRnmW3WSylpseSqUgUgf8O0zU4VKTE9oVkMbJOIhHQTKp4gmPcz7Ow0mafwVWnjL5oPQx62sBbo4g4h%2BrqgzKx3UF7OWtMw%2BAU0N8ULeX1VwnFm9hwuycm58K31UwjS4Fzgfx2TMuF6VplPzF5k1jftxbFM7H4WyHQ7qtcNc99C%2BqDrYDlDsrNCnUDti67Om%2FdKJRW4X2otr%2FWoRodnL576HO%2FgA%3D&RelayState=_acfaf449-7b39-4804-89b8-07f5f48cf21e&SigAlg=http%3A%2F%2Fwww.w3.org%2F2000%2F09%2Fxmldsig%23rsa-sha1&Signature=Pgip7uZCEYh%2BNq1xu8FFcNhHQG9S0Iw9Vn8JeZIw1W8s8yFm4gtE%2BBIfG6Xuf761i1VH0a6%2FtkLjQSzdoVY8aX1PczHeSYiYSi%2BgfbuU4FJ0nTYHRrl67GzPWsdduqCno9sHWxlEG%2BjVFy45mpOkeUkBXHv7zGeQQv36BeLGEvcEgXkMRfmSOq68a12hpM2D2%2FW0TER27tbRUT9dApa4PI0ib%2FpfscmorOc3S82i0zky3HNEEowj6mMYh18koPHJjDtat377WUjdAGRrGIGuZNpKN%2FwTJHdbpxhOCj6DvGDmnkH2Hl5iePYVqEkiPu9Fagj6bktzanggdpsVZjEFyw%3D%3D&scb=yes&cancelURL=https%3A%2F%2Fsp.auth.adobe.com%2Fadobe-services%2F1.0%2Fsession%3Fcancelled%3D1%26_method%3DPOST%26mso_id%3DVerizon%26redirect_url%3Dhttp%253A%252F%252Fwatchabc.go.com%252Factivate%253Fdevice%253Dappletv&cancelURLDevice=https%3A%2F%2Fsp.auth.adobe.com%2Fadobe-services%2F1.0%2FsessionDevice%3Fcancelled%3D1%26amp%3B_method%3DPOST%26amp%3Bmso_id%3DVerizon&TARGET=https%3A%2F%2Fsp.auth.adobe.com%2Fsp%2Fsaml%2FSAMLAssertionConsumer%3Fredirect_url%3Dhttp%253A%252F%252Fwatchabc.go.com%252Factivate%253Fdevice%253Dappletv&partner=abc&loginType=fullRedirect&ver=2'
-println url.size()
+void func(Map map, String param1, String param2) {
+	println "Parameters #1: ${param1}"
+	println "Parameters #2: ${param2}"
+	println "Map:"
+	
+	map.each { name,value ->
+		println "${name}=${value}"
+	}
+}
+
+func("p1", "p2", foo:'foo', bar:'bar')
