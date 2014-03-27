@@ -1,0 +1,2776 @@
+{
+    "steps": [
+        {
+            "metadata": {
+                "contains": "Sentence"
+            },
+            "annotations": [
+                {
+                    "start": 0,
+                    "end": 63,
+                    "metadata": {
+                        
+                    },
+                    "id": "s1",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 64,
+                    "end": 90,
+                    "metadata": {
+                        
+                    },
+                    "id": "s2",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 91,
+                    "end": 127,
+                    "metadata": {
+                        
+                    },
+                    "id": "s3",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 128,
+                    "end": 263,
+                    "metadata": {
+                        
+                    },
+                    "id": "s4",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 264,
+                    "end": 397,
+                    "metadata": {
+                        
+                    },
+                    "id": "s5",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 398,
+                    "end": 527,
+                    "metadata": {
+                        
+                    },
+                    "id": "s6",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 528,
+                    "end": 666,
+                    "metadata": {
+                        
+                    },
+                    "id": "s7",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 667,
+                    "end": 802,
+                    "metadata": {
+                        
+                    },
+                    "id": "s8",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 803,
+                    "end": 1013,
+                    "metadata": {
+                        
+                    },
+                    "id": "s9",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1014,
+                    "end": 1041,
+                    "metadata": {
+                        
+                    },
+                    "id": "s10",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1042,
+                    "end": 1140,
+                    "metadata": {
+                        
+                    },
+                    "id": "s11",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1141,
+                    "end": 1153,
+                    "metadata": {
+                        
+                    },
+                    "id": "s12",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1154,
+                    "end": 1483,
+                    "metadata": {
+                        
+                    },
+                    "id": "s13",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1484,
+                    "end": 1603,
+                    "metadata": {
+                        
+                    },
+                    "id": "s14",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1604,
+                    "end": 1642,
+                    "metadata": {
+                        
+                    },
+                    "id": "s15",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1643,
+                    "end": 1692,
+                    "metadata": {
+                        
+                    },
+                    "id": "s16",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1693,
+                    "end": 1826,
+                    "metadata": {
+                        
+                    },
+                    "id": "s17",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 1827,
+                    "end": 2075,
+                    "metadata": {
+                        
+                    },
+                    "id": "s18",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2076,
+                    "end": 2255,
+                    "metadata": {
+                        
+                    },
+                    "id": "s19",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2256,
+                    "end": 2372,
+                    "metadata": {
+                        
+                    },
+                    "id": "s20",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2373,
+                    "end": 2393,
+                    "metadata": {
+                        
+                    },
+                    "id": "s21",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2394,
+                    "end": 2474,
+                    "metadata": {
+                        
+                    },
+                    "id": "s22",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2475,
+                    "end": 2588,
+                    "metadata": {
+                        
+                    },
+                    "id": "s23",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2589,
+                    "end": 2638,
+                    "metadata": {
+                        
+                    },
+                    "id": "s24",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2639,
+                    "end": 2742,
+                    "metadata": {
+                        
+                    },
+                    "id": "s25",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2743,
+                    "end": 2959,
+                    "metadata": {
+                        
+                    },
+                    "id": "s26",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 2960,
+                    "end": 3274,
+                    "metadata": {
+                        
+                    },
+                    "id": "s27",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3275,
+                    "end": 3402,
+                    "metadata": {
+                        
+                    },
+                    "id": "s28",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3403,
+                    "end": 3415,
+                    "metadata": {
+                        
+                    },
+                    "id": "s29",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3416,
+                    "end": 3431,
+                    "metadata": {
+                        
+                    },
+                    "id": "s30",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3432,
+                    "end": 3444,
+                    "metadata": {
+                        
+                    },
+                    "id": "s31",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3445,
+                    "end": 3508,
+                    "metadata": {
+                        
+                    },
+                    "id": "s32",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3509,
+                    "end": 3735,
+                    "metadata": {
+                        
+                    },
+                    "id": "s33",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 3736,
+                    "end": 4009,
+                    "metadata": {
+                        
+                    },
+                    "id": "s34",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4010,
+                    "end": 4199,
+                    "metadata": {
+                        
+                    },
+                    "id": "s35",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4200,
+                    "end": 4384,
+                    "metadata": {
+                        
+                    },
+                    "id": "s36",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4385,
+                    "end": 4405,
+                    "metadata": {
+                        
+                    },
+                    "id": "s37",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4406,
+                    "end": 4663,
+                    "metadata": {
+                        
+                    },
+                    "id": "s38",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4664,
+                    "end": 4829,
+                    "metadata": {
+                        
+                    },
+                    "id": "s39",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4830,
+                    "end": 4938,
+                    "metadata": {
+                        
+                    },
+                    "id": "s40",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 4939,
+                    "end": 5220,
+                    "metadata": {
+                        
+                    },
+                    "id": "s41",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 5221,
+                    "end": 5237,
+                    "metadata": {
+                        
+                    },
+                    "id": "s42",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 5238,
+                    "end": 5380,
+                    "metadata": {
+                        
+                    },
+                    "id": "s43",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 5381,
+                    "end": 5393,
+                    "metadata": {
+                        
+                    },
+                    "id": "s44",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 5394,
+                    "end": 5677,
+                    "metadata": {
+                        
+                    },
+                    "id": "s45",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 5678,
+                    "end": 5828,
+                    "metadata": {
+                        
+                    },
+                    "id": "s46",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 5829,
+                    "end": 6000,
+                    "metadata": {
+                        
+                    },
+                    "id": "s47",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6001,
+                    "end": 6111,
+                    "metadata": {
+                        
+                    },
+                    "id": "s48",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6112,
+                    "end": 6306,
+                    "metadata": {
+                        
+                    },
+                    "id": "s49",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6307,
+                    "end": 6526,
+                    "metadata": {
+                        
+                    },
+                    "id": "s50",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6527,
+                    "end": 6569,
+                    "metadata": {
+                        
+                    },
+                    "id": "s51",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6570,
+                    "end": 6582,
+                    "metadata": {
+                        
+                    },
+                    "id": "s52",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6583,
+                    "end": 6598,
+                    "metadata": {
+                        
+                    },
+                    "id": "s53",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6599,
+                    "end": 6611,
+                    "metadata": {
+                        
+                    },
+                    "id": "s54",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6612,
+                    "end": 6668,
+                    "metadata": {
+                        
+                    },
+                    "id": "s55",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6669,
+                    "end": 6681,
+                    "metadata": {
+                        
+                    },
+                    "id": "s56",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6682,
+                    "end": 6697,
+                    "metadata": {
+                        
+                    },
+                    "id": "s57",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6698,
+                    "end": 6710,
+                    "metadata": {
+                        
+                    },
+                    "id": "s58",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6711,
+                    "end": 6775,
+                    "metadata": {
+                        
+                    },
+                    "id": "s59",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6776,
+                    "end": 6927,
+                    "metadata": {
+                        
+                    },
+                    "id": "s60",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 6928,
+                    "end": 7048,
+                    "metadata": {
+                        
+                    },
+                    "id": "s61",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7049,
+                    "end": 7180,
+                    "metadata": {
+                        
+                    },
+                    "id": "s62",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7181,
+                    "end": 7286,
+                    "metadata": {
+                        
+                    },
+                    "id": "s63",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7287,
+                    "end": 7423,
+                    "metadata": {
+                        
+                    },
+                    "id": "s64",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7424,
+                    "end": 7717,
+                    "metadata": {
+                        
+                    },
+                    "id": "s65",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7718,
+                    "end": 7908,
+                    "metadata": {
+                        
+                    },
+                    "id": "s66",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7909,
+                    "end": 7979,
+                    "metadata": {
+                        
+                    },
+                    "id": "s67",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 7980,
+                    "end": 8124,
+                    "metadata": {
+                        
+                    },
+                    "id": "s68",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 8125,
+                    "end": 8404,
+                    "metadata": {
+                        
+                    },
+                    "id": "s69",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 8405,
+                    "end": 8563,
+                    "metadata": {
+                        
+                    },
+                    "id": "s70",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 8564,
+                    "end": 8798,
+                    "metadata": {
+                        
+                    },
+                    "id": "s71",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 8799,
+                    "end": 8960,
+                    "metadata": {
+                        
+                    },
+                    "id": "s72",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 8961,
+                    "end": 9184,
+                    "metadata": {
+                        
+                    },
+                    "id": "s73",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9185,
+                    "end": 9320,
+                    "metadata": {
+                        
+                    },
+                    "id": "s74",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9321,
+                    "end": 9440,
+                    "metadata": {
+                        
+                    },
+                    "id": "s75",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9441,
+                    "end": 9551,
+                    "metadata": {
+                        
+                    },
+                    "id": "s76",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9552,
+                    "end": 9673,
+                    "metadata": {
+                        
+                    },
+                    "id": "s77",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9674,
+                    "end": 9704,
+                    "metadata": {
+                        
+                    },
+                    "id": "s78",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9705,
+                    "end": 9812,
+                    "metadata": {
+                        
+                    },
+                    "id": "s79",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9813,
+                    "end": 9849,
+                    "metadata": {
+                        
+                    },
+                    "id": "s80",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9850,
+                    "end": 9862,
+                    "metadata": {
+                        
+                    },
+                    "id": "s81",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9863,
+                    "end": 9878,
+                    "metadata": {
+                        
+                    },
+                    "id": "s82",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9879,
+                    "end": 9891,
+                    "metadata": {
+                        
+                    },
+                    "id": "s83",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9892,
+                    "end": 9978,
+                    "metadata": {
+                        
+                    },
+                    "id": "s84",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 9979,
+                    "end": 10005,
+                    "metadata": {
+                        
+                    },
+                    "id": "s85",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 10006,
+                    "end": 10202,
+                    "metadata": {
+                        
+                    },
+                    "id": "s86",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 10203,
+                    "end": 10358,
+                    "metadata": {
+                        
+                    },
+                    "id": "s87",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 10359,
+                    "end": 10659,
+                    "metadata": {
+                        
+                    },
+                    "id": "s88",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 10660,
+                    "end": 10831,
+                    "metadata": {
+                        
+                    },
+                    "id": "s89",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 10832,
+                    "end": 11024,
+                    "metadata": {
+                        
+                    },
+                    "id": "s90",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11025,
+                    "end": 11060,
+                    "metadata": {
+                        
+                    },
+                    "id": "s91",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11061,
+                    "end": 11230,
+                    "metadata": {
+                        
+                    },
+                    "id": "s92",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11231,
+                    "end": 11356,
+                    "metadata": {
+                        
+                    },
+                    "id": "s93",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11357,
+                    "end": 11482,
+                    "metadata": {
+                        
+                    },
+                    "id": "s94",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11483,
+                    "end": 11618,
+                    "metadata": {
+                        
+                    },
+                    "id": "s95",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11619,
+                    "end": 11714,
+                    "metadata": {
+                        
+                    },
+                    "id": "s96",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11715,
+                    "end": 11782,
+                    "metadata": {
+                        
+                    },
+                    "id": "s97",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11783,
+                    "end": 11795,
+                    "metadata": {
+                        
+                    },
+                    "id": "s98",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11796,
+                    "end": 11811,
+                    "metadata": {
+                        
+                    },
+                    "id": "s99",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11812,
+                    "end": 11824,
+                    "metadata": {
+                        
+                    },
+                    "id": "s100",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11825,
+                    "end": 11900,
+                    "metadata": {
+                        
+                    },
+                    "id": "s101",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 11901,
+                    "end": 12101,
+                    "metadata": {
+                        
+                    },
+                    "id": "s102",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12102,
+                    "end": 12342,
+                    "metadata": {
+                        
+                    },
+                    "id": "s103",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12343,
+                    "end": 12471,
+                    "metadata": {
+                        
+                    },
+                    "id": "s104",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12472,
+                    "end": 12510,
+                    "metadata": {
+                        
+                    },
+                    "id": "s105",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12511,
+                    "end": 12652,
+                    "metadata": {
+                        
+                    },
+                    "id": "s106",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12653,
+                    "end": 12825,
+                    "metadata": {
+                        
+                    },
+                    "id": "s107",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12826,
+                    "end": 12965,
+                    "metadata": {
+                        
+                    },
+                    "id": "s108",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 12966,
+                    "end": 13189,
+                    "metadata": {
+                        
+                    },
+                    "id": "s109",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13190,
+                    "end": 13258,
+                    "metadata": {
+                        
+                    },
+                    "id": "s110",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13259,
+                    "end": 13271,
+                    "metadata": {
+                        
+                    },
+                    "id": "s111",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13272,
+                    "end": 13287,
+                    "metadata": {
+                        
+                    },
+                    "id": "s112",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13288,
+                    "end": 13300,
+                    "metadata": {
+                        
+                    },
+                    "id": "s113",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13301,
+                    "end": 13352,
+                    "metadata": {
+                        
+                    },
+                    "id": "s114",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13353,
+                    "end": 13460,
+                    "metadata": {
+                        
+                    },
+                    "id": "s115",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13461,
+                    "end": 13473,
+                    "metadata": {
+                        
+                    },
+                    "id": "s116",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13474,
+                    "end": 13665,
+                    "metadata": {
+                        
+                    },
+                    "id": "s117",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13666,
+                    "end": 13753,
+                    "metadata": {
+                        
+                    },
+                    "id": "s118",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13754,
+                    "end": 13981,
+                    "metadata": {
+                        
+                    },
+                    "id": "s119",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 13982,
+                    "end": 14281,
+                    "metadata": {
+                        
+                    },
+                    "id": "s120",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 14282,
+                    "end": 14435,
+                    "metadata": {
+                        
+                    },
+                    "id": "s121",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 14436,
+                    "end": 14610,
+                    "metadata": {
+                        
+                    },
+                    "id": "s122",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 14611,
+                    "end": 14779,
+                    "metadata": {
+                        
+                    },
+                    "id": "s123",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 14780,
+                    "end": 14880,
+                    "metadata": {
+                        
+                    },
+                    "id": "s124",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 14881,
+                    "end": 14978,
+                    "metadata": {
+                        
+                    },
+                    "id": "s125",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 14979,
+                    "end": 15071,
+                    "metadata": {
+                        
+                    },
+                    "id": "s126",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15072,
+                    "end": 15184,
+                    "metadata": {
+                        
+                    },
+                    "id": "s127",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15185,
+                    "end": 15272,
+                    "metadata": {
+                        
+                    },
+                    "id": "s128",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15273,
+                    "end": 15450,
+                    "metadata": {
+                        
+                    },
+                    "id": "s129",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15451,
+                    "end": 15621,
+                    "metadata": {
+                        
+                    },
+                    "id": "s130",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15622,
+                    "end": 15634,
+                    "metadata": {
+                        
+                    },
+                    "id": "s131",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15635,
+                    "end": 15740,
+                    "metadata": {
+                        
+                    },
+                    "id": "s132",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15741,
+                    "end": 15756,
+                    "metadata": {
+                        
+                    },
+                    "id": "s133",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15757,
+                    "end": 15833,
+                    "metadata": {
+                        
+                    },
+                    "id": "s134",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 15834,
+                    "end": 16084,
+                    "metadata": {
+                        
+                    },
+                    "id": "s135",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16085,
+                    "end": 16303,
+                    "metadata": {
+                        
+                    },
+                    "id": "s136",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16304,
+                    "end": 16316,
+                    "metadata": {
+                        
+                    },
+                    "id": "s137",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16317,
+                    "end": 16500,
+                    "metadata": {
+                        
+                    },
+                    "id": "s138",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16501,
+                    "end": 16640,
+                    "metadata": {
+                        
+                    },
+                    "id": "s139",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16641,
+                    "end": 16671,
+                    "metadata": {
+                        
+                    },
+                    "id": "s140",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16672,
+                    "end": 16841,
+                    "metadata": {
+                        
+                    },
+                    "id": "s141",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16842,
+                    "end": 16971,
+                    "metadata": {
+                        
+                    },
+                    "id": "s142",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 16972,
+                    "end": 17128,
+                    "metadata": {
+                        
+                    },
+                    "id": "s143",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17129,
+                    "end": 17449,
+                    "metadata": {
+                        
+                    },
+                    "id": "s144",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17450,
+                    "end": 17519,
+                    "metadata": {
+                        
+                    },
+                    "id": "s145",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17520,
+                    "end": 17790,
+                    "metadata": {
+                        
+                    },
+                    "id": "s146",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17791,
+                    "end": 17829,
+                    "metadata": {
+                        
+                    },
+                    "id": "s147",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17830,
+                    "end": 17921,
+                    "metadata": {
+                        
+                    },
+                    "id": "s148",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17922,
+                    "end": 17963,
+                    "metadata": {
+                        
+                    },
+                    "id": "s149",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 17964,
+                    "end": 18108,
+                    "metadata": {
+                        
+                    },
+                    "id": "s150",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18109,
+                    "end": 18282,
+                    "metadata": {
+                        
+                    },
+                    "id": "s151",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18283,
+                    "end": 18466,
+                    "metadata": {
+                        
+                    },
+                    "id": "s152",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18467,
+                    "end": 18642,
+                    "metadata": {
+                        
+                    },
+                    "id": "s153",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18643,
+                    "end": 18921,
+                    "metadata": {
+                        
+                    },
+                    "id": "s154",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18922,
+                    "end": 18973,
+                    "metadata": {
+                        
+                    },
+                    "id": "s155",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18974,
+                    "end": 18986,
+                    "metadata": {
+                        
+                    },
+                    "id": "s156",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 18987,
+                    "end": 18999,
+                    "metadata": {
+                        
+                    },
+                    "id": "s157",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19000,
+                    "end": 19015,
+                    "metadata": {
+                        
+                    },
+                    "id": "s158",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19016,
+                    "end": 19028,
+                    "metadata": {
+                        
+                    },
+                    "id": "s159",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19029,
+                    "end": 19041,
+                    "metadata": {
+                        
+                    },
+                    "id": "s160",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19042,
+                    "end": 19115,
+                    "metadata": {
+                        
+                    },
+                    "id": "s161",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19116,
+                    "end": 19376,
+                    "metadata": {
+                        
+                    },
+                    "id": "s162",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19377,
+                    "end": 19493,
+                    "metadata": {
+                        
+                    },
+                    "id": "s163",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19494,
+                    "end": 19689,
+                    "metadata": {
+                        
+                    },
+                    "id": "s164",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19690,
+                    "end": 19808,
+                    "metadata": {
+                        
+                    },
+                    "id": "s165",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 19809,
+                    "end": 20034,
+                    "metadata": {
+                        
+                    },
+                    "id": "s166",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20035,
+                    "end": 20084,
+                    "metadata": {
+                        
+                    },
+                    "id": "s167",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20085,
+                    "end": 20343,
+                    "metadata": {
+                        
+                    },
+                    "id": "s168",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20344,
+                    "end": 20657,
+                    "metadata": {
+                        
+                    },
+                    "id": "s169",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20658,
+                    "end": 20901,
+                    "metadata": {
+                        
+                    },
+                    "id": "s170",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20902,
+                    "end": 20954,
+                    "metadata": {
+                        
+                    },
+                    "id": "s171",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20955,
+                    "end": 20967,
+                    "metadata": {
+                        
+                    },
+                    "id": "s172",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20968,
+                    "end": 20983,
+                    "metadata": {
+                        
+                    },
+                    "id": "s173",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20984,
+                    "end": 20996,
+                    "metadata": {
+                        
+                    },
+                    "id": "s174",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 20997,
+                    "end": 21070,
+                    "metadata": {
+                        
+                    },
+                    "id": "s175",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 21071,
+                    "end": 21101,
+                    "metadata": {
+                        
+                    },
+                    "id": "s176",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 21102,
+                    "end": 21188,
+                    "metadata": {
+                        
+                    },
+                    "id": "s177",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 21189,
+                    "end": 21337,
+                    "metadata": {
+                        
+                    },
+                    "id": "s178",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 21338,
+                    "end": 21501,
+                    "metadata": {
+                        
+                    },
+                    "id": "s179",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 21502,
+                    "end": 21771,
+                    "metadata": {
+                        
+                    },
+                    "id": "s180",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 21772,
+                    "end": 22067,
+                    "metadata": {
+                        
+                    },
+                    "id": "s181",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 22068,
+                    "end": 22189,
+                    "metadata": {
+                        
+                    },
+                    "id": "s182",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 22190,
+                    "end": 22378,
+                    "metadata": {
+                        
+                    },
+                    "id": "s183",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 22379,
+                    "end": 22517,
+                    "metadata": {
+                        
+                    },
+                    "id": "s184",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 22518,
+                    "end": 22898,
+                    "metadata": {
+                        
+                    },
+                    "id": "s185",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 22899,
+                    "end": 23140,
+                    "metadata": {
+                        
+                    },
+                    "id": "s186",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23141,
+                    "end": 23357,
+                    "metadata": {
+                        
+                    },
+                    "id": "s187",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23358,
+                    "end": 23514,
+                    "metadata": {
+                        
+                    },
+                    "id": "s188",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23515,
+                    "end": 23760,
+                    "metadata": {
+                        
+                    },
+                    "id": "s189",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23761,
+                    "end": 23828,
+                    "metadata": {
+                        
+                    },
+                    "id": "s190",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23829,
+                    "end": 23841,
+                    "metadata": {
+                        
+                    },
+                    "id": "s191",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23842,
+                    "end": 23857,
+                    "metadata": {
+                        
+                    },
+                    "id": "s192",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23858,
+                    "end": 23870,
+                    "metadata": {
+                        
+                    },
+                    "id": "s193",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23871,
+                    "end": 23962,
+                    "metadata": {
+                        
+                    },
+                    "id": "s194",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 23963,
+                    "end": 24097,
+                    "metadata": {
+                        
+                    },
+                    "id": "s195",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 24098,
+                    "end": 24413,
+                    "metadata": {
+                        
+                    },
+                    "id": "s196",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 24414,
+                    "end": 24668,
+                    "metadata": {
+                        
+                    },
+                    "id": "s197",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 24669,
+                    "end": 24811,
+                    "metadata": {
+                        
+                    },
+                    "id": "s198",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 24812,
+                    "end": 24903,
+                    "metadata": {
+                        
+                    },
+                    "id": "s199",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 24904,
+                    "end": 25125,
+                    "metadata": {
+                        
+                    },
+                    "id": "s200",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25126,
+                    "end": 25226,
+                    "metadata": {
+                        
+                    },
+                    "id": "s201",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25227,
+                    "end": 25237,
+                    "metadata": {
+                        
+                    },
+                    "id": "s202",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25238,
+                    "end": 25269,
+                    "metadata": {
+                        
+                    },
+                    "id": "s203",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25270,
+                    "end": 25359,
+                    "metadata": {
+                        
+                    },
+                    "id": "s204",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25360,
+                    "end": 25407,
+                    "metadata": {
+                        
+                    },
+                    "id": "s205",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25408,
+                    "end": 25421,
+                    "metadata": {
+                        
+                    },
+                    "id": "s206",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25422,
+                    "end": 25429,
+                    "metadata": {
+                        
+                    },
+                    "id": "s207",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25430,
+                    "end": 25470,
+                    "metadata": {
+                        
+                    },
+                    "id": "s208",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25471,
+                    "end": 25506,
+                    "metadata": {
+                        
+                    },
+                    "id": "s209",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25507,
+                    "end": 25559,
+                    "metadata": {
+                        
+                    },
+                    "id": "s210",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25560,
+                    "end": 25603,
+                    "metadata": {
+                        
+                    },
+                    "id": "s211",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25604,
+                    "end": 25613,
+                    "metadata": {
+                        
+                    },
+                    "id": "s212",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25614,
+                    "end": 25709,
+                    "metadata": {
+                        
+                    },
+                    "id": "s213",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25710,
+                    "end": 25748,
+                    "metadata": {
+                        
+                    },
+                    "id": "s214",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25749,
+                    "end": 25764,
+                    "metadata": {
+                        
+                    },
+                    "id": "s215",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25765,
+                    "end": 25906,
+                    "metadata": {
+                        
+                    },
+                    "id": "s216",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25907,
+                    "end": 25921,
+                    "metadata": {
+                        
+                    },
+                    "id": "s217",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25922,
+                    "end": 25987,
+                    "metadata": {
+                        
+                    },
+                    "id": "s218",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 25988,
+                    "end": 26027,
+                    "metadata": {
+                        
+                    },
+                    "id": "s219",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26028,
+                    "end": 26037,
+                    "metadata": {
+                        
+                    },
+                    "id": "s220",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26038,
+                    "end": 26090,
+                    "metadata": {
+                        
+                    },
+                    "id": "s221",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26091,
+                    "end": 26156,
+                    "metadata": {
+                        
+                    },
+                    "id": "s222",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26157,
+                    "end": 26290,
+                    "metadata": {
+                        
+                    },
+                    "id": "s223",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26291,
+                    "end": 26303,
+                    "metadata": {
+                        
+                    },
+                    "id": "s224",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26304,
+                    "end": 26378,
+                    "metadata": {
+                        
+                    },
+                    "id": "s225",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26379,
+                    "end": 26413,
+                    "metadata": {
+                        
+                    },
+                    "id": "s226",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26414,
+                    "end": 26427,
+                    "metadata": {
+                        
+                    },
+                    "id": "s227",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26428,
+                    "end": 26453,
+                    "metadata": {
+                        
+                    },
+                    "id": "s228",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                },
+                {
+                    "start": 26454,
+                    "end": 26493,
+                    "metadata": {
+                        
+                    },
+                    "id": "s229",
+                    "label": "Sentence",
+                    "features": {
+                        
+                    }
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        
+    },
+    "text": "Tonal Structure and Form in Bart\u00F3k\u2019s Concerto for Orchestra (I)\n            Drew F. Nobile\n            University of Washington\n            Before beginning an analysis of any piece by B\u00E9la Bart\u00F3k, one must first decide to what degree tonal analysis will be used.\nBart\u00F3k\u2019s music, although it is often difficult to call completely tonal, never entirely sheds itself of tonal elements and structure.\nThis remains true even with one of his last compositions, the Concerto for Orchestra, written two years before his death in 1943.\nThe discussion that follows analyzes the first movement of the Concerto, focusing on the tonal structures at play throughout the movement.\nThe analysis will treat the movement tonally, investigating the progression of local \u201Ctonics\u201D and its relationship to the overall form.\nWe will also examine to what degree a \u201Ctonal\u201D reading of this movement is limited in its analytical potential in an attempt to pinpoint exactly where Bart\u00F3k strays from common-practice compositional techniques.\nHarmonic Structure and Form\n            Bart\u00F3k describes the form of the first movement as \u201Cmore or less regular sonata form.\u201D\nBart\u00F3k, 431.\nWhile that does not seem to be a meaningful assertion, it is perfectly accurate: the movement is in sonata form, but there is an introduction that does not relate thematically to any other parts of the movement (not unheard of in Mozart sonatas), and the recapitulation presents the two themes of the exposition in reverse order.\nThe \u201Cbackwards\u201D recapitulation is a technique that Bart\u00F3k employs frequently because of the formal symmetry it creates.\nFor example, the fifth string quartet.\nAlso see Bart\u00F3k\u2019s comments on that (Bart\u00F3k, 414).\nExample 1 shows a diagram of the form of the movement; the symmetry is apparent within the seven sections following the introduction.\nAs the example shows, the development section is divided into three subsections; the first and third subsections draw their thematic material from the first theme group, and the second subsection involves new material not drawn from the exposition.\nHence, on either side of the middle section of the development we have the alternation FTG-STG-FTG which makes the overall form, with the exception of the Introduction, symmetric.\nPaul Wilson also discusses the inherent symmetry of the movement, although his interpretation is somewhat different.\nSee Wilson, 168-170.\n|| Intro | FTG | STG | Dev I (FTG) | Dev II (new) | Dev III (FTG) | STG | FTG ||\n                  The abbreviations FTG and STG stand for First Theme Group and Second Theme Group, respectively.\nexample 1: formal structure of the first movement\n            Sonata form\u2014or, \u201Cmore-or-less\u201D sonata form\u2014carries harmonic as well as formal connotations.\nWhile \u201Ctonality\u201D in this piece (and in Bart\u00F3k\u2019s music in general) is quite different from its classical interpretation, we find that the harmonic structure is at least analogous to the standard sonata-form structure.\nTo begin with, the movement is in F. When we say \u201Cin F,\u201D we do not imply F major (or minor, for that matter)\u2014the major/minor tonal system in general does not apply to this piece\u2014but rather that the pitch-class F is the tonal center of the movement, and acts analogously to the tonic in a Mozartian sonata movement.\nUsing this interpretation, we can map out the local tonics (tonal centers) used throughout the movement, as shown in Example 2.\n            \n               \n            \n            example 2: harmonic structure of the first movement\n            In this example, the barlines divide the formal sections of the piece (Introduction\u2013Exposition\u2013Development\u00AD\u2013Recapitulation)\u2014so we can immediately see that the tonic F is not established until the exposition begins.\nBeginning with the exposition, the large-scale progression of tonal centers is a whole-tone descent from F to F, represented by the stemmed notes in Example 2, while the Introduction ascends from C\u266F to F through D\u266F (shown as D\u266D and E\u266D in the graph) in a quasi-bass Anstieg.\nThe middle pitch of the descent, B, acts as the \u201Cdominant\u201D to F, based on its symmetrical division of the whole-tone scale and the fact that the second theme appears in B in the exposition.\nBart\u00F3k has often applied a tonic-dominant relationship to a pitch-class and its tritone partner, and even admits to using that as a compositional framework in his fifth string quartet.\nSee Bart\u00F3k, 414-415.\nIn this particular movement, Bart\u00F3k feigns moving to the tonal dominant, C, for the second theme before reinterpreting C as a chromatic passing tone between D\u266D and B\u2014this and other subtleties shown in Example 2 will be explained in detail in later sections.\nPaul Wilson gives a detailed account of the foreground activity throughout this movement in his analysis; we do not seek to duplicate or substitute for his findings.\nOur analysis will focus instead on relating the foreground activity to the overarching background structure.\nThe graph in Example 2 will serve as a point of departure for the subsequent analysis; while we will periodically refer back to some of its specific elements, it should be understood that even when not explicitly referenced, this graph serves as the explanatory goal of this paper.\nThe Introduction\n            As Paul Wilson points out, the title \u201CIntroduzione\u201D given to the movement as a whole seems to apply only to the first 75 measures.\nWilson, 172.\nThe Introduction does not relate thematically to any of the main sections of the movement\u2014in fact, it is the third movement that draws its thematic material from this section\u2014but the harmonic and motivic principles at play here foreshadow some important elements of the entire piece.\nTo begin with, the opening motive in the celli and basses, shown in Example 3, outlines a pentatonic set and strongly presents C\u266F as the tonal center.\nThe pentatonic set here is exclusively a pitch-class set, and its incarnations throughout the movement are devoid of any connotations associated with the pentatonic scale.\nIndeed, this set can be seen more as a by-product of stacked perfect fourths than a generative element itself.\nThe perfect fourth in fact generates much of the motivic and harmonic material of the entire movement, and its importance is immediately evident in the Introduction with the opening bass motive.\nFurthermore, the following two instances of this opening motive, shown in Examples 4 and 5, remove any doubt as to the motivic importance of the perfect fourth, and in turn diminish the importance of the pentatonic set.\nexample 3: measures 1-6 (celli and basses)\n            \n               \n            \n            example 4: measures 12-16 (celli and basses)\n            \n               \n            \n            example 5: measures 22-29 (celli, basses and violas)\n            Example 4 transitions from C\u266F to F\u266F, and adds pitch-class E to the pentatonic set of Example 3, creating a six-note set of stacked fourths.\nExample 5 shows the true dominance of the perfect fourth; the set created is a ten-note set derived by stacking fourths.\nIf we begin from the final D\u266F and ascend the circle of fourths until we reach C we obtain the entire set presented in this example.\nEach note is either approached or left (or both) by a fourth, and the structural motion is from F\u266F to D\u266F.\nThe overall motion in the first 29 measures is C\u266F to D\u266F, through F\u266F; these are represented enharmonically in Example 2 as D\u266D, E\u266D and G\u266D.\nAs previously mentioned, this motion constitutes the initial ascent to what will eventually be a whole-tone descent from F to F. So the prevailing structural motion of the movement as a whole is a descending whole step and the prevailing melodic motion is a (usually ascending) perfect fourth.\nWe can connect the two by noting that the descending whole step consists of two ascending fourths; indeed, the structural whole-tone descent is often \u201Cfilled in\u201D with the intervening fourth.\nThis motion is exemplified in Example 2 in the second theme group (mm.\n155-233), and as we will see, it occurs in other places, though not relevant enough to the background structure to be represented in Example 2. \n            Each time the motion in Examples 3 through 5 breaks from chains of fourths, the same sequence of intervals occurs: two descending perfect fourths separated by an ascending major second (-5, +2, -5); each instance of this intervallic cell is bracketed in the examples.\nThis sequence of intervals is the inversion of those found in the second head motive of the first theme of the exposition, shown in measures 2-3 of Example 8.\nSo although there is no thematic relation between the Introduction and the main sections of the movement, within the first 29 measures we can already see structural, harmonic and motivic elements that apply to the movement as a whole.\nThe section from measures 35-50 is centered on E; upon the return of D\u266F, enharmonically respelled as E\u266D, in measure 58, we see that E acts as its upper-neighbor.\nThis relationship is somewhat obscured by measures 51-57 however; while there is no clear tonal center for this section, G appears in the outer voices in measure 51, although the harmonic material is reminiscent of C minor.\nThe concluding motive of this section in the violins (the bracketed sections of Example 6), as well as the bass motive of measure 58ff.\n(Example 7), are related to the first head motive of the first theme, which is shown in the first measure of Example 8.\nAll three of these motives span a tritone, which as mentioned is the \u201Cdominant\u201D relationship in this movement.\nPaul Wilson describes the transition from the Introduction to the Exposition as \u201Cquite abrupt and seemingly unmotivated,\u201D\n                  Wilson, 173.\nbut it is in fact this motivic relationship that ties them together and creates a rather smooth transition.\nexample 6: measures 56-58 (violin 1)\n            \n               \n            \n            example 7: measure 58 (violas, celli, basses); repeated through measure 75\n            The Exposition\n            Although the motivic relationship between the Introduction and the first theme of the exposition smooth the transition, nearly every other element changes when the first theme appears.\nThe drastic tempo and meter changes as well as the first appearances of staccato articulations make it clear to the listener that the introduction is over.\nAs mentioned, the first theme, the beginning of which is reproduced in Example 8, contains two head motives: the first is the tritone-spanning ascent that appears in the first measure, and the second is an iteration of the interval cell (+5, -2, +5) that appears in the second through third measures.\nWhile the presence of the perfect fourths that was so prevalent in the Introduction is clear in the latter, the former does not employ the perfect fourth in its formation.\nRather, this motive is a small-scale representation of the tonic-dominant relationship of tritone partners, specifically F and B, that is the basis for the harmonic structure of this movement.\nexample 8: measures 76-80 (violins)\n            Rhythmically, we have a dissonance between the melody, which follows the written meter, and the accompanying chords in the bassoons, horns and lower strings.\nExample 9 reproduces the chords, and Example 10 rewrites them in a meter that is more consistent with their rhythmic pattern.\nAs Example 10 shows, the chords are more-or-less in duple meter (4/8 and 2/8) with one \u201Chiccup\u201D occurring in the 5/8 measure.\nThis is in strict metric dissonance with the triple meter of the melody (with its own \u201Chiccups\u201D occurring in the written 2/8 measures).\nAs we will later see, this dissonance disappears when this theme returns in the recapitulation.\nexample 9: measures 77-91 (bassoons, horns, lower strings; reduced)\n            \n               \n            \n            example 10: measures 77-91 rebarred to reflect rhythmic pattern\n            We have already mentioned that the first theme group is in F\u2014this is made clear from the onset, both in the melodic line and by the F minor triad that occurs on the downbeat of measure 77.\nWhile the material occasionally departs from this F in measures 76-94, these departures are all subordinate to the prolonged F. E\u266D is the tonal center for measures 95-134, although it does not appear as a strong bass note until measure 131.\nMeasures 95-130 contain a mostly chromatic descent from C to E\u266D, where E\u266D is anticipated throughout as a goal tone for the bass.\nExample 11 illustrates this structure.\nImmediately following the arrival of E\u266D in the bass, C\u266F (D\u266D) is established as the tonal center for the final transition to the second theme.\nThe trombone motive in measures 134-141, shown in Example 12, is the subject of the fugato section in part 3 of the development, although its importance is downplayed here.\nNote that the initial G\u266F is a pickup to the section in C\u266F, which fills in the whole-tone descent from E\u266D to C\u266F with the intervening fourth.\nThis motive also contains the intervallic cell of the second head motive of the first theme in the form of G\u266F-C\u266F-B-E (with the addition of some passing tones), in addition to consisting largely of motion by perfect fourths.\nexample 11: bass structure of the first theme group, measures 76-155\n            \n               \n            \n            example 12: measures 134-141 (trombone)\n            Wilson claims that C and E\u266D are \u201Clocal dominants\u201D to F in this first section of the exposition.\nWilson, 174.\nWhile the strong V-I motion from measures 90-91 does carry a tonal implication of dominant-tonic, such cadential bass motion does not imply anything about structural function in this context.\nE\u266D, furthermore, is not convincingly established as a dominant-functioning tone at all.\nThe passage from measures 85-89 is centered on E\u266D (and the pentatonic set from the opening of the exposition is transposed down a whole step), but its mere presence as local tonic does not signify any sort of dominant function.\nRather, we can consider this occurrence of E\u266D as a middleground-level whole-tone descent that foreshadows the structural descent to E\u266D at measure 131 that is represented in Example 2. In measures 91-95, the bass descends F-E\u266D-D\u266D-C, which might seem to support C\u2019s functioning as structural dominant.\nHowever, as previously mentioned, C acts as a \u201Cfake\u201D dominant that in measures 149-155 actually functions as an upper neighbor to B, the \u201Ctrue\u201D dominant.\nThe descent in measures 91-95 in fact participates in the farce by projecting a descent ending on C, which makes the eventual reinterpretation of C and descent to B stronger.\nThis creates both a smooth transition to the second theme and a strong sense that a new section is beginning, a combination that is generally rather difficult to forge.\nThe second theme is tranquil and harmonically simple, which is in stark contrast to the first theme.\nB dominates as tonal center from measures 155-191 with little or no harmonic motion away from it.\nMeasures 192-197 are in E\u266D, with the bass notes in the harp, and measures 198-209 are in D\u266D.\nA\u266D intervenes between E\u266D and D\u266D in measure 195\u2014another instance of the whole-tone being \u201Cfilled in\u201D by a fourth.\nThe return to B in measure 210 is also filled-in in this way by F\u266F in measures 208-209.\nHence, measures 155-210 constitute the bass progression B-E\u266D-D\u266D-B; the same stepwise descent (E\u266D-D\u266D) occurred in the first theme group while F rather than B was being prolonged.\nPaul Wilson points out that \u201C[i]n substituting for F within an analogous structure, B receives confirmation at this point as the crucial interior center of the movement.\u201D\nWilson, 179.\nIn our terminology, this is the point at which B is unequivocally established as the structural dominant.\nThe Development\n            As mentioned, the development is divided into three subsections.\nIn Example 2, the entire development section is represented by exactly three pitches, and indeed each subsection is associated with one of these three pitches as its tonal center\u2014none of these pitches is involved in the structural whole-tone descent.\nAs Paul Wilson states, the development \u201Cis, for Bart\u00F3k\u2019s music, developmental in a relatively conventional way\u201D; the themes from the exposition are expanded and modified, and tonalities other than those expected arise.\nWilson, 180.\nThe only slight abnormality, though it is certainly not unheard of even in classical-period sonata movements, is the emergence of a new theme in the second section of the development.\nAlthough Wilson claims that this theme is based on \u201Ca transformation in rhythm and contour of the second head-motive of [the first-theme],\u201D\n                  Wilson, 182.\nthere is no intervallic relationship between the two motives, and it is not clear what elements of a motive remain when rhythm, contour and interval content are changed.\nFurthermore, this section, being the middle section of the movement, upholds the formal symmetry if interpreted as its own theme.\nThe first section of the development, measures 231-271, begins with a big D-minor chord which immediately establishes D as the tonal center for the section.\nAlthough it moves to E\u266D minor in measure 239, it returns to D minor in measure 248, which suggests that E\u266D is an upper neighbor prolonging D. The passage beginning at measure 248, shown in Example 13, can be considered to be the \u201Ctheme\u201D of this section, and is a development of the second head motive of the first theme.\nThis motive undergoes inversion and extension throughout the section.\nWhile Wilson rightly identifies the resultant set of measures 261-264 as 6-Z50 ([014679]), identifying it as such does not offer much analytical insight until we point out that this is a simple extension of the intervallic sequence (+5, -2, +5) from the original motive.\nexample 13: measures 248-264 (violins)\n            The second section of the development is in C\u266F (which is sometimes spelled D\u266D).\nThis section is reproduced as Example 14.\nThis section returns to the calm simplicity (and tempo) of the second section, though apart from affect there are no references to that section.\nAlthough the C\u266F major chord in measure 293, preceded by A\u266D major (V) in measure 285, suggests C\u266F as tonal center, the tonality is not strongly established until measure 303.\nThe arrival at C\u266F was foreshadowed by the first two measures of the development (Example 15), which are almost a direct transposition of the two head motives of the first theme to C\u266F.\nBecause of its emphasis here in the development section and its position as leading to B in the second theme group, we could conceive of C# as a sub-dominant in this movement.\nAs tempting as this interpretation may be, this observation is relegated to the notes section because it constitutes a horrible abuse of terminology\u2014there is only so far that such tonal analogies can go before they begin to hide any true analytical insight behind misused terms.\nexample 15: measures 231-232 (violins and trumpets)\n            \n            \n               \n            \n            \n            example 14: measures 272-313 (reduction): development, part 2\n            The third section of the development takes the trombone motive from the transition between the first and second sections of the exposition shown in Example 12, transposed to begin on F, and turns it into a fugato sequence, reproduced in Example 17.\nThe tonal center B\u266D is established immediately in measures 316-318 by the strong V-I chord progression (Example 16).\nAs previously mentioned, the fugato motive incorporates the motion by perfect fourths found in the Introduction as well as the intervallic cell found in the second head motive of the first theme.\nThe resultant set is the pentatonic set F-B\u266D-E\u266D-A\u266D-D\u266D; the entire passage shown in Example 17 remains within this set.\nThe second and fourth entrances of the fugato subject are transposed up a perfect fifth, but the first note is B\u266D rather than C, which allows Bart\u00F3k to remain in this pentatonic set (and also to reinforce B\u266D as tonal center).\nexample 16: measures 316-318: establishment of b\u266D\n            The second instance of the fugato section, not reproduced in its entirety but based on the subject in Example 18, is an exact pitch inversion transposed to begin on C. The inversion blends seamlessly back into the original subject in measure 363.\nThe following section (measures 363-389) especially brings out the quartal harmonies within the pentatonic set, so much so that B\u266D is obscured as tonal center which allows A\u266D to emerge as the goal tone of this section\u2014only to be immediately reinterpreted as a leading tone to the A that begins the recapitulation.\nBoth B\u266D and A\u266D are chromatic neighbors to A, which intensifies the arrival on A, and brings out the fact that the appearance of A continues the large-scale whole-tone descent that has been left stranded on B for the entire development section.\nexample 17: measures 316-340 (brass): fugato section\n            \n               \n            \n            example 18: measures 342-349 (horns): inverted fugato subject\n            The Recapitulation\n            The recapitulation, as we have seen, presents the themes in reverse order.\nThe second theme is initially presented in A, as part of the whole-tone descent, and proceeds directly to G, where it is restated slightly modified.\nIt is worth pointing out that the arrival on G at measure 425 is led into by D, which constitutes another \u201Cfilling in\u201D of the whole-step by the intervening fourth.\nThe A\u266F in measure 438 might initially seem to be a new tonal area, but it leads to D in measure 444, which constitutes a V chord still applied to G. Rather than resolve this D back to G, however, Bart\u00F3k shifts briefly to F\u266F in measure 456 and leads to E in measure 467.\nE and F\u266F are both active throughout the entire transition from second theme back to first theme (measures 456-487) which brings out their functions as upper and lower chromatic neighbors to F, which returns triumphantly in measure 488 with the much-anticipated recapitulation of the first theme.\nThe return of the first theme is certainly immediately recognized as such; however, there are some important differences.\nFirstly, its initial appearance in the exposition had a minor flare to it; the first chord in Example 9 is an F-minor triad, and the first four notes of Example 8 ascend the F-minor scale.\nIn the recapitulation of this theme, shown in Example 19, the first chord is an F-major chord, and the A\u266D is replaced by A\u266E in the melody.\nIn fact, the chord progression of the first four measures of Example 19 can be thought of tonally as I-vi-V in F major\u2014while we are reluctant to say that this passage is in major (the conspicuous A\u266D in measure 490 easily brings doubt to this interpretation), we can certainly say that the minor flare of the beginning has been replaced by a major flare here in the recapitulation.\nIn addition to the \u201Cmode\u201D-shift, we notice that the metric dissonance shown in Examples 9 and 10 no longer appears (notice how regular the rhythm of the accompanying figure is in Example 19) and also that the written meter no longer changes.\nIn other words, the piece, in becoming more regular, is beginning to drive towards the finish\u2014because of the formal structure, the recapitulation of the first theme also serves as the closing section of the movement.\nIndeed, this section has the feel of a Coda to it\u2014it is much shorter than any other major section or subsection, and the tonic harmony is active throughout.\nThere are also no phrase divisions\u2014the music simply drives forward with no pause until measure 514, where the fugato motive appears in the brass over an obvious V-I cadence, signaling the end of the movement which occurs as the motive completes.\nexample 19: measures 488-494: the first theme in the recapitulation\n            \n               \n            \n            There is no fine line between music that is \u201Ctonal\u201D and music that is \u201Catonal.\u201D\nBart\u00F3k is one of the many early-twentieth century composers whose music fits entirely in the gray area between tonality and atonality.\nWhile we know from his writings that he often composed with a tonal centers and relationships in mind, and that he regularly applied tonal structures and forms to his compositions, by merely glancing at any one of his pieces we can see that tonality as it is understood in the common practice period is not at work.\nThanks largely to the work of tonal theorists such as Heinrich Schenker and others, we have a detailed system for analyzing tonal music\u2014their system, however, is virtually useless in analyzing music that falls entirely on the atonal side of the spectrum.\nBut if we apply it to music such as Bart\u00F3k\u2019s that is in the middle area, we can come up with some enlightening and perhaps unexpected results.\nTo do so was the goal of this analysis of the first movement of the Concerto for Orchestra.\nBy applying our tonal system to music that slips outside of the tonal realm, we not only find the elements of tonality that do remain, but we also pinpoint exactly when and how this music breaks from previous conventions.\nIt is not disputed that Bart\u00F3k\u2019s music has great expressive power\u2014perhaps now we can understand why.\nReferences\n            Antokoletz, Elliot.\nThe Music of B\u00E9la Bart\u00F3k: A Study of Tonality and Progression in Twentieth-Century Music.\nBerkeley: University of California Press, 1992.\nBart\u00F3k, B\u00E9la.\nEssays.\nSelected and Edited by Benjamin Suchoff.\nNew York: St. Martin\u2019s Press, 1976.\nBernard, Jonathan W. \u201CSpace and Symmetry in Bart\u00F3k.\u201D\nJournal of Music Theory 30 (1986): 185-201.\n________.\n\u201CZones of Impingement: Two Movements from Bart\u00F3k\u2019s Music for Strings, Percussion, and Celesta.\u201D\nMusic Theory Spectrum 25 (2003): 3-34.\nBerry, Wallace.\n\u201CSymmetrical Interval sets and Derivative Pitch Materials in Bart\u00F3k\u2019s String Quartet No. 3.\u201D Perspectives of New Music 18 (1979/80): 287-379.\nCohn, Richard.\n\u201CInversional Symmetry and Transpositional Combination in Bart\u00F3k.\u201D\nMusic Theory Spectrum 10 (1988): 19-42.\n________.\n\u201CBart\u00F3k\u2019s Octatonic Strategies: A Motivic Approach.\u201D\nJournal of the American Musicological Society 44 (1991): 262-300.\nMorrison, Charles D. \u201CProlongation in the Final Movement of Bart\u00F3k\u2019s String Quartet No. 4.\u201D Music Theory Spectrum 13 (1991): 179-196.\nTravis, Roy.\n\u201CTonal Coherence in the First Movement of Bart\u00F3k\u2019s Fourth String Quartet.\u201D\nThe Music Forum 2 (1970): 298-371.\nWilson, Paul.\nThe Music of B\u00E9la Bart\u00F3k.\nNew Haven: Yale University Press, 1992.\n",
+    "@context": {
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "text": "http://vocab.lappsgrid.org/jsonld/container/text",
+        "metadata": {
+            "@id": "http://vocab.lappsgrid.org/jsonld/container/metadata",
+            "@container": "@index"
+        },
+        "steps": {
+            "@id": "http://vocab.lappsgrid.org/jsonld/container/steps",
+            "@container": "@list"
+        }
+    },
+    "@id": "http://vocab.lappsgrid.org/jsonld/container"
+}

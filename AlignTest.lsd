@@ -1,0 +1,59 @@
+import util.Http
+import util.AlignmentService
+import util.WrapperService
+
+include 'LAPPS'
+include 'Brandeis'
+include 'Common'
+include 'Masc'
+
+def brandeis = BrandeisFactory.new('stanfordnlp')
+def http = new Http('http://stanfordneralign.appspot.com/api')
+def align = new AlignmentService()
+def wrapper = new WrapperService()
+
+def json = read('examples/bartok.json')
+def text = read('examples/bartok.txt')
+def key = 'MASC3-0202'
+def masc = MascData.new(Nodes.localhost, '1.4.0')
+
+println "Fetching MASC data."
+def original = masc.text.get(key)
+
+println "Splitting"
+def sentenceData = brandeis.splitter.execute(original)
+check(sentenceData)
+Container container = new Container(sentenceData.payload)
+container.metadata.params = [prefix:'s', label:'Sentence']
+
+println "Wrapping"
+Data data = DataFactory.json(container.toJson())
+def wrapped = wrapper.execute(data)
+check(wrapped)
+write('/Users/suderman/Desktop/wrapped.json', wrapped.payload)
+
+println "Aligning"
+container = new Container(wrapped.payload)
+container.metadata.alignParams = [originalText:original.payload, step:0]
+Data result = align.execute(DataFactory.json(container.toJson())
+check(result)
+
+/*
+def response = http.post(json:json, text:text, step:0)
+println response.code
+
+Container container = new Container(response.body)
+container.text = text
+println container.toPrettyJson()
+*/
+
+/*
+Container container = new Container(json)
+container.metadata.alignParams = [originalText:text, step:0]
+
+Data data = DataFactory.json(container.toJson())
+Data result = align.execute(data)
+//check(result, Types.JSON)
+container = new Container(result.payload)
+println container.toPrettyJson()
+*/

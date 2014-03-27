@@ -3,6 +3,7 @@ package concurrent
 @Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
 import groovyx.gpars.*
 import groovyx.gpars.dataflow.*
+
 import java.util.concurrent.atomic.AtomicInteger
 
 class AsyncPipeline {
@@ -57,7 +58,15 @@ class AsyncPipeline {
 	Object value() {
 		return channel.val
 	}
-	
+
+    void waitFor(String value) {
+        boolean done = false
+        while (!done) {
+            //sleep(100)
+            done = value.equals(channel.val)
+        }
+    }
+
 	Closure invoke(WebService service) {
 		def invoker = { Packet packet ->
 			println "${packet.id}: Calling ${service.endpoint}"

@@ -1,0 +1,31 @@
+import util.Record
+
+def path = args.in ?: 'masc.index'
+
+def records = []
+new File(path).eachLine { line ->
+    def col = line.split('\t')
+    records << new Record(key:col[0], words:col[1] as int, size:col[2] as int, category:col[3], genre:col[4])
+}
+
+def counts = [:]
+
+records.each { record ->
+    def genre = record.genre
+    def count = counts[genre]
+    if (count == null) {
+        count = new Counter()
+        counts[genre] = count
+    }
+    count.increment()
+}
+
+counts.each { println it }
+return
+
+def list = records.findAll { it.genre == 'JO' }
+list.sort()
+list.each { println it }
+println()
+
+

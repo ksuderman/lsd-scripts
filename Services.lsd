@@ -11,10 +11,10 @@ ServiceFactory = [:]
  * services - the list of services to create clients for.
  * version - the version of the services.
  */
-ServiceFactory.create = { Map node, String provider, List<String> services, String version ->
+ServiceFactory.new = { Map node, String provider, List<String> services, String version ->
     def map = [:]
     services.each { service ->
-        map[ service] = Service {
+        map[service] = Service {
             server node.server
             name "${node.id}:${provider}.${service}_${version}"
         }

@@ -1,0 +1,12 @@
+include 'LAPPS'
+include 'Masc'
+
+def masc = MascData.new(Nodes.getNode(), '1.4.0')
+
+if (!args.id) {
+	println "No ID specified"
+	return
+}
+
+def data = masc.text.get(args.id)
+println data.payload

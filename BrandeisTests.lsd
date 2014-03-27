@@ -1,0 +1,104 @@
+@Grab('org.lappsgrid:vocabulary:0.9.4')
+import org.lappsgrid.vocabulary.*
+import org.anc.util.StopWatch
+import util.AlignmentService
+import util.OnePerLineWrapperService
+
+include 'Brandeis'
+include 'Common'
+include 'Masc'
+include 'LAPPS'
+
+def serviceType = 'opennlp'
+if (args.stanford) {
+	serviceType = 'stanfordnlp'
+}
+
+def services = BrandeisFactory.new(serviceType)
+def masc = MascData.new(Nodes.vassar, '1.4.0')
+align = new AlignmentService()
+wrap = new OnePerLineWrapperService()
+
+def path = args.out ?: '/tmp/brandeis'
+def destination = createDir(path)
+
+int count = 0
+def keys = masc.text.list()
+
+//def keys = [ 'MASC3-0203' ]
+int start = 0
+int end = keys.size()
+if (args.start) start = args.start as int
+if (args.end) end = args.end as int
+
+def timer = new StopWatch()
+timer.start()
+keys[start..end-1].each { key ->
+	++count
+	def data = masc.text.get(key)
+	check(data)
+	def text = data.payload
+
+	try {
+		println "${count}. Processing ${key}"
+		println "Splitting."
+		def sentenceData = services.splitter.execute(data)
+		Container sentences = wrapAndAlign(sentenceData, text, 's', Annotations.SENTENCE)	
+		def meta = sentences.steps[0].metadata
+		meta[Metadata.PRODUCED_BY] = "${Annotations.SENTENCE}:${services.splitter.endpoint}"
+		meta[Metadata.CONTAINS] = Annotations.SENTENCE
+	
+		println "Tokenizing."
+		def tokenData = services.tokenizer.execute(data)
+		Container tokens = wrapAndAlign(tokenData, text, 'tok', Annotations.TOKEN)
+	
+		println "Tagging."
+		def tagData = services.tagger.execute(tokenData)
+		// Add the POS tags as features of the tokens.
+		def it = tokens.steps[0].annotations.iterator()
+		String[] tags = tagData.payload.split('\n+')
+		tags.each { tag ->
+			def token = it.next()
+			token.features['pos'] = tag
+		}
+		meta = tokens.steps[0].metadata
+		meta[Metadata.PRODUCED_BY] = "Token:${services.tokenizer.endpoint} @pos:${services.tagger.endpoint}"
+		meta[Metadata.CONTAINS] = "${Annotations.SENTENCE} ${Features.PART_OF_SPEECH}"
+		sentences.steps.add(tokens.steps[0])
+		write(new File(destination, "${key}.json"), sentences.toPrettyJson())
+	}
+	catch (Exception e) {
+		println "Unable to process ${key}: ${e.message}"
+		e.printStackTrace()
+		System.exit(1)
+	}
+}
+
+timer.stop()
+println "Time: ${timer}"
+
+Data addParams(Map params, Data data, String name) {
+	Container container = new Container(data.payload)
+	container.metadata[name] = params
+	return DataFactory.json(container.toJson())
+}
+
+Container wrapAndAlign(Data data, String original, String prefix, String label) {
+	check(data)
+	Container container = new Container()
+	container.text = data.payload
+	container.metadata.params = [prefix:prefix, label:label]
+	data = DataFactory.json(container.toJson())
+	
+	println "Wrapping lines with ${label} tags."
+	data = wrap.execute(data)
+	check(data, Types.JSON)
+	
+	println "Aligning with original text."
+//	data = addParams(data, 'alignParams', originalText:original, step:0)
+	container = new Container(data.payload)
+	container.metadata.alignParams = [originalText:original, step:0]
+	data = align.execute(DataFactory.json(container.toJson()))
+	check(data)
+	return new Container(data.payload)
+}

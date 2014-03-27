@@ -1,0 +1,77 @@
+/*
+ * Run 10 documents from MASC through the GATE services on the Vassar node.
+ *
+ * This is a rather complex example. Here we combine Groovy classes from the
+ * classpath (anything imported from the util package), an inline class
+ * definition (Failure) and sprinkle in some code included from the Servers.lsd
+ * and Common.lsd scripts.
+ *
+ * The default server will be localhost unless the -server parameter was used.
+ */
+ 
+import util.DataSourceIterator
+import util.ServiceProvider
+
+include 'Servers'
+include 'Common'
+
+// Define an inline class (Java Bean) to store information about exceptions that were
+// thrown during processing
+class Failure {
+	String name
+	Throwable cause
+}
+
+// The DataSource for MASC text files from Vassar.
+def datasource = Datasource {
+	server servers.vassar
+	name "anc:masc.text_1.4.0"
+}
+
+// Get an iterator for ten documents. Just for interest we will get documents 
+// 20 through 29.
+def masc = new DataSourceIterator(datasource, 20 , 30)
+
+// Someplace to store the processed files.
+File destination = createDir('/tmp/gate/pipeline')
+
+// These are the GATE services we want to create clients for.
+def services = ['tokenizer', 'gazetteer', 'splitter', 'tagger', 'ner' ]
+
+// Get the WebService clients for the GATE services we are interested in.
+def gate = new ServiceProvider(servers.vassar, 'gate', '1.3.0', services)
+
+// This is where the actual work gets done.
+def failed = []  
+int counter = 0
+while (masc.hasNext()) {
+	++counter
+
+	String key = masc.key()
+	String title = getTitle(key)
+	println "Processing ${counter}. ${title} (${key})"
+	
+	// Get the next document, execute the GATE pipeline and save the result.
+	Data data = masc.next()
+	try {
+		Data result = gate.run(data)		
+		File file = new File(destination, "${title}.xml")
+		file.text = result.payload
+		println "Wrote ${file.path}"
+	}
+	catch (Exception e) {
+		println e.message
+		failed << new Failure(name:key, cause:e)
+	}
+	println()
+}
+
+// Print results for any documents that threw an exception during processing.
+if (failed.size() > 0) {
+	println "The following documents had problems."
+	failed.each { failure ->
+		println "${failure.name}\t${failure.cause.message}"
+	}
+	println()
+}
+println "Done."

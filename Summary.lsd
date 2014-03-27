@@ -1,12 +1,8 @@
 /*
  * Summarizes the annotations in a directory of files.
  */
-include 'LAPPS'
-
-if (!args.path) {
-	println "No directory specified."
-//	return
-}
+//include 'LAPPS'
+include 'Tomcat'
 
 ext = 'json'
 ['txt', 'xml', 'csv', 'json'].each {
@@ -21,13 +17,15 @@ if (!args.path) {
 }
 
 def version = args.v ?: args.ver ?: args.version ?: '0.3.1-SNAPSHOT'
-def node = Nodes.getNode()
-def summarizer = new Summarizer()
+//def node = Nodes.getNode()
+summarizer = new Summarizer()
 
-convert = Service {
-	server node.server
-	name "${node.id}:convert.gate2json_${version}"
-}
+//convert = Service {
+//	server node.server
+//	name "${node.id}:convert.gate2json_${version}"
+//}
+
+convert = getConverters('http://localhost:8080', version)
 
 void scan(File directory) {
 	println "Scanning ${directory.path} for ${ext} files"
@@ -46,7 +44,7 @@ void process(File file) {
 	Container container
 	if (file.name.endsWith(".xml")) {
 		Data data = new Data(Types.GATE, file.text)
-		data = convert.execute(data)
+		data = convert.gate2json.execute(data)
 		container = new Container(data.payload)
 	}
 	else {

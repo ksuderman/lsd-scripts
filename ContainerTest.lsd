@@ -1,0 +1,4 @@
+Container container = new Container()
+container.text = "Hello world"
+container.metadata.parameters = [ one:'1', two:'2' ]
+println container.toPrettyJson()

@@ -1,17 +1,6 @@
-passed = 0
-failed = 0
+File file = new File('examples/bartok1.json')
+Container c = new Container(file.text)
+println c.text
 
-test = { condition, message=null ->
-	if (!condition) {
-		println message ?: 'Test failed.'
-		++failed
-	}
-	else {
-		++passed
-	}
-}
 
-printTestResults = {
-	println "Passed: ${passed}"
-	println "Failed: ${failed}"
-}
+write "Foo"

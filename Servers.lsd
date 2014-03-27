@@ -13,14 +13,14 @@ servers.localhost = Server {
 
 servers.vassar = Server {
     url "http://grid.anc.org:8080"
-    username "temporary"
-    password "temporary"
+    username "tester"
+    password "tester"
 }
 
 servers.brandeis = Server {
 	url "http://eldrad.cs-i.brandeis.edu:8080"
 	username "eldrad"
-	password "******"
+	password "eldrad1234"
 }
 
 servers.ldc = Server {

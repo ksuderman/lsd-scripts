@@ -1,8 +1,8 @@
 package util
 
-import org.lappsgrid.api.*
-import org.lappsgrid.client.DataSourceClient
-import org.lappsgrid.discrimination.*
+//import org.lappsgrid.api.*
+//import org.lappsgrid.client.DataSourceClient
+//import org.lappsgrid.discrimination.*
 
 class DataSourceIterator implements Iterator<Data> {
 	DataSourceClient client
@@ -12,20 +12,19 @@ class DataSourceIterator implements Iterator<Data> {
 	int end
 	
 	public DataSourceIterator(DataSourceClient client) {
-		this(client, 0)
+		this(client, 0, -1)
 	}
 	
 	public DataSourceIterator(DataSourceClient client, int start) {
+		this(client, start, -1)
+	}
+	
+	public DataSourceIterator(DataSourceClient client, int start, int end) {
 		this.client = client
 		this.keys = client.list()
 		this.index = start
 		this.start = start
-		this.end = keys.size()
-	}
-	
-	public DataSourceIterator(DataSourceClient client, int start, int end) {
-		this(client, start)
-		this.end = end
+		this.end = (end > start) ? end : keys.size()
 	}
 	
 	Data next() {

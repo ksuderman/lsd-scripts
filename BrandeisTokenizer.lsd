@@ -1,0 +1,73 @@
+import util.Wrappers
+
+include 'Brandeis'
+include 'Common'
+include 'Masc'
+include 'LAPPS'
+include 'Align'
+
+def services = BrandeisFactory.new('stanfordnlp')
+
+def masc = MascData.new(Nodes.getNode(), '1.4.0')
+
+//def data = masc.text.get('MASC3-0203')
+//new File('examples/MASC2-0203').setText(data.payload, 'UTF-8')
+
+//def text = data.payload
+//println data.payload
+//return
+//def txt = "Donald A. Kaplan, Esq."
+//def txt = "Donald Kaplan Esq. and Keith Suderman Esq. and so on ..."
+
+def text = new File('examples/MASC2-0203.txt').getText('UTF-8')
+def data = DataFactory.text(text)
+data = services.tokenizer.execute(data)
+//println data.payload
+//return
+
+/*
+def transformed = []
+def skip = false
+data.payload.split('\n+').each { token ->
+	if (skip) {
+		if (token == '.') {
+			println "Skipping: ${token}"
+		}
+		else {
+			transformed << token
+		}
+	}
+	else {
+		transformed << token
+	}
+	skip = token.endsWith('.')	
+}
+data.payload = transformed.join('\n')
+*/
+def wrapped = Wrappers.wrap(data, 'tok', 'Token')
+//dump(wrapped)
+align(wrapped, text)
+
+println wrapped.toPrettyJson()
+//println wrapped.text
+return
+
+def aligned = align(wrapped, data.payload)
+//println aligned.toPrettyJson()
+
+aligned.steps[0].annotations.each { a ->
+	def string = aligned.text.substring(a.start as int, a.end as int)
+	println "${a.start}-${a.end} ${string}"
+}
+
+void dump(container) {
+	container.steps.each { ProcessingStep step ->
+		println step.metadata.producedBy ?: 'Unknown'
+		step.annotations.each { a ->
+			int start = a.start
+			int end = a.end
+			def string = container.text[start..end-1]
+			println "${start}-${end} \"${string}\""
+		}
+	}
+}

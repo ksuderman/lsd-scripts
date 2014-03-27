@@ -1,19 +1,17 @@
 /*
- * Defines a factory that creates ServiceClients for all of the Gate services.
+ * Creates service clients for each of the GATE services deploy to the 
+ * Vassar service node.
  */
-
-
+	
 GateServices = [:]
 GateServices.new = { node, version ->
-    println "WARNING: Gate.lsd will be deprecated soon."
-	def gate = [:]
-	def services = ['tokenizer', 'gazetteer', 'splitter', 'tagger', 'ner',
-		'npchunker', 'vpchunker', 'ortho', 'coref', 'annie', 'opennlp', 'lingpipe']
-	services.each { service ->
-		gate[service] = Service {
+	def map = [:]
+	[ 'coref', 'gazetteer', 'ner', 'npchunker', 'ortho', 'tagger', 
+	'splitter', 'tokenizer', 'vpchunker'].each { id ->
+		map[id] = Service {
 			server node.server
-			name "${node.id}:gate.${service}_${version}"
+			name "${node.id}:gate.${id}_${version}"
 		}
 	}
-	return gate
+	return map
 }

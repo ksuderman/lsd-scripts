@@ -1,0 +1,42 @@
+
+align = { container, text, step=0 ->
+	int index = 0
+	def sorted = container.steps[step].annotations.sort { it.start }
+	// non-breaking space character.
+	String nbspace = "${160 as char}"
+	sorted.each {
+		int start = it.start as int
+		int end = it.end as int
+		def string = container.text.substring(start,end)
+		string = string.replaceAll(space, ' ')
+		//println "${start}-${end} ${string} (${index})"
+		def before = index
+		index = text.indexOf(string, index)
+		if (index < 0) {
+			//println "TEXT"
+			//println text[0..before+string.size()]
+			//println "CONTAINER"
+			//println container.text[0..start+string.size()]
+			//def actual = text[before..before+string.size()]
+			//println "Actual '${actual}'"
+			//actual.each { ch ->
+			//	println "${ch} : ${(int)ch}"
+			//}
+			//println "String '${string}'"
+			//string.each { ch ->
+			//	println "${ch} : ${(int)ch}"
+			//}
+			//int really = actual.indexOf(string)
+			//println "Really: ${really}"
+			println "Actual ${before} '${actual}'"
+			throw new LappsException("Unable to match '${string}' at offset ${before}")
+		}
+		it.start = index
+		it.end = it.start + string.length()
+		def matched = text.substring(it.start as int, it.end as int)
+		//println "${it.start}-${it.end} ${string} -> ${matched}"
+		index = it.end 
+	}
+	container.text = text
+	return container
+}

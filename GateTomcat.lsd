@@ -3,20 +3,15 @@ import concurrent.Packet
 import org.anc.util.StopWatch
 
 include 'Common'
-include 'LAPPS'
-include 'Gate'
-include 'Masc'
+include 'Tomcat'
 
-def node = Nodes.getNode()
-
-def gate = GateServices.new(node, '1.3.2-SNAPSHOT')
-def masc = MascData.new(node, '1.4.0')
-def convert = Service {
-	server node.server
-	name "${node.id}:convert.gate2json_0.3.1-SNAPSHOT"
-}
+def server = 'http://localhost:9080'
+def gate = getGateServices(server, '1.3.2-SNAPSHOT')
+def convert = getConverters(server, '0.3.1-SNAPSHOT')
+masc = getMasc(server, '1.4.0')
 
 def path = args.path ?: '/tmp'
+
 destination = createDir(path)
 
 def reader = { packet ->
@@ -27,7 +22,7 @@ def reader = { packet ->
 
 def writer = { packet ->
     File file = new File(destination, "${packet.key}.json")
-    file.text = new Container(packet.data.payload).toPrettyJson()
+    file.text = packet.data.payload
     println "${packet.id}. Wrote: ${file.path}"
     return packet.key
 }
@@ -39,7 +34,7 @@ pipeline << gate.gazetteer
 pipeline << gate.splitter
 pipeline << gate.tagger
 pipeline << gate.ner
-pipeline << convert
+pipeline << convert.gate2json
 pipeline << writer
 
 def keys = masc.text.list()
@@ -61,7 +56,6 @@ keys[start..end-1].each { key ->
     pipeline << new GatePacket(key:key)
 }
 
-// Wait for the lastKey to come out the end of the pipeline.
 boolean done = false
 while (!done) {
     sleep(250)

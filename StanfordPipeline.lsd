@@ -1,46 +1,71 @@
 import groovy.xml.*
+import concurrent.AsyncPipeline
+import concurrent.Packet
 import util.DataSourceIterator
-import util.ServiceProvider
+import org.anc.util.StopWatch
 
 include 'LAPPS'
 include 'Common'
+include 'Masc'
+include 'Services'
 
-def node = Nodes.localhost
-if (args.vassar) {
-	node = Nodes.vassar
-}
+def node = Nodes.getNode()
 
 def path = args.out ?: '/tmp/stanford'
-
-def masc = Datasource {
-	server node.server
-	name "${node.id}:masc.text_1.4.0"
-}
-def ds = new DataSourceIterator(masc, 0, 20)
+destination = createDir(path)
 
 def services = [ 'splitter', 'tokenizer', 'tagger', 'ner' ]
-def stanford = new ServiceProvider(node.server, 'stanford', '1.3.0', services)
 
-Pipeline pipeline = new Pipeline()
+def masc = MascData.new(node, '1.4.0')
+def stanford = ServiceFactory.new(node, 'stanford', services, '1.3.1')
+
+int start = 0
+int end = 392
+if (args.start) start = args.start as int
+if (args.end) end = args.end as int
+
+//def iterator = new DataSourceIterator(masc.text, start, end)
+
+def reader = { packet ->
+    println "${packet.id}. Reading ${packet.key}"
+    packet.data = masc.text.get(packet.key)
+    return packet
+}
+
+def writer = { packet ->
+    File file = new File(destination, "${packet.key}.json")
+    file.text = new Container(packet.data.payload).toPrettyJson()
+    println "${packet.id}. Wrote: ${file.path}"
+    return packet.key
+}
+
+
+def pipeline = new AsyncPipeline()
+pipeline.add reader
+pipeline << stanford.tokenizer
 pipeline.add stanford.splitter
-pipeline.add stanford.tokenizer
 pipeline.add stanford.tagger
 pipeline.add stanford.ner
+pipeline.add writer
 
 File destination = createDir(path)
 
 int counter = 0
-while (ds.hasNext()) {
-	String key = ds.key()
-	String title = getTitle(key)
+String lastKey
+def timer = new StopWatch()
+timer.start()
+def keys = masc.text.list()
+keys[start..end-1].each { key ->
 	++counter
-	println "${counter}. Processing ${title} (${key})"
+	lastKey = key
+	println "${counter}. Submitting ${key}"
 
-	Data document = ds.next()
-	Data result = pipeline.execute(document, false)
-	check(result)
-	File file = new File(destination, "${key}.json")
-	file.text = new Container(result.payload).toPrettyJson()
-	println "Wrote ${file.path}"
+	pipeline << new StanfordPacket(key:key)
 }
-println "Done."
+pipeline.waitFor(lastKey)
+timer.stop()
+println "Time: ${timer}"
+
+class StanfordPacket extends Packet {
+    String key
+}

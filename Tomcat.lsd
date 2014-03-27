@@ -1,0 +1,58 @@
+
+WebService getClient(String provider, String name, String version) {
+    return new ServiceClient("http://localhost:8080/${provider}/${version}/services/${name}", null, null)
+}
+
+def GATE_SERVICES = [
+    annie:'Annie',
+    coref:'Coreferencer',
+    gazetteer:'Gazetteer',
+    lingpipe:'LingPipe',
+    ner:'NamedEntityRecognizer',
+    npchunker:'NounPhraseChunker',
+    opennlp:'OpenNlp',
+    ortho:'OrthoMatcher',
+    tagger:'POSTagger',
+    splitter:'SentenceSplitter',
+    tokenizer:'Tokenizer',
+    vpchunker:'VerbPhraseChunker'
+]
+
+def STANFORD_SERVICES = [
+    tokenizer:'SATokenizer',
+    tagger:'SATagger',
+    splitter:'SentenceSplitter',
+    ner:'NamedEntityRecognizer'
+]
+
+getGateServices = { String server, String version ->
+    def gate = [:]
+    GATE_SERVICES.each { id, name ->
+        gate[id] = new ServiceClient("${server}/GateServices/${version}/services/${name}")
+    }
+    return gate
+}
+
+getStanfordServices = { String server, String version ->
+    def stanford = [:]
+    STANFORD_SERVICES.each { id, name ->
+        stanford[id] = new ServiceClient("${server}/StanfordServices/${version}/services/${name}")
+    }
+    return stanford
+}
+
+getConverters = { String server, String version ->
+    def map = [:]
+    map.gate2json = new ServiceClient("${server}/GateConverter/${version}/services/GateToJson")
+    map.json2gate = new ServiceClient("${server}/GateConverter/${version}/services/JsonToGate")
+    return map
+}
+
+getMasc = { String server, String version ->
+    def map = [:]
+    map.text = new DataSourceClient("${server}/MascDataSource/${version}/services/MascTextSource", null, null)
+    map.json = new DataSourceClient("${server}/MascDataSource/${version}/services/MascJsonTextSource", null, null)
+    map.gold = new DataSourceClient("${server}/MascDataSource/${version}/services/MascJsonSource", null, null)
+    map.headers = new DataSourceClient("${server}/MascDataSource/${version}/services/MascHeaderSource", null, null)
+    return map
+}

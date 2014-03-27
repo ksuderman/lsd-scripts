@@ -35,22 +35,47 @@ else if (args.opennlp) {
 
 def service = Service {
 	server node.server
-	name = "${node.id}:gate.${gapp}_${args.version}"
+	name "${node.id}:gate.${gapp}_${args.version}"
+}
+
+def convert = Service {
+    server node.server
+    name "${node.id}:convert.gate2json_0.3.1-SNAPSHOT"
 }
 
 StopWatch timer = new StopWatch()
 def destination = createDir(args.out)
 def keys = masc.text.list()
+int start = 0
+int end = keys.size()
+if (args.start) {
+    start = args.start as int
+}
+if (args.end) {
+    end = args.end as int
+    if (end > keys.size()) {
+        end = keys.size()
+    }
+}
+
 int count = 0
 timer.start()
-keys.each { key ->
+keys[start..end-1].each { key ->
 	++count
 	println "${count}: ${key}"
 	Data data = service.execute(masc.text.get(key))
-	new File(destination, "${key}.xml").text = data.payload
+	if (data.discriminator == Types.ERROR) {
+	    println data.payload
+	}
+	else {
+        data = convert.execute(data)
+        File file = new File(destination, "${key}.xml")
+        file.text = data.payload
+        println "Wrote ${file.path}"
+    }
 }
 timer.stop()
-println "Time " + new SimpleDateFormat("mm:ss:SSS").format(timer.elapsed())
+println "Time ${timer.toString()}"
 
 
 	
