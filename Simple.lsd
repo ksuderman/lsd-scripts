@@ -2,8 +2,6 @@
  * A simple lsd script to exercise a datasource and a service. 
  */
 
-include 'Common'
-
 vassar = Server {
 	url 'http://grid.anc.org:8080'
 	username 'tester'
@@ -27,7 +25,6 @@ tokenizer = Service {
 // Get the first document from the DataSource and run it through the tokenizer.
 String[] keys = masc.list()
 Data document = masc.get(keys[0])
-check(document)
 Data result = tokenizer.execute(document)
 
 // We only create a new Container object so we can call the toPrettyJson()
