@@ -1,27 +1,39 @@
-@Grab('org.lappsgrid:vocabulary:0.9.4')
+@Grab('org.lappsgrid:vocabulary:0.10.0-SNAPSHOT')
 import org.lappsgrid.vocabulary.*
 import org.anc.util.StopWatch
-import util.LocalAlignmentService
-import util.OnePerLineWrapperService
 
+include 'LAPPS'
 include 'Brandeis'
 include 'Common'
 include 'Masc'
-include 'LAPPS'
+include 'Services'
 
 def serviceType = 'opennlp'
 if (args.stanford) {
 	serviceType = 'stanfordnlp'
 }
 
+def node = Nodes.getNode()
 def services = BrandeisFactory.new(serviceType)
-def masc = MascData.new(Nodes.vassar, '1.4.0')
-align = new LocalAlignmentService()
-wrap = new OnePerLineWrapperService()
+def masc = MascData.new(Nodes.localhost, '1.4.2')
+def convert = Service {
+	server node.server
+	name "${node.id}:convert.json2gate_0.4.0-SNAPSHOT"
+}
 
-def path = args.out ?: '/tmp/brandeis'
+services.align = Service {
+	server node.server
+	name "${node.id}:word-align-1.0.0-SNAPSHOT"
+}
+
+services.wrap = Service {
+	server node.server
+	name "${node.id}:wrap-1.0.0-SNAPSHOT"
+}
+
+def path = args.out ?: "/Users/suderman/Desktop/brandeis/${serviceType}"
 def destination = createDir(path)
-
+println "Destination is ${destination.path}"
 int count = 0
 def keys = masc.text.list()
 
@@ -34,20 +46,62 @@ if (args.end) end = args.end as int
 def timer = new StopWatch()
 timer.start()
 keys[start..end-1].each { key ->
-	++count
 	def data = masc.text.get(key)
 	check(data)
 	def text = data.payload
-
+	File originalTextFile = new File(destination, "${key}-original.txt")
+	write(originalTextFile, text)
 	try {
-		println "${count}. Processing ${key}"
+		println "${++count}. Processing ${key}"
 		println "Splitting."
 		def sentenceData = services.splitter.execute(data)
-		Container sentences = wrapAndAlign(sentenceData, text, 's', Annotations.SENTENCE)	
-		def meta = sentences.steps[0].metadata
+		/***
+		File textFile = new File(destination, "${key}.txt")
+		write(textFile, sentenceData.payload)
+		Container sentences = wrapAndAlign(sentenceData, text, 's', Annotations.SENTENCE)
+		sentenceData = DataFactory.json(sentences.toJson())
+		def gateXmlData = convert.execute(sentenceData)	
+		File file = new File(destination, "${key}.xml")
+		write(file, gateXmlData.payload)
+		***/
+		//def meta = sentences.steps[0].metadata
+		//sentenceData = wrap(sentenceData, 's', Annotations.SENTENCE)
+		
+		Container container = new Container(false)
+		container.text = sentenceData.payload
+		container.metadata.parameters = [ prefix:'s', label:Annotations.SENTENCE ]
+		//meta.alignParams = [originalText:text, step:0]
+		//File file = new File(destination, "${key}-split.json")
+		//write(file, container.toPrettyJson())
+		
+		println "Wrapping"
+		sentenceData = services.wrap.execute(DataFactory.json(container.toJson()))
+		check(sentenceData)
+		println sentenceData.payload
+		return
+		
+		
+		File file = new File(destination, "${key}.json")
+		write(file, new Container(sentenceData.payload).toPrettyJson())
+		println "Wrote ${file.path}"
+		
+		/***		
+		container = new Container(sentenceData.payload)
+		meta = container.steps[0].metadata
 		meta[Metadata.PRODUCED_BY] = "${Annotations.SENTENCE}:${services.splitter.endpoint}"
 		meta[Metadata.CONTAINS] = Annotations.SENTENCE
-	
+		file = new File(destination, "${key}-wrapped.json")
+		write(file, container.toPrettyJson())
+		println "Wrote ${file.path}"
+
+		println "Aligning"
+		sentenceData = alignService.execute(DataFactory.json(container.toJson()))
+		check(sentenceData)
+		file = new File(destination, "${key}-aligned.json")
+		write(file, new Container(sentenceData.payload).toPrettyJson())
+		***/
+		
+		/*
 		println "Tokenizing."
 		def tokenData = services.tokenizer.execute(data)
 		Container tokens = wrapAndAlign(tokenData, text, 'tok', Annotations.TOKEN)
@@ -66,6 +120,7 @@ keys[start..end-1].each { key ->
 		meta[Metadata.CONTAINS] = "${Annotations.SENTENCE} ${Features.PART_OF_SPEECH}"
 		sentences.steps.add(tokens.steps[0])
 		write(new File(destination, "${key}.json"), sentences.toPrettyJson())
+		*/
 	}
 	catch (Exception e) {
 		println "Unable to process ${key}: ${e.message}"
@@ -83,6 +138,13 @@ Data addParams(Map params, Data data, String name) {
 	return DataFactory.json(container.toJson())
 }
 
+Data wrap(Data data , String prefix, String label) {
+	Container container = new Container(data.payload)
+	container.metadata.params = [prefix:prefix, label:label]
+	data = DataFactory.json(container.toJson())
+	return wrapService.execute(data)
+}
+
 Container wrapAndAlign(Data data, String original, String prefix, String label) {
 	check(data)
 	Container container = new Container()
@@ -91,14 +153,14 @@ Container wrapAndAlign(Data data, String original, String prefix, String label) 
 	data = DataFactory.json(container.toJson())
 	
 	println "Wrapping lines with ${label} tags."
-	data = wrap.execute(data)
+	data = wrapService.execute(data)
 	check(data, Types.JSON)
 	
 	println "Aligning with original text."
 //	data = addParams(data, 'alignParams', originalText:original, step:0)
 	container = new Container(data.payload)
 	container.metadata.alignParams = [originalText:original, step:0]
-	data = align.execute(DataFactory.json(container.toJson()))
+	data = alignService.execute(DataFactory.json(container.toJson()))
 	check(data)
 	return new Container(data.payload)
 }

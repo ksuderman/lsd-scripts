@@ -7,8 +7,8 @@ include 'Services'
 
 VassarServices = [:]
 VassarServices.getGateServices = { node, version ->
-    return ServiceFactory.create(node, 'gate', GATE_SERVICES, version)
+    return ServiceFactory.new(node, 'gate', GATE_SERVICES, version)
 }
 VassarServices.getStanfordServices = { node, version ->
-    return ServiceFactory.create(node, 'stanford', STANFORD_SERVICES, version)
+    return ServiceFactory.new(node, 'stanford', STANFORD_SERVICES, version)
 }

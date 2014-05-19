@@ -1,12 +1,43 @@
+import groovy.json.JsonSlurper
 import util.Http
-import util.AlignmentService
-import util.WrapperService
+import util.RemoteAlignmentService
+//import util.WrapperService
 
 include 'LAPPS'
 include 'Brandeis'
 include 'Common'
 include 'Masc'
 
+File indir = new File('/Users/suderman/Projects/LAPPS/output/brandeis/opennlp')
+File jsonFile = new File(indir, 'MASC3-0200.json')
+
+Http http = new Http('http://stanfordneralign.appspot.com/api')
+String json = read(jsonFile)
+
+def response = http.post(json:json)
+//def response = http.post(json:'{"originalText":"text"}')
+println response.code
+println response.message
+
+if (response.code == 200) {
+	println response.body
+}
+else {
+	if (response.body.trim().startsWith('<html>')) {
+		new File('error.html').text = response.body
+		println repsonse.body
+		println "Error saved to error.html"
+	}
+	else {
+		Map map = new JsonSlurper().parseText(response.body)
+		map.each { key,value ->
+			println "${key}: ${value}"
+		}
+	}
+	
+}
+
+/***
 def brandeis = BrandeisFactory.new('stanfordnlp')
 def http = new Http('http://stanfordneralign.appspot.com/api')
 def align = new AlignmentService()
@@ -37,6 +68,7 @@ container = new Container(wrapped.payload)
 container.metadata.alignParams = [originalText:original.payload, step:0]
 Data result = align.execute(DataFactory.json(container.toJson())
 check(result)
+***/
 
 /*
 def response = http.post(json:json, text:text, step:0)

@@ -23,7 +23,7 @@ if (!checkArgs(args, ['out', 'version'])) {
 
 def node = Nodes.getNode()
 
-def masc = MascData.new(node, '1.4.0')
+def masc = MascData.new(node, '1.4.1')
 
 def gapp = 'annie'
 if (args.lingpipe) {
@@ -35,12 +35,12 @@ else if (args.opennlp) {
 
 def service = Service {
 	server node.server
-	name "${node.id}:gate.${gapp}_${args.version}"
+	name "${node.id}:gapp.${gapp}_1.0.0-SNAPSHOT"
 }
 
 def convert = Service {
     server node.server
-    name "${node.id}:convert.gate2json_0.3.1-SNAPSHOT"
+    name "${node.id}:convert.gate2json_0.3.3"
 }
 
 StopWatch timer = new StopWatch()
@@ -65,7 +65,7 @@ keys[start..end-1].each { key ->
 	println "${count}: ${key}"
 	Data data = service.execute(masc.text.get(key))
 	if (data.discriminator == Types.ERROR) {
-	    println data.payload
+	    println "ERROR: ${data.payload}"
 	}
 	else {
         data = convert.execute(data)

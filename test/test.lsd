@@ -1,6 +1,65 @@
 
-def c = new Container()
-c.text = 'hello world'
-c.metadata.parameters = 'x=y'
+include 'LAPPS'
+include 'Masc'
+include 'Gate'
+include 'Stanford'
+include 'Brandeis'
 
-println c.toPrettyJson()
+def gate = GateServices.new(Nodes.vassar, '1.3.5')
+def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+def masc = MascData.new(Nodes.vassar, '1.4.2')
+
+[gate, stanford, masc].each { map ->
+	map.each { name, service ->
+		println service.endpoint
+	}
+}
+
+/**
+def text = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascTextSource', null, null)
+def json = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascJsonSource', null, null)
+def jsonText = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascJsonTextSource', null, null)
+
+def index = text.list()
+def key = 'MASC3-0202' //index[11]
+
+def data = json.get(key)
+Container container = new Container(data.payload)
+def neStep = find(container, "f.ne")
+if (neStep == null) {
+	println "Named entities not found."
+	return	
+}
+
+Container neContainer = new Container(false)
+neContainer.text = container.text
+neContainer.language = container.language
+neContainer.steps.add(neStep)
+println neContainer.toPrettyJson()
+
+
+ProcessingStep find(Container container, String type) {
+	for (ProcessingStep step : container.getSteps()) {
+		Map metadata = step.getMetadata()
+		String aType = metadata.get("annotationType")
+		if (type != null && type.equals(aType)) {
+			return step
+		}
+	}
+	return null
+}
+*/
+
+/*
+def node = Nodes.vassar
+def masc = MascData.new(node, '1.4.2')
+
+def index = masc.gold.list()
+def key = index[0]
+def data = masc.gold.get(key)
+//println new Container(data.payload).toPrettyJson()
+println "Gold service endpoint is: ${masc.gold.endpoint}"
+*/
+
+
+// http://grid.anc.org:8080/service_manager/invoker/anc:masc.gold_1.4.2

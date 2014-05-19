@@ -4,7 +4,7 @@
 
 StanfordServices = [:]
 StanfordServices.new = { node, version ->
-    println "WARNING: Stanford.lsd will be deprecated soon."
+    //println "WARNING: Stanford.lsd will be deprecated soon."
 	def map = [:]
 	def services = ['tokenizer', 'splitter', 'tagger', 'ner']
 	services.each { service ->

@@ -1,11 +1,8 @@
 package util
 
 class RemoteAlignmentService implements WebService {
-	Http http
-	
-	public AlignmentService() {
-		http = new Http('http://stanfordneralign.appspot.com/api')
-	}
+	final static String endpoint = 'http://stanfordneralign.appspot.com/api'
+	Http http = new Http(endpoint)
 	
 	long[] requires() { return [ Types.JSON ] as long[] }
 	long[] produces() { return [ Types.JSON ] as long[] }

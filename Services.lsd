@@ -21,3 +21,17 @@ ServiceFactory.new = { Map node, String provider, List<String> services, String 
     }
     return map
 }
+
+ServiceFactory.align = { node,version ->
+	return Service {
+		server node.server
+		name "${node.id}:word-align-${version}"
+	}
+}
+
+ServiceFactory.wrap = { node,version ->
+	return Service {
+		server node.server
+		name "${node.id}:wrap-${version}"
+	}
+}

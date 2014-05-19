@@ -7,6 +7,9 @@ MascData.new = { node, version ->
 			name "${node.id}:masc.${type}_${version}"
 		}
 	}
-	
+	masc.json = Datasource {
+		server node.server
+		name "${node.id}:masc.text.json_${version}"
+	}
 	return masc
 }

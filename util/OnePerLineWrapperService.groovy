@@ -30,6 +30,7 @@ class OnePerLineWrapperService implements WebService {
 		Data result = null
 		try {
 			Container c = Wrapper.wrap(params.prefix, params.label, container.text)
+			c.metadata = container.metadata
 			result = DataFactory.json(c.toJson())
 		}
 		catch (Exception e) {

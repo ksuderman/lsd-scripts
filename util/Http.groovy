@@ -49,22 +49,62 @@ class Http {
         }
         
         Response response = new Response()
+        connection.headerFields.each { name,value ->
+        	if (name) {
+        		response.headers[name] = value
+        	}
+        }
+        
         response.code = connection.responseCode
         response.encoding = connection.contentEncoding
         response.contentType = connection.contentType
+        response.message = connection.responseMessage
+        if (response.code == 200) {
+        	response.body = connection.inputStream.text
+        }
+        else {
+        	response.body = connection.errorStream.text
+        }
+        /*
         if (response.code != 200) {
         	response.body = connection.responseMessage
         }
         else {
 	        response.body = connection.inputStream.text;			
 	    }
+	    */
         return response
 	}
+
+	Response get(String query) {
+		HttpURLConnection connection = (HttpURLConnection) new URL(query).openConnection()
+		connection.setRequestMethod("GET")
+		
+		Response response = new Response()
+		response.code = connection.responseCode
+		connection.headerFields.each { name,value ->
+			if (name) {
+				response.headers[name] = value
+			}
+		}
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.inputStream))
+		StringBuilder buffer = new StringBuilder()
+		String line = reader.readLine()
+		while (line != null) {
+			buffer << line
+			buffer << "\n"
+			line = reader.readLine()
+		}
+		response.body = buffer.toString()
+		return response
+	}	
 	
 	public class Response {
 		int code
 		String encoding
 		String contentType
+		String message
+		Map headers = [:]
 		String body
 	}
 } 

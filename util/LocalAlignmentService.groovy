@@ -23,34 +23,43 @@ class LocalAlignmentService implements WebService {
 			return DataFactory.error("No alignment parameters found.")
 		}
 		
-		def text = params.originalText
-		int step = 0
+		def originalText = params.originalText
+		int index = -1
 		if (params.step) {
-			step = params.step as int
+			index = params.step as int
 		}
-		int index = 0
-		def sorted = container.steps[step].annotations.sort { it.start }
+		if (index < 0) {
+			container.steps.each { ProcessingStep step ->
+				align(originalText, container.text, step.annotations)
+			}
+		}
+		else {
+			align(originalText, container.text, step.annotations)
+		}
+		container.text = originalText
+		return DataFactory.json(container.toJson())
+	}
+	
+	void align(String originalText, String text, List annotations) {
+		def sorted = annotations.sort { it.start }
 		// non-breaking space character.
 		String nbspace = "${160 as char}"
+		int index = 0
 		sorted.each {
 			int start = it.start as int
 			int end = it.end as int
-			def string = container.text.substring(start,end)
-			string = string.replaceAll(space, ' ')
+			def string = text.substring(start,end)
+			string = string.replaceAll(nbspace, ' ')
 			//println "${start}-${end} ${string} (${index})"
 			def before = index
-			index = text.indexOf(string, index)
+			index = originalText.indexOf(string, index)
 			if (index < 0) {
 				println "Actual ${before} '${actual}'"
 				throw new LappsException("Unable to match '${string}' at offset ${before}")
 			}
 			it.start = index
 			it.end = it.start + string.length()
-			def matched = text.substring(it.start as int, it.end as int)
-			//println "${it.start}-${it.end} ${string} -> ${matched}"
 			index = it.end 
 		}
-		container.text = text
-		return container
 	}
 }
