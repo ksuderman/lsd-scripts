@@ -1,0 +1,46 @@
+import org.anc.util.Counter
+
+summarize = { input ->
+	Container container
+	if (input instanceof Container) {
+		container = (Container) input
+	}
+	else if (input instanceof Data) {
+		container = new Container(input.payload)
+	}
+	else if (input instanceof String) {
+		// Assume a JSON string.
+		container = new Container(input)
+	}
+	
+	Map<String,Counter> counters = [:]
+	container.steps.each { step ->	
+		step.annotations.each { annotation ->
+			String type = annotation.type
+			Counter counter = counters[type]
+			if (counter == null) {
+				counter = new Counter()
+				counters[type] = counter
+			}
+			counter.increment()
+		}
+	}
+	
+	counters.keySet().sort().each { key ->
+		Counter counter = counters[key]
+		printf "%-15s : %d\n", key, counter.count
+	}
+}
+
+/**
+class SummaryService implements WebService {
+	String endpoint = FilterService.class.name + "_1.0.0"
+	int index
+	String type
+	long[] produces() { return [ Types.JSON ] as long[] }
+	long[] requires() { return [ Types.JSON ] as long[] }
+	Data configure(Data ignored) {
+		return DataFactory.error("Unsupported operation.")
+	}
+}
+*/

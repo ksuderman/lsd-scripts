@@ -1,0 +1,15 @@
+
+ConverterServices = [:]
+ConverterServices.new = { node, version ->
+	def services = [:]
+	services.gate2json = Service {
+		server node.server
+		name "${node.id}:convert.gate2json_${version}"
+	}
+	services.json2gate = Service {
+		server node.server
+		name "${node.id}:convert.json2gate_${version}"
+	}
+	return services
+}
+	

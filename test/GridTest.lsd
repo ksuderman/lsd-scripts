@@ -1,0 +1,23 @@
+include 'LAPPS'
+include 'Masc'
+
+def vassar = Server {
+	url 'http://grid.anc.org:8080'
+	username 'tester'
+	password 'tester'
+}
+
+def masc = Datasource {
+	server vassar
+	name 'anc:masc.text_1.4.0'
+}
+
+//def source = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascTextSource', null, null)
+//def keys = source.list()
+//def data = source.get(keys[0])
+
+//def masc = MascData.new(Nodes.localhost, '1.4.2')
+def keys = masc.list()
+def data = masc.get(keys[0])
+println data.payload
+

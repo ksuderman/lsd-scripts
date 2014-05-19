@@ -1,0 +1,32 @@
+/*
+ * Runs the first document from MASC through the OpenNLP tokenizer, sentence splitter,
+ * part of speech tagger, and named entity recognizer on the Brandeis service node.
+ *
+ * In this script we create the Java client objects directly without using the LSD
+ * builtin function Service and Datasource
+ */
+
+String brandeis = "http://eldrad.cs-i.brandeis.edu:8080/service_manager/invoker/brandeis_eldrad_grid_1:opennlp"
+String username = "eldrad"
+String password = "eldrad"
+
+def tokenizer = new ServiceClient("${brandeis}.tokenizer", username, password)
+def splitter = new ServiceClient("${brandeis}.splitter", username, password)
+def tagger = new ServiceClient("${brandeis}.postagger", username, password)
+def ner = new ServiceClient("${brandeis}.namedentityrecognizer", username, password)
+
+def masc = new DataSourceClient("http://grid.anc.org:8080/service_manager/invoker/anc:masc.text_1.4.2", "tester", "tester")
+
+// Fetch the first document from MASC
+def index = masc.list()
+def data = masc.get(index[0])
+
+// and run it through the Brandeis services.
+[tokenizer, splitter, tagger, ner].each { service ->
+	data = service.execute(data)
+}
+
+
+// The only reason for the new Container is to pretty print the JSON. We could
+// just print data.payload, but that would be difficult for humans to read.
+println new Container(data.payload).toPrettyJson()

@@ -1,0 +1,34 @@
+include 'LAPPS'
+include 'Common'
+include 'Masc'
+include 'Stanford'
+
+def node = Nodes.vassar
+def masc = MascData.new(node, '1.4.2')
+def stanford = StanfordServices.new(node, '1.4.0')
+
+File destination = createDir('/Users/suderman/Desktop/Stanford')
+
+//Pipeline pipeline = new Pipeline()
+pipeline = ['tokenizer', 'splitter', 'tagger', 'ner']  //.each { processor ->
+//	pipeline.add(stanford[processor])
+//}
+
+int i = 0
+def keys = masc.text.list()
+keys[0..9].each { key ->
+	//def key = keys[i]
+	println "${++i}. Processing ${key}"	
+	Data data = masc.text.get(key)
+	pipeline.each { service ->
+		println "Running stanford.${service}"
+		data = stanford[service].execute(data)
+	}
+	check(data)
+	String json = new Container(data.payload).toPrettyJson()
+	File outfile = new File(destination, "${key}.json")
+	outfile.text = json
+	println json
+}
+
+println "Done."

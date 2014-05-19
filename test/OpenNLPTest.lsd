@@ -1,0 +1,22 @@
+
+include 'OpenNLP'
+include 'Common'
+include 'TestData'
+include 'Summary'
+
+def opennlp = OpenNLPServices.new()
+
+def services = []
+services << opennlp.tokenizer
+services << opennlp.splitter
+services << opennlp.tagger
+services << opennlp.ner
+
+services.each { service ->
+	println "Calling ${service.endpoint}"
+	data = service.execute(data)
+	check(data)
+}
+
+summarize(data)
+println  new Container(data.payload).toPrettyJson()

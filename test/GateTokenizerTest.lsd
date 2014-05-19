@@ -1,0 +1,45 @@
+import org.anc.lapps.converters.gate.*
+
+include 'LAPPS'
+include 'Masc'
+include 'Gate'
+include 'Common'
+
+def node = Nodes.getNode()
+def masc = MascData.new(node, '1.4.2')
+def gate = GateServices.new(node, '1.3.5')
+
+def gate2json = Service {
+	server node.server
+	name "${node.id}:convert.gate2json_0.4.0"
+}
+
+def index = masc.text.list()
+def key = index[0]
+//def input = masc.text.get(key)
+def test = DataFactory.text("Hello world. Goodbye cruel world.")
+def result = gate.tokenizer.execute(test)
+
+//new File('/Users/suderman/Desktop/GateTokens.xml').text = result.payload
+println "Calling ${gate2json.endpoint}"
+result = gate2json.execute(test)
+check(result)
+
+Container container = new Container(result.payload)
+if (!container.steps.size() == 1) {
+	println "Invalid number of steps: ${container.steps.size()}"
+	return
+}
+ProcessingStep step = container.steps[0]
+if (container.metadata.contains?.Token == null) {
+	println "Processing step does not contain tokens."
+	return
+}
+
+int nTokens = step.annotations.count { it.type == 'Token' }
+if (nTokens != 7) { 
+	println "Wrong number of tokens."
+	return
+}
+
+println "Done."

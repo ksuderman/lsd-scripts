@@ -1,0 +1,176 @@
+/*
+ * This script runs documents from MASC through the three pipelines included with
+ * GATE: ANNIE, OpenNLP, and LingPipe.  A worker thread (Actor) is started for each
+ * pipeline as well as separate threads for reading and writing files.
+ */
+@Grab(group='org.codehaus.gpars', module='gpars', version='1.1.0')
+import groovyx.gpars.*
+import groovyx.gpars.actor.*
+import static groovyx.gpars.actor.Actors.*
+
+import org.anc.util.StopWatch
+
+include 'LAPPS'
+include 'Vassar'
+include 'Masc'
+include 'Common'
+
+//def gate = VassarServices.getGateServices(Nodes.vassar, '1.3.4')
+def node = Nodes.getNode()
+def gate = [:]
+gate.annie = Service {
+	server node.server
+	name "${node.id}:gate.annie_1.0.0-SNAPSHOT"
+}
+gate.opennlp = Service {
+	server node.server
+	name "${node.id}:gate.opennlp_1.0.0-SNAPSHOT"
+}
+gate.lingpipe = Service {
+	server node.server
+	name "${node.id}:gate.lingpipe_1.0.0-SNAPSHOT"
+}
+
+def gate2json = Service {
+	server node.server
+	name "${node.id}:convert.gate2json_0.3.3"
+}
+
+def masc = MascData.new(Nodes.vassar, '1.4.0')
+String root = '/Users/suderman/Projects/LAPPS/output/vassar'
+
+class Packet {
+	int id
+	String key
+	Data data
+	File file
+}
+
+String[] keys = masc.text.list()
+
+int start = 0
+int end = keys.size()
+
+if (args.start) start = args.start as int
+if (args.end) end = args.end as int
+
+GParsPool.withPool {
+	writer = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "${packet.id}. Writing ${packet.file.path}"
+					write(packet.file, packet.data.payload)
+				}
+				else {
+					println "Stopping the writer."
+					stop()
+				}
+			}
+		}
+	}
+	
+	converter = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "${packet.id}. Converting ${packet.file.path} to JSON"
+					packet.data = gate2json.execute(packet.data)
+					writer << packet
+				}
+				else {
+					println "Stopping the converter actor."
+					stop()
+				}
+			}
+		}
+	}
+	
+	opennlp = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "${packet.id}. OpenNLP processing ${packet.key}"
+					packet.data = gate.opennlp.execute(packet.data)
+					packet.file = new File("${root}/opennlp/${packet.key}.json")
+					converter << packet
+				}
+				else {
+					println "Stopping the OpenNLP actor."
+					stop()
+				}
+			}
+		}
+	}
+
+	annie = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "${packet.id}. Annie processing ${packet.key}"
+					packet.data = gate.annie.execute(packet.data)
+					packet.file = new File("${root}/annie/${packet.key}.json")
+					converter << packet
+				}
+				else {
+					println "Stopping the ANNIE actor."
+					stop()
+				}
+			}
+		}
+	}
+
+	lingpipe = actor {
+		loop {
+			react { packet ->
+				if (packet.data) {
+					println "${packet.id}. LingPipe processing ${packet.key}"
+					packet.data = gate.lingpipe.execute(packet.data)
+					packet.file = new File("${root}/lingpipe/${packet.key}.json")
+					converter << packet
+				}
+				else {
+					println "Stopping the ANNIE actor."
+					stop()
+				}
+			}
+		}
+	}
+	
+	reader = actor {
+		loop {
+			react { packet ->
+				if (packet.key) {
+					println "Fetching data for ${packet.key}"
+					packet.data = masc.text.get(packet.key)
+				}
+				else {
+					println "Stopping the Reader actor."
+					stop()
+				}
+				annie << packet
+				lingpipe << packet
+				opennlp << packet
+			}
+		}
+	}
+	
+	int id = 0
+	keys[start..end-1].each { key ->		
+		reader << new Packet(key:key, id:++id)
+	}
+	
+	// Send in the poison pill.
+	def poison = new Packet()
+	reader << poison
+	
+	// Wait for all the actors to stop	
+	[annie,lingpipe,opennlp]*.join()
+	
+	// Stop the converter and writer and wait for them to terminate.
+	writer << poison
+	converter << poison
+	[writer, converter]*.join()
+}
+
+println "Done."

@@ -1,0 +1,27 @@
+
+include 'LAPPS'
+include 'Gate'
+include 'Common'
+include 'Converters'
+include 'TestData'
+include 'Summary'
+
+def convert = ConverterServices.new(Nodes.vassar, '0.4.0')
+def gate = GateServices.new(Nodes.vassar, '1.3.5')
+
+def services = []
+services << gate.tokenizer
+services << gate.gazetteer
+services << gate.splitter
+services << gate.tagger
+services << gate.ner
+services << convert.gate2json
+
+services.each { service ->
+	println "Calling ${service.endpoint}"
+	data = service.execute(data)
+	check(data)
+}
+
+//Container container = new Container(data.payload)
+summarize(data)

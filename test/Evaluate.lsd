@@ -1,0 +1,77 @@
+include 'LAPPS'
+include 'Common'
+include 'Gate'
+include 'Stanford'
+include 'Converters'
+include 'Masc'
+
+def node = Nodes.vassar
+def gate = GateServices.new(node, '1.3.5')
+def stanford = StanfordServices.new(node, '1.4.0')
+def masc = MascData.new(node, '1.4.2')
+def convert = ConverterServices.new(node, '0.4.0')
+
+def index = masc.text.list()
+def key = index[0]
+def data = masc.text.get(key)
+
+def gateResult = gate.tokenizer.execute(data)
+gateResult = convert.gate2json.execute(gateResult)
+gateResult = new Container(gateResult.payload)
+def stanfordResult = getResult(stanford.tokenizer, data)
+
+def gold = gateResult.steps[0].annotations
+def test = stanfordResult.steps[0].annotations
+
+if (gold.size() != test.size()) {
+	println "Sizes are different."
+}
+
+Iterator<Annotation> goldIt = gold.iterator()
+Iterator<Annotation> testIt = test.iterator()
+
+int correct = 0
+int incorrect = 0
+test.each { t ->
+	def g = gold.find { it.start == t.start && it.end == t.end }
+	if (g != null) {
+		++correct
+	}
+	else {
+		++incorrect
+	}
+}
+
+/*
+Annotation testAnnotation = testIt.next()
+while (goldIt.hasNext()) {
+	Annotation goldAnnotation = goldIt.next()
+	if (goldAnnotation.start == testAnnotation.start) {
+		if (goldAnnotation.end == testAnnotation.end) {
+			++correct
+		}
+		else {
+			++incorrect
+		}
+	}
+	else {
+		++incorrect
+		while (goldAnnotation.start > testAnnotation.start && testIt.hasNext()) {
+			testAnnotation = testIt.next()
+		}	
+	}
+}
+*/
+println "Correct: ${correct}"
+println "Incorrect: ${incorrect}"
+
+	
+
+
+
+Container getResult(WebService service, Data data) {
+	Data result = service.execute(data)
+	return new Container(result.payload)
+}
+
+

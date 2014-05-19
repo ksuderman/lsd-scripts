@@ -1,0 +1,53 @@
+include 'LAPPS'
+include 'Common'
+include 'Services'
+
+def node = Nodes.getNode()
+def wrap = ServiceFactory.wrap(node, "1.0.0-SNAPSHOT")
+def align = ServiceFactory.align(node, "1.0.0-SNAPSHOT")
+
+def text = """one
+two
+three
+four
+five"""
+
+def original = """
+  
+     one  two
+     three
+     
+     four   five
+"""
+
+Container container = new Container(false)
+container.text = text
+container.language = 'en'
+container.metadata.parameters = [
+	prefix:"s",
+	label:"Sentence"	
+]
+Data data = new Data(Types.ONE_PER_LINE, container.toJson())
+
+println "Wrapping"
+Data result = wrap.execute(data)
+check(result)
+
+container = new Container(result.payload)
+//println container.toPrettyJson()
+//return
+
+container.metadata.parameters = [
+	original:original
+]
+data = DataFactory.json(container.toJson());
+
+println "Aligning"
+result = align.execute(data)
+check(result)
+
+prettyPrint(result)
+
+println "Done."
+
+***/

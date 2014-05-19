@@ -1,0 +1,48 @@
+{
+    "@context" : "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+    "metadata" : {
+        "alignParams" : {
+            "originalText" : "\n\n    one two\n    three\n    four   five"
+        }
+    },
+    "text" : {
+        "@value" : "one\ntwo\nthree\nfour\nfive",
+        "@language" : "en"
+    },
+    "steps" : [ {
+        "metadata" : {
+            "contains" : {
+                "s" : {
+                    "producer" : "JUnit Test Case.",
+                    "type" : "segment:s"
+                }
+            }
+        },
+        "annotations" : [ {
+            "@type" : "s",
+            "id" : "id0",
+            "start" : 0,
+            "end" : 3
+        }, {
+            "@type" : "s",
+            "id" : "id1",
+            "start" : 4,
+            "end" : 7
+        }, {
+            "@type" : "s",
+            "id" : "id2",
+            "start" : 8,
+            "end" : 13
+        }, {
+            "@type" : "s",
+            "id" : "id3",
+            "start" : 14,
+            "end" : 18
+        }, {
+            "@type" : "s",
+            "id" : "id4",
+            "start" : 19,
+            "end" : 23
+        } ]
+    } ]
+}

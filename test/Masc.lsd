@@ -1,0 +1,15 @@
+MascData = [:]
+MascData.new = { node, version ->
+	def masc = [:]
+	['text', 'gold', 'headers'].each { type ->
+		masc[type] = Datasource {
+			server node.server
+			name "${node.id}:masc.${type}_${version}"
+		}
+	}
+	masc.json = Datasource {
+		server node.server
+		name "${node.id}:masc.text.json_${version}"
+	}
+	return masc
+}

@@ -1,0 +1,17 @@
+/*
+ * Defines a factory that creates ServiceClients for all of the Stanford services.
+ */
+
+StanfordServices = [:]
+StanfordServices.new = { node, version ->
+    //println "WARNING: Stanford.lsd will be deprecated soon."
+	def map = [:]
+	def services = ['tokenizer', 'splitter', 'tagger', 'ner']
+	services.each { service ->
+		map[service] = Service {
+			server node.server
+			name "${node.id}:stanford.${service}_${version}"
+		}
+	}
+	return map
+}

@@ -1,0 +1,93 @@
+@Grab('org.lappsgrid:vocabulary:0.10.0-SNAPSHOT')
+import org.lappsgrid.vocabulary.*
+import org.anc.util.StopWatch
+
+include 'LAPPS'
+include 'Brandeis'
+include 'Common'
+include 'Masc'
+include 'Stanford'
+include 'Services'
+
+def serviceType = 'opennlp'
+if (args.stanford) {
+	serviceType = 'stanfordnlp'
+}
+
+def node = Nodes.vassar
+def masc = MascData.new(Nodes.vassar, '1.4.2')
+def services = BrandeisFactory.new(serviceType)
+def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+
+def json2gate = Service {
+	server node.server
+	name "${node.id}:convert.json2gate_0.4.0"
+}
+def gate2json = Service {
+	server node.server
+	name "${node.id}:convert.gate2json.4.0"
+}
+
+services.align = Service {
+	server node.server
+	name "${node.id}:word-align-1.0.0"
+}
+
+services.wrap = Service {
+	server node.server
+	name "${node.id}:wrap-1.0.0"
+}
+
+def path = args.out ?: "/Users/suderman/Desktop/brandeis/${serviceType}"
+def destination = createDir(path)
+println "Destination is ${destination.path}"
+int count = 0
+def keys = masc.text.list()
+
+//def keys = [ 'MASC3-0203' ]
+int start = 0
+int end = keys.size()
+if (args.start) start = args.start as int
+if (args.end) end = args.end as int
+
+def pipeline = [
+	services.splitter,
+	services.tokenizer,
+	services.tagger,
+	services.ner
+]
+
+def timer = new StopWatch()
+timer.start()
+keys[0..0].each { key ->
+	println "Getting data."
+	def data = masc.text.get(key)
+	check(data)
+	println "Got data."
+	def text = data.payload
+	//File originalTextFile = new File(destination, "${key}-original.txt")
+	//write(originalTextFile, text)
+	try {
+		println "${++count}. Processing ${key}"
+		pipeline.each { service ->	
+			println service.endpoint
+			data = service.execute(data)
+			check(data)
+			//println data.payload
+		}
+		String json = new Container(data.payload).toPrettyJson()
+		File outfile = new File(destination, "${key}.json")
+		outfile.text = json
+		//println json
+		println "Wrote ${outfile.path}"
+			
+	}
+	catch (Exception e) {
+		println "Unable to process ${key}: ${e.message}"
+		e.printStackTrace()
+		System.exit(1)
+	}
+}
+
+timer.stop()
+println "Time: ${timer}"

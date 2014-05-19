@@ -1,0 +1,135 @@
+include 'LAPPS'
+include 'Masc'
+include 'Gate'
+include 'Stanford'
+include 'Common'
+
+def node = Nodes.getNode()
+def masc = MascData.new(node, '1.4.2')
+def gate = GateServices.new(node, '1.3.5-SNAPSHOT')
+def stanford = StanfordServices.new(node, '1.4.0')
+
+/*
+def gate2json = Service {
+	server node.server
+	name "${node.id}:convert.gate2json_0.4.0-SNAPSHOT"
+}
+def json2gate = Service {
+	server node.server
+	name "${node.id}:convert.json2gate-0.4.0-SNAPSHOT"
+}
+*/
+
+def json2gate = new ServiceClient('http://localhost:9080/GateConverter/0.4.0-SNAPSHOT/services/JsonToGate')
+def gate2json = new ServiceClient('http://localhost:9080/GateConverter/0.4.0-SNAPSHOT/services/GateToJson')
+def updateMetadata = new UpdateMetadata()
+def fixFeatures = new FixFeatures()
+
+/*
+Pipeline pipeline = new Pipeline()
+pipeline.add stanford.tokenizer
+pipeline.add stanford.splitter
+pipeline.add json2gate
+pipeline.add gate.tagger
+*/
+
+def pipeline = [ gate.tokenizer, gate.splitter, gate.tagger, gate2json, updateMetadata, fixFeatures, stanford.ner ] 
+//def pipeline = [ stanford.tokenizer, stanford.splitter, stanford.tagger] //, json2gate, gate.gazetteer, gate.ner, gate2json ]
+def index = masc.text.list()
+def key = index[3]
+
+def data = masc.text.get(key)
+pipeline.each { processor ->
+	println "Running ${processor.endpoint}"
+	data = processor.execute(data)
+}
+check(data)
+Container container = new Container(data.payload)
+String json = container.toPrettyJson()
+println json
+File file = new File('/Users/suderman/Desktop/StanfordGateHybrid.json')
+write(file, json)
+println "Wrote ${file.path}"
+//println new Container(result.payload).toPrettyJson()
+
+class UpdateMetadata implements WebService {
+	String endpoint = UpdateMetadata.class.name
+	
+	long[] requires() { [ Types.JSON ] as long }
+	long[] produces() { [ Types.JSON ] as long }
+	Data configure(Data ignore) {
+		return DataFactory.error("Unsupported operation.")
+	}
+	
+	Data execute(Data input) {
+		if (input.discriminator == Types.ERROR) {
+			return input
+		}
+		if (input.discriminator != Types.JSON) {
+			String typeName = DiscriminatorRegistry.get(input.discriminator)
+			return DataFactory.error("Invalid input type. Expected json but found ${typeName}")
+		}
+		Container container
+		try {
+			container = new Container(input.payload)
+			container.steps.each { step->
+				Set<String> types = getTypes(step)
+				types.each { type ->
+					step.addContains(type, "Unknown", "unknown:${type}")
+				}
+			}
+		}
+		catch (Throwable e) {
+			return DataFactory.error("Unable to process input", e)
+		}
+		return DataFactory.json(container.toJson())
+	}
+	
+	Set<String> getTypes(ProcessingStep step) {
+		Set<String> types = new HashSet<String>()
+		step.annotations.each { types.add(it.type) }
+		return types
+	}
+}
+
+class FixFeatures implements WebService {
+	String endpoint = FixFeatures.class.name
+	
+	long[] requires() { [ Types.JSON ] as long[] }
+	long[] produces() { [ Types.JSON ] as long[] }
+	Data configure(Data ignored) {
+		return DataFactory.error('Unsupported operation.')
+	}
+	
+	Data execute(Data input) {
+		if (input.discriminator == Types.ERROR) {
+			return input
+		}
+		Container container = new Container(input.payload)
+		def renamer = { annotation, oldName, newName ->
+			annotation.features[newName] = annotation.features[oldName]
+			annotation.features.remove(oldName)
+		}
+		
+		container.steps.each { ProcessingStep step ->
+			boolean containsPOS = false
+			step.annotations.each { Annotation annotation ->
+				def actions = []
+				annotation.features.each { name, value ->
+					if (name == 'category') {
+						containsPOS = true
+						actions << renamer.curry(annotation, 'category', 'pos')
+					}
+					else if (name == 'string') {
+						actions << renamer.curry(annotation, 'string', 'word')
+					}
+				}
+				actions.each { it() }
+				if (containsPOS) {
+					step.addContains('pos', 'Unknown', 'tagset:penn')
+				}
+			}
+		}		
+		return DataFactory.json(container.toJson())
+	}
+}

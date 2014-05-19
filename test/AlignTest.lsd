@@ -1,0 +1,34 @@
+/*
+ * Test the text alignment service deployed to the local Tomcat instance.
+ */
+ 
+File testFile = new File('ToBeAligned.json')
+if (!testFile.exists()) {
+	println "Test file not found: ${testFile.path}"
+	return
+}
+
+//def service = new ServiceClient("http://localhost:9080/WordAlignment/1.0.0-SNAPSHOT/services/WordAlignment")
+
+def localhost = Server {
+	url 'http://localhost:8080'
+	username 'operator'
+	password 'operator'
+}
+
+def service = Service {
+	server localhost
+	name "picard:word-align-1.0.0-SNAPSHOT"
+}
+
+
+Container container = new Container(testFile.text)
+Data input = DataFactory.json(container.toJson())
+Data result = service.execute(input)
+
+if (result.discriminator == Types.ERROR) {
+	println result.payload
+	return
+}
+
+println new Container(result.payload).toPrettyJson()

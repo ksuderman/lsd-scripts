@@ -1,0 +1,21 @@
+
+def service = new ServiceClient("http://localhost:9080/Wrap/1.0.0-SNAPSHOT/services/Wrap")
+
+def text = """one
+two
+three
+four
+five"""
+
+Container container = new Container(false)
+container.text = text
+container.language = 'en'
+container.metadata.parameters = [
+	prefix:'s',
+	label:'Sentence'
+]
+Data input = new Data(Types.ONE_PER_LINE, container.toJson())
+Data result = service.execute(input)
+
+println DiscriminatorRegistry.get(result.discriminator)
+println result.payload

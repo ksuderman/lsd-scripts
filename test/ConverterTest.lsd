@@ -1,0 +1,32 @@
+include 'LAPPS'
+include 'Common'
+
+File inputDir = new File('/Users/suderman/Desktop/Gate')
+
+def node = Nodes.localhost //getNode()
+def gate2json = Service {
+	server node.server
+	name "${node.id}:convert.gate2json_0.4.0-SNAPSHOT"
+}
+def json2gate = Service {
+	server node.server
+	name "${node.id}:convert.json2gate.4.0-SNAPSHOT"
+}
+
+def g2j = new ServiceClient('http://localhost:9080/GateConverter/0.4.0-SNAPSHOT/services/JsonToGate')
+def j2g = new ServiceClient('http://localhost:9080/GateConverter/0.4.0-SNAPSHOT/services/GateToJson')
+printProducesRequires(g2j)
+printProducesRequires(j2g)
+
+/*
+int count = 0
+inputDir.eachFileMatch(~/.*\.xml/) { file ->	
+	println "${++count}. Converting ${file.path}"
+	Data data = new Data(Types.GATE, file.text)
+	Data result = converter.execute(data)
+	check(result)
+	File newFile = new File(file.path.replace('.xml', '.json'))
+	newFile.text = new Container(result.payload).toPrettyJson()
+}
+*/
+println "Done."

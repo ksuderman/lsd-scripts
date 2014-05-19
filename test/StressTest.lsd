@@ -1,0 +1,221 @@
+import concurrent.AsyncPipeline
+import concurrent.Packet
+import java.util.concurrent.atomic.AtomicInteger
+
+// List used to record timing information.
+List<String> dataRecords = []
+
+String VASSAR_URL = "http://grid.anc.org:8080/service_manager/invoker/anc:"
+String GATE_URL = VASSAR_URL + "gate."
+String STANFORD_URL = VASSAR_URL + "stanford."
+
+// Initialize maps with the URLs for the various gate and stanford services. That is,
+// gate.tokenizer will contain the URL for the GATE tokenizer, stanford.tagger will
+// contain the URL for the Stanford POS tagger, etc. The Worker threads will use these
+// URLs to create ServiceClients for the services.
+def gate = [:]
+def stanford = [:]
+["tokenizer", "splitter", "tagger", "ner"].each { name ->
+	gate[name] = GATE_URL + name + "_1.3.5"
+	stanford[name] = STANFORD_URL + name + "_1.4.0"
+}
+def gate2json = VASSAR_URL + "convert.gate2json_0.4.0"
+
+// Log messages are saved to a list to prevent unneeded disk access during the tests.
+def logMessages = []
+log = { message ->
+	println "LOG: ${message}"
+	logMessages << message
+}
+
+// A simple closure so users can call now() rather than typing System.currentTimeMillis()
+// all the time.
+def now = { System.currentTimeMillis() }
+
+
+// A closure used to write result to a file.
+def outputService = { packet ->
+	if (packet.data.discriminator == Types.ERROR) {
+		log "Error during processing: ${packet.data.payload}"
+		File outfile = new File(packet.outdir, "${packet.key}.error")
+		outfile.text = packet.data.payload
+	}
+	else try {
+		File outfile = new File(packet.outdir, "${packet.key}.json")
+		outfile.text = new Container(packet.data.payload).toPrettyJson()
+		log "Wrote ${outfile.path}"
+	}
+	catch (Throwable t) {
+		log "Error writing data: " + t.message
+	}
+	return packet.key
+}
+
+// The next three closures are added to the pipeline to record timing information.
+
+def startGateService = { packet ->
+	packet.startTime = System.currentTimeMillis()
+	packet.processor = "GATE"
+	return packet
+}
+
+def startStanfordService = { packet ->
+	packet.startTime = System.currentTimeMillis()
+	packet.processor = "Stanford"
+	return packet
+}
+
+def dataRecorder = { packet ->
+	long elapsed = now() - packet.startTime
+	String data = "${packet.id} ${packet.processor} ${packet.key} ${elapsed}"
+	log "DATA " + data
+	dataRecords << data
+	return packet
+}
+
+/**
+ * Extend the Packet class to include extra information we want to record.
+ */
+class MascPacket extends Packet {
+	String key
+	File outdir
+	long startTime
+	String processor
+}
+
+/**
+ * A Controller object is used to synchronize with all the worker threads. Each worker
+ * notifies the controller when it terminates.
+ */
+class Controller {
+	// The number of threads that have terminated.
+	AtomicInteger completed = new AtomicInteger()
+	Closure log
+	
+	// Overloads the ++ operator.
+	void next() {
+		int value = completed.incrementAndGet()
+		log "Controller received completed message: ${value}"
+	}
+	
+	void waitFor(int value) {
+		while (completed.get() != value) {
+			sleep(250)
+		}
+	}
+}
+
+/**
+ * Each worker thread will create an AsyncPipeline and then run documents from
+ * MASC through the pipeline.
+ */
+class Worker implements Runnable {
+	String id
+	DataSourceClient datasource
+	AsyncPipeline pipeline
+	File outdir
+	Controller controller 
+	Closure log
+	
+	public Worker(Controller controller, String id, List services, File outdir, Closure log) {
+		this.controller = controller
+		this.id = id
+		this.datasource = new DataSourceClient("http://grid.anc.org:8080/service_manager/invoker/anc:masc.text_1.4.2", "tester", "tester")
+		this.pipeline = new AsyncPipeline(log)
+		services.each { object ->
+			if (object instanceof String || object instanceof GString) {
+				// The string is the full URL of the web service
+				pipeline << new ServiceClient(object.toString(), "tester", "tester")
+			}
+			else if (object instanceof Closure) {
+				pipeline << object
+			}
+			else {
+				throw new UnsupportedOperationException("Unable to add ${object} to the pipeline.")
+			}
+		}
+		this.outdir = new File(outdir, id)
+		if (!this.outdir.exists()) {
+			this.outdir.mkdirs()
+		}
+		this.log = log
+	}
+	
+	void run() {
+		def index = datasource.list()
+		String lastKey = null
+		index[0..9].each { key ->
+			lastKey = key
+			log "Thread ${id}: queueing document ${key}"
+			def data = datasource.get(key)
+			pipeline << new MascPacket(key:key, data:data, outdir:outdir)
+		}
+		
+		// Wait for the pipeline to finish.
+		log "Thread ${id} is waiting for key ${lastKey}"
+		String value = pipeline.value()
+		while (value != lastKey) {
+			log "Thread ${id}: pipeline produced ${value}"
+			value = pipeline.value()
+		}
+		
+		// And notify the controller we are finished.
+		log "Thread ${id} terminating."		
+		++controller
+	}
+}
+
+// The lists of services that will be used to create the AsyncPipelines. Each list 
+// element is either a closure or the url of the service to be invoked.
+def gateServices = [ startGateService, gate.tokenizer, gate.splitter, gate.tagger, gate.ner, dataRecorder, gate2json, outputService]
+def stanfordServices = [ startStanfordService, stanford.tokenizer, stanford.splitter, stanford.tagger, stanford.ner, dataRecorder, outputService]
+
+// Where the results will be stored.
+File root = new File("/Users/suderman/Desktop/StressTests")
+File gateDir = new File(root, "Gate")
+File stanfordDir = new File(root, "Stanford")
+
+// Spin up the worker threads.
+Controller controller = new Controller(log:log)
+int nThreads = 5
+if (args.threads) {
+	nThreads = Integer.parseInt(args.threads)
+}
+
+List threads = []
+if (args.gate) {
+	log "Starting ${nThreads} GATE threads."
+	nThreads.times { id ->
+		Worker worker = new Worker(controller, "gate-${id}", gateServices, gateDir, log)
+		threads << new Thread(worker).start()
+	}
+}
+
+if (args.stanford) {
+	log "Starting ${nThreads} Stanford threads."
+	nThreads.times { id ->
+		Worker worker = new Worker(controller, "stanford-${id}", stanfordServices, stanfordDir, log)
+		threads << new Thread(worker).start()
+	}
+}
+
+// Wait for all worker threads to terminate. Each worker thread notifies the 
+// controller when it has terminated so we need to wait for the number of terminated threads to equal
+// the number of threads that were started.
+controller.waitFor(threads.size())
+
+File desktop = new File('/Users/suderman/Desktop')
+// Write timing information to a file.
+File timingFile = new File(desktop, "timing.txt")
+timingFile.withWriter { writer ->
+	dataRecords.each { writer.println it }
+}
+println "Wrote ${timingFile.path}"
+
+// Write all the log messages to a file.
+File logFile = new File(desktop, 'StressTestLog.txt')
+logFile.withWriter { writer ->
+	logMessages.each { writer.println it }
+}
+println "Wrote ${logFile.path}"
+println "Done"

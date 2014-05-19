@@ -1,0 +1,22 @@
+
+include 'LAPPS'
+include 'Stanford'
+include 'Common'
+include 'TestData'
+include 'Summary'
+
+def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+
+def services = []
+services << stanford.tokenizer
+services << stanford.splitter
+services << stanford.tagger
+services << stanford.ner
+
+services.each { service ->
+	println "Calling ${service.endpoint}"
+	data = service.execute(data)
+	check(data)
+}
+
+summarize(data)

@@ -1,0 +1,50 @@
+import org.anc.util.StopWatch
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+include 'LAPPS'
+include 'Gate'
+include 'Stanford'
+include 'Common'
+
+format = new SimpleDateFormat("mm:ss:SSS")
+format.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+timer = new StopWatch()
+def gate = GateServices.new(Nodes.vassar, '1.3.5')
+def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+
+void pingAll(Map services) {
+	services.each { name, service ->
+		printf "%-15s", name		
+		long total = 0
+		100.times {
+			timer.start()
+			Throwable error = null
+			try {
+				long[] requires = service.requires()
+				long[] produces = service.produces()
+			}
+			catch (Throwable t) {
+				error = t
+			}
+			timer.stop()
+			total += timer.elapsed()
+//			if (error) {
+//				printf "%-10s %s", name, error.message
+//			}
+//			else {
+//				printf "%-10s %s\n", name, timer.toString()
+//			}
+		}
+		println format.format(total)
+	}	
+}
+
+println "GATE"
+pingAll(gate)
+
+println "\nStanford"
+pingAll(stanford)
+
+

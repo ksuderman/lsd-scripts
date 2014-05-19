@@ -1,0 +1,12 @@
+Container container = new Container(false)
+ProcessingStep step = new ProcessingStep()
+step.addContains('Token', 'http://service.that.produces.the.tokens', 'tokenization:custom')
+container.addStep(step)
+println container.toPrettyJson()
+return
+
+
+Map context = container.getContext()
+context.put("foo", "http://example.com")
+
+println container.toPrettyJson()

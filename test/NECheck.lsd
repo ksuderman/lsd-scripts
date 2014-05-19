@@ -1,0 +1,25 @@
+
+def text = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascTextSource', null, null)
+def json = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascJsonSource', null, null)
+
+def index = text.list()
+def key = index[23]
+def data = json.get(key)
+
+Container container = new Container(data.payload)
+def ne = container.steps.find { it?.metadata?.annotationType == 'f.ne' }
+if (ne == null) {
+	println "No named entities found."
+	return
+}
+//if (ne.size() > 1) {
+//	println "More than one processing step contains named entities."
+//	return
+//}
+
+Set<String> types = new HashSet<String>()
+ne.annotations.each { types << it.type }
+types.each { println it }
+
+//println new Container(data.payload).toPrettyJson()
+

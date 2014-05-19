@@ -1,0 +1,79 @@
+include 'LAPPS'
+include 'Gate'
+include 'Stanford'
+include 'OpenNLP'
+include 'Masc'
+include 'Converters'
+include 'Common'
+include 'TestData'
+
+def gate = GateServices.new(Nodes.vassar, '1.3.5')
+def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+def opennlp = OpenNLPServices.new()
+def convert = ConverterServices.new(Nodes.vassar, '0.4.0')
+
+List pipeline = [ 
+	gate.tokenizer, 
+	gate.gazetteer, 
+	convert.gate2json, 
+	new FilterService(index:0, type:'SpaceToken'),
+	stanford.tagger,
+	opennlp.ner
+]
+
+//List pipeline = []
+//pipeline << stanford.tokenizer
+//pipeline << stanford.splitter
+//pipeline << stanford.tagger
+//pipeline << stanford.ner
+
+//pipeline << opennlp.tagger
+//pipeline << convert.json2gate
+//pipeline << gate.ner
+//pipeline << convert.gate2json
+
+pipeline.each { service ->
+	println "Running ${service.endpoint}"
+	data = service.execute(data)
+	check(data)
+}
+
+summarize(data)
+
+class FilterService implements WebService {
+	static final String endpoint = FilterService.class.name + "_1.0.0"
+	
+	int index
+	String type
+	
+	long[] produces() { return [ Types.JSON ] as long[] }
+	long[] requires() { return [ Types.JSON ] as long[] }
+	Data configure(Data ignored) {
+		return DataFactory.error("Unsupported operation.")
+	}
+	
+	Data execute(Data input) {
+		if (input.discriminator == Types.ERROR) {
+			return input
+		}
+		if (input.discriminator != Types.JSON) {
+			return DataFactory.error("Invalid input type. Expected json but found ${DiscriminatorRegistry.get(input.discriminator)}")
+		}
+		Container container = new Container(input.payload)
+		
+		Map parameters = container?.metadata.parameters
+		if (parameters != null) {
+			if (parameters.type) {
+				type = parameters.type
+			}
+			if (parameters.index) {
+				index = Integer.parseInt(parameters.index)
+			}
+		}
+
+		List annotations = container.steps[index].annotations
+		def toBeRemoved = annotations.findAll { it.type == type }
+		toBeRemoved.each { annotations.remove it }
+		return DataFactory.json(container.toJson())
+	}
+}

@@ -1,0 +1,25 @@
+include 'LAPPS'
+include 'Masc'
+include 'Common'
+
+def node = Nodes.getNode()
+println "Using service manager at ${node.server.url}"
+
+def masc = MascData.new(node, '1.4.0')
+
+def index = masc.text.list()
+def key = index[2]
+def data = masc.gold.get(key)
+Container container = new Container(data.payload)
+
+def step = container.steps.find { it?.metadata.annotationType == 'f.ne' }
+if (step) {
+	println "Found the named enties."
+	step.annotations.each { a ->
+		String token = container.text.substring((int)a.start, (int)a.end)
+		println "${token}\t${a.label}"
+	}
+}
+
+println "Done."
+

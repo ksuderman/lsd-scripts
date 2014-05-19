@@ -1,0 +1,25 @@
+include 'LAPPS'
+include 'Gate'
+include 'Stanford'
+include 'OpenNLP'
+include 'Common'
+
+void printAll(serviceType) {
+	serviceType.each { service ->
+		printProducesRequires(service)
+		println	
+	}
+}
+
+def gate = GateServices.new(Nodes.vassar, '1.3.5')
+def opennlp = OpenNLPServices.new()
+def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+
+println "GATE Services"
+printAll(gate)
+
+println "Stanford Services"
+printAll(stanford)
+
+println "OpenNLP Services"
+printAll(opennlp)

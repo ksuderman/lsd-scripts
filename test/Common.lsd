@@ -1,0 +1,117 @@
+/*
+ * The Common.lsd script contains a collection of helper functions.  
+ *
+ * the getTitle() closure is specific to the MASC datasources, but the rest
+ * are general purpose functions.
+ */
+ 
+include 'Servers'
+
+read = { file ->
+	if (file instanceof String) {
+		file = new File(file)
+	}
+	if (!(file instanceof File)) {
+		throw new UnsupportedOperationException("Parameter must be a String (path to the file) or a File object.")
+	}
+	return file.getText('UTF-8')
+}
+
+write = { file, contents ->
+	if (file instanceof String) {
+		file = new File(file)
+	}
+	if (!(file instanceof File)) {
+		throw new UnsupportedOperationException("The first parameter must be a String (path to the file) or a File object.")
+	}
+	if (contents instanceof Data) {
+		contents = contents.payload
+	}
+	file.setText(contents, 'UTF-8')
+}
+
+/*
+ * Returns the discriminator name for the discriminator in the Data
+ * object.
+ */
+getType = { data ->
+	return DiscriminatorRegistry.get(data.discriminator)
+}
+
+/*
+ * Creates a new directory at the given path or throws an IOException.
+ */
+createDir = { path ->
+	File file = new File(path)
+	if (!file.exists()) {
+		if (!file.mkdirs()) {
+			throw new IOException("Unable to create ${path}")
+		}
+	}
+	return file
+}
+
+/*
+ * Prints the discriminator names for all values in a list of
+ * discriminator values.
+ */
+printTypes = { types ->
+	def names = []
+	types.each { type ->
+		//println "\t(${type}) ${DiscriminatorRegistry.get(type)}"
+		names << DiscriminatorRegistry.get(type)
+	}
+	return names.join(", ")
+}
+
+/*
+ * Pretty prints the data in a container object.
+ */
+prettyPrint = { data ->
+	println new Container(data.payload).toPrettyJson()
+}
+
+/*
+ * Prints out the requirements and annotations produced by a given
+ * service.
+ */
+printProducesRequires = { service ->
+	println "${service.endpoint}"
+	println "\tRequires: ${printTypes(service.requires())}"	
+	println "\tProduces: ${printTypes(service.produces())}"
+}
+
+/*
+ * Checks that a data object is not null, does not contain an error code, and
+ * (optionally) that the discriminator is of the given type.
+ */
+check = { data, type=null ->
+	if (data == null) {
+		throw new NullPointerException("Data object is null.")
+	}
+	if (data.discriminator == Types.ERROR) {
+		throw new LappsException('ERROR: ' + data.payload)
+	}
+	
+	if (type && data.discriminator != type) {
+		def expected = DiscriminatorRegistry.get(type)
+		def found = DiscriminatorRegistry.get(data.discriminator)
+		throw new LappsException("Invalid discriminator type. Expected:${expected} Found:${found}")
+	}
+		
+}
+
+/*
+ * Checks that each of the values present in requires is also present
+ * in actual.
+ */
+checkArgs = { actual, required ->
+	boolean result = true
+	required.each { name ->
+		if (actual[name] == null) {
+			println "Missing parameter: ${name}"
+			result = false
+		}
+	}
+	return result
+}
