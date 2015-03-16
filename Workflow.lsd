@@ -1,0 +1,18 @@
+
+Container container = new Container()
+container.text = "Hello world"
+container.language = "en"
+
+//println container.toPrettyJson()
+
+View view = new View()
+view.metadata.contains = [type:'Token']
+view.annotations << new Annotation(id:1, label:'Token', '@type':'Token', start:0, end:5)
+view.annotations << new Annotation(id:2, label:'Token', '@type':'Token', start:6, end:11)
+container.views << view
+
+view = new View()
+view.metadata.contains = [type:'Sentence']
+veiw.annotations << new Annotation(id:3, label:'Sentence', '@type':'Sentence', start:0, end:11)
+container.views << view
+println container.toPrettyJson()

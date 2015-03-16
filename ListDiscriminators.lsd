@@ -1,0 +1,4 @@
+DiscriminatorRegistry.types().sort{ it.id }.each { id ->
+	Discriminator d = DiscriminatorRegistry.getById(id)
+	println "${d.id}\t${d.name}\t${d.uri}"
+}

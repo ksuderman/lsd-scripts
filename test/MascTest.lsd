@@ -1,0 +1,8 @@
+include 'LAPPS'
+include 'MASC'
+
+def masc = MascData.new(Nodes.vassar, '1.4.2')
+def index = masc.text.list()
+Data data = masc.text.get(index[-1])
+println data.payload
+

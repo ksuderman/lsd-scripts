@@ -1,0 +1,22 @@
+
+URL schema = new URL("http://vocab.lappsgrid.org/schema/service-schema.json")
+Validator validator = new Validator(schema)
+
+String url = "http://grid.anc.org:9080/GateServices/2.0.0-SNAPSHOT/services/Tokenizer"
+WebService service = new ServiceClient(url, null, null)
+String json = service.getMetadata()
+
+// We need to parse the JSON into a Data object so
+// we can access the payload.
+Data<String> data = Serializer.parse(json, Data)
+def result = validator.validate(data.payload)
+if (result.isSuccess()) {
+	println "Valid"
+}
+else {
+	println "Invalid"
+	result.each { println it.toString() }
+}
+
+println "Done."
+

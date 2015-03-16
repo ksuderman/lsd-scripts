@@ -1,0 +1,63 @@
+def grid = "http://grid.anc.org:9080" 
+def localhost = "http://localhost:9080"
+
+def servers = [:]
+servers.gate = "$grid/GateServices/2.0.0-SNAPSHOT/services"
+servers.stanford = "$grid/StanfordServices/2.0.0-SNAPSHOT/services"
+servers.converter = "$grid/GateConverter/1.0.0-SNAPSHOT/services"
+
+def gateServices = [ 
+	"NamedEntityRecognizer",
+	"Tokenizer",
+	"SentenceSplitter",
+	"Gazetteer",
+	"Coreferencer",
+	"OrthoMatcher",
+	"NounPhraseChunker",
+	"VerbPhraseChunker",
+	"POSTagger"
+]
+
+def stanfordServices = [
+	"NamedEntityRecognizer",
+	"Tokenizer",
+	"SentenceSplitter",
+	"Tagger"
+]
+
+def converters = [
+	"GateToJson",
+	"JsonToGate"
+]
+
+URL schemaUrl = new URL("http://vocab.lappsgrid.org/schema/service-schema.json")
+
+validator = new Validator(schemaUrl)
+passed = 0
+failed = 0
+
+validateServices(servers.gate, gateServices)
+validateServices(servers.stanford, stanfordServices)
+//validateServices(servers.converter, converters)
+println "Passed: $passed"
+println "Failed: $failed"
+println "Done."
+
+void validateServices(String server, List services) {
+	services.each { name ->
+		print "Validating $name metadata: "
+		WebService service = new ServiceClient("$server/$name", null, null)
+		String json = service.getMetadata()
+		Data<String> data = Serializer.parse(json, Data)
+		def report = validator.validate(data.payload)
+		if (report.isSuccess()) {
+			++passed
+			println "passed."
+		}
+		else {
+			++failed
+			println "failed."
+			report.each { println "\t${it.toString()}" }
+		}
+	}
+}

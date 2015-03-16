@@ -1,0 +1,42 @@
+include 'LAPPS'
+include 'Common'
+
+def node = Nodes.getNode()
+
+/**
+def opl = Service {
+	server node.server
+	name "${node.id}:wrap-2.0.0-SNAPSHOT"
+}
+*/
+
+def service = new ServiceClient('http://localhost:9080/wrap-2.0.0-SNAPSHOT')//, 'operator', 'operator')
+//println opl.endpoint
+//return
+
+def metadata = opl.getMetadata()
+println metadata.discriminator
+println metadata.payload
+return
+
+String text = """one
+two
+three
+four four-and-one-half
+five
+"""
+
+Container container = new Container()
+container.text = text
+container.metadata.parameters = [ prefix:'id', label:'line' ]
+
+Data input = DataFactory.oneperline(container.toJson())
+//println input.payload
+
+Data result = service.execute(input)
+println result.discriminator
+println result.payload
+//prettyPrint result
+
+
+

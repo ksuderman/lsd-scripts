@@ -1,0 +1,8 @@
+
+String grid = "http://grid.anc.org:9080"
+String gate = "$grid/GateServices/2.0.0-SNAPSHOT/services"
+String url = "$gate/Tokenizer"
+WebService service = new ServiceClient(url, null, null)
+String json = service.getMetadata()
+Data<String> data = Serializer.parse(json, Data)
+println groovy.json.JsonOutput.prettyPrint(data.payload)

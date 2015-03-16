@@ -1,0 +1,35 @@
+//@GrabResolver(name="anc.org", root="http://www.anc.org:8080/nexus/content/repositories/releases")
+//@GrabResolver(name="anc.org", root="http://www.anc.org:8080/nexus/content/repositories/snapshots")
+@Grab("org.anc.json:validator:1.0.0")
+import org.anc.json.validator.Validator
+
+def schema = """
+{
+	"type":"object",
+	"additionalProperties":true,
+	"properties":{
+		"name":{
+			"type":"string"
+		},
+		"age":{
+			"type":"number"
+		}
+	}
+"""
+def instance = """
+{
+	"name":"Bob",
+	"age":19,
+	"address":"123 Main Street",
+	"city":"Anytown"
+}
+"""
+
+Validator validator = new Validator(schema)
+def report = validator.validate(instance)
+if (report.isSuccess()) {
+	println "Instance is valid."
+}
+else {
+	report.each { println it.message }
+}

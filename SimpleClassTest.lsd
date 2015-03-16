@@ -1,0 +1,4 @@
+import SimpleClass
+
+def data = new SimpleClass().execute(null)
+println data.payload

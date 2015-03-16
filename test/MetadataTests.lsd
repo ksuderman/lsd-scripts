@@ -1,0 +1,19 @@
+include 'LAPPS'
+include 'Gate'
+include 'Masc'
+
+//def gate = GateServices.new(Nodes.getNode(), '2.0.0-SNAPSHOT')
+//println gate.splitter.getMetadata().payload
+//return
+
+def masc = MascData.new(Nodes.getNode(), '2.0.0-SNAPSHOT')
+//def index = masc.text.list().payload.split("\\s+")
+
+println masc.gold.getMetadata().payload
+
+/*
+gate.each { name, service ->
+	println name
+	println service.getMetadata().payload
+}
+*/

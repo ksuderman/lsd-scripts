@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>LAPPS Service Requirements</title>
+	<link type="text/css" rel="stylesheet" href="lapps.css"/>
+</head>
+<body>
+<div>
+<h1>GATE</h1>
+<p>These services are available from the Vassar service manager.</p>
+
+<table><tr><th>Service ID</th><th>Requires</th><th>Produces</th><tr>
+<tr><td>anc:gate.coref_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.gazetteer_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.ner_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.npchunker_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.ortho_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.splitter_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.tagger_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.tokenizer_1.3.5</td><td>error</td><td>error</td></tr>
+<tr><td>anc:gate.vpchunker_1.3.5</td><td>error</td><td>error</td></tr>
+</table>
+<h1>Stanford NLP<h1>
+<p>These services are available from the Vassar service manager.</p>
+<table><tr><th>Service ID</th><th>Requires</th><th>Produces</th><tr>
+<tr><td>anc:stanford.ner_1.4.0</td><td>error</td><td>error</td></tr>
+<tr><td>anc:stanford.splitter_1.4.0</td><td>error</td><td>error</td></tr>
+<tr><td>anc:stanford.tagger_1.4.0</td><td>error</td><td>error</td></tr>
+<tr><td>anc:stanford.tokenizer_1.4.0</td><td>error</td><td>error</td></tr>
+</table>
+<h1>OpenNLP</h1>
+<p>These services are available from the Brandeis service manager.</p>
+<table><tr><th>Service ID</th><th>Requires</th><th>Produces</th><tr>
+<tr><td>brandeis_eldrad_grid_1:opennlp.namedentityrecognizer</td><td>token, json</td><td>opennlp, ne, json</td></tr>
+<tr><td>brandeis_eldrad_grid_1:opennlp.parser</td><td>sentence</td><td>opennlp, sentence, token</td></tr>
+<tr><td>brandeis_eldrad_grid_1:opennlp.splitter</td><td>text, json</td><td>opennlp, sentence, json</td></tr>
+<tr><td>brandeis_eldrad_grid_1:opennlp.postagger</td><td>token, json</td><td>opennlp, pos, json</td></tr>
+<tr><td>brandeis_eldrad_grid_1:opennlp.tokenizer</td><td>sentence, text, json</td><td>opennlp, token, json</td></tr>
+</table>
+</div>
+</html>

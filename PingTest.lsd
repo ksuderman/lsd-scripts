@@ -1,0 +1,32 @@
+include 'LAPPS'
+include 'Common'
+
+def node = Nodes.getNode()
+
+def ping = Service {
+	server node.server
+	name "${node.id}:ping-1.0.0-SNAPSHOT"
+}
+
+def service = new ServiceClient('http://localhost:9080/Ping/2.0.0-SNAPSHOT/services/PingService')//, 'operator', 'operator')
+def input = DataFactory.text('Hello world.')
+
+println "Metadata"
+def metadata = service.getMetadata()
+if (metadata) {
+	println metadata.discriminator
+	println metadata.payload
+}
+else {
+	println "ERROR: metadata is null."
+}
+
+
+println()
+println "Service call"
+def result = service.execute(input)
+println result.discriminator
+println result.payload
+
+//println opl.endpoint
+//return

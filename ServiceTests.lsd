@@ -1,0 +1,60 @@
+import groovy.json.JsonOutput
+
+println "Running ServiceTests.lsd"
+def grid = "http://grid.anc.org:9080" 
+def localhost = "http://localhost:9080"
+
+def gate = "$grid/GateServices/2.0.0-SNAPSHOT/services"
+def masc = "$grid/MascDataSource/2.0.0-SNAPSHOT/services"
+def conv = "$localhost/GateConverter/1.0.0-SNAPSHOT/services"
+
+def services = [ 
+	"NamedEntityRecognizer",
+	"Tokenizer",
+	"SentenceSplitter",
+	"Gazetteer",
+	"POSTagger"
+]
+
+def source = new DataSourceClient("$masc/MascTextSource", null, null)
+source.setToken("123abc")
+
+def converter = new ServiceClient("$conv/GateToJson")
+
+def tokenizer = new ServiceClient("$gate/Tokenizer", null, null)
+def splitter = new ServiceClient("$gate/SentenceSplitter", null, null)
+def tagger = new ServiceClient("$gate/POSTagger", null, null)
+
+/*
+println converter.getMetadata()
+println "Done."
+
+return
+*/
+
+File output = new File("gate-tokenized.json")
+println "Reading input from ${output.path}"
+List<String> list = source.list(0,2)
+String key = list[0]
+println "Fetching document $key"
+String json = source.get(key)
+println "Tokenizing"
+json = tokenizer.execute(json)
+println "Splitting"
+json = splitter.execute(json)
+println "Tagging"
+json = tagger.execute(json)
+println "Converting"
+json = converter.execute(json)
+
+//println json
+output.text = JsonOutput.prettyPrint(json)
+println "Wrote ${output.path}"
+
+
+/*
+Data data = Serializer.parse(json, Data)
+println "${data.payload.class.name}"
+List<String> list = data.payload
+list.each { println it }
+*/

@@ -1,0 +1,14 @@
+
+//String url = "http://grid.anc.org:9080/GateServices/2.0.0-SNAPSHOT/services/Tokenizer"
+//String url = "http://localhost:9080/DatabaseService/1.0.0-SNAPSHOT/services/DatabaseService"
+String url = "http://grid.anc.org:8080/service_manager/invoker/anc:database.service_1.0.0-SNAPSHOT"
+WebService service = new ServiceClient(url, "tester", "tester")
+println service.getMetadata()
+
+Data request = new Data(Discriminators.Uri.JSON)
+String json = service.execute(request.asJson())
+Data data = Serializer.parse(json, Data)
+data.payload.each { 
+	println "${it.gridid}:${it.id}, ${it.name} - ${it.description}"
+}
+
