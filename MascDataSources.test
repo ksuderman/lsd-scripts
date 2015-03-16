@@ -1,17 +1,103 @@
-include 'Servers'
-include 'Masc'
+include 'LAPPS'
 include 'Test'
 
-masc = MascData.new(servers.localhost, '1.4.0')
+def node = Nodes.localhost
 
-String[] text = masc.text.list()
-String[] gold = masc.gold.list()
-String[] headers = masc.headers.list()
+def text = Datasource {
+	server node.server
+	name "${node.id}:masc.text_2.0.0-SNAPSHOT"
+}
 
-test("Wrong number of sources available.", masc.size() == 3)
-test("text != gold", text.size() == gold.size())
-test("text != headers", text.size() == headers.size())
-test("headers != gold", headers.size() == gold.size())
+def json = Datasource {
+	server node.server
+	name "${node.id}:masc.gold_2.0.0-SNAPSHOT"
+}
+/*
+def text = new DataSourceClient("http://localhost:9080/MascDataSource/2.0.0-SNAPSHOT/services/MascTextSource", null, null)
+def json = new DataSourceClient("http://localhost:9080/MascDataSource/2.0.0-SNAPSHOT/services/MascJsonSource", null, null)
+*/
+
+text.setToken('123abc')
+json.setToken('123abc')
+
+String[] textList = text.list()
+String[] jsonList = json.list()
+
+test("text != gold", textList.size() == jsonList.size())
+test("size != 392", textList.size() == 392)
 
 println "Tests passed: ${passed}"
 println "Tests failed:: ${failed}"
+
+
+/*
+import java.util.concurrent.TimeUnit;
+import org.lappsgrid.serialization.*
+import org.lappsgrid.serialization.lif.*
+import org.lappsgrid.serialization.datasource.*
+import org.lappsgrid.metadata.*
+
+//Data<Void> request = new Data<Void>(Discriminators.Uri.GETMETADATA)
+
+def client = new DataSourceClient("http://localhost:9080/MascDataSource/2.0.0-SNAPSHOT/services/MascTextSource", null, null)
+//def client = new DataSourceClient("http://grid.anc.org:9080/MascDataSource/2.0.0-SNAPSHOT/services/MascTextSource", null, null)
+//def client = new DataSourceClient("http://localhost:8080/services/MascTextSource", null, null)
+client.setToken("2ae317014058d00f742ccc9fdf27a701")
+//client.setToken("123abc")
+
+//String json = client.getMetadata()
+//Data<String> data = Serializer.parse(json, Data)
+//DataSourceMetadata metadata = Serializer.parse(data.payload, DataSourceMetadata)
+//println Serializer.toPrettyJson(metadata)
+
+String json = client.execute(DataFactory.list())
+Data data = Serializer.parse(json, Data)
+println data.discriminator
+if (data.discriminator == Discriminators.Uri.ERROR) {
+	println "ERROR: ${data.payload}"
+}
+else {
+	List<String> keys = data.payload
+
+	json = client.get(keys[0])
+	Data stringData = Serializer.parse(json, Data)
+	if (stringData.discriminator == Discriminators.Uri.ERROR) {
+		println "ERROR: ${stringData.discriminator}"
+	}
+	else {
+		println stringData.payload
+	}
+}
+return
+
+//println client.execute(request)
+
+json = client.execute(DataFactory.list())
+Data<List<String>> data = Serializer.parse(json, Data)
+if (data.discriminator == Discriminators.Uri.ERROR) {
+	println "ERROR: ${data.payload}"
+}
+else {
+	println data.discriminator
+	data.payload.each { println it }
+	
+	//println "Parsing JSON"
+	//DataSourceMetadata metadata = Serializer.parse(data.payload, DataSourceMetadata)
+	//println Serializer.toPrettyJson(metadata)
+	
+}
+println 'Done'
+return
+
+String list() {
+	return asJson(new List())
+}
+
+String get(String key) {
+	return DataFactory.get(key)
+}
+
+String asJson(object) {
+	return Serializer.toPrettyJson(object)
+}
+*/

@@ -6,6 +6,7 @@ include 'Masc'
 include 'Converters'
 include 'Common'
 include 'TestData'
+include 'Summary'
 
 def gate = GateServices.new(Nodes.vassar, '1.3.5')
 def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
@@ -15,10 +16,12 @@ def convert = ConverterServices.new(Nodes.vassar, '0.4.0')
 List pipeline = [ 
 	gate.tokenizer, 
 	gate.gazetteer, 
+	gate.splitter,
 	convert.gate2json, 
-	new FilterService(index:0, type:'SpaceToken'),
-	stanford.tagger,
-	opennlp.ner
+	new FilterService(index:-1, type:'SpaceToken'),
+	opennlp.tagger,
+	//stanford.tagger,
+	//opennlp.ner
 ]
 
 //List pipeline = []
@@ -71,9 +74,17 @@ class FilterService implements WebService {
 			}
 		}
 
-		List annotations = container.steps[index].annotations
-		def toBeRemoved = annotations.findAll { it.type == type }
-		toBeRemoved.each { annotations.remove it }
+		if (index >= 0) {
+			remove(container.steps[index], type)
+		}
+		else {
+			container.steps.each { remove(it, type) }
+		}
 		return DataFactory.json(container.toJson())
+	}
+	
+	void remove(ProcessingStep step, String type) {
+		def toBeRemoved = step.annotations.findAll { it.type == type }
+		toBeRemoved.each { step.annotations.remove it }
 	}
 }

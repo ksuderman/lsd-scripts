@@ -1,22 +1,45 @@
 
-include 'OpenNLP'
+include 'LAPPS'
+include 'Masc'
 include 'Common'
-include 'TestData'
-include 'Summary'
+include 'OpenNLP'
 
-def opennlp = OpenNLPServices.new()
+def masc = MascData.new(Nodes.vassar, '1.4.2')
+def provider = OpenNLPServices.new()
 
-def services = []
-services << opennlp.tokenizer
-services << opennlp.splitter
-services << opennlp.tagger
-services << opennlp.ner
-
-services.each { service ->
-	println "Calling ${service.endpoint}"
-	data = service.execute(data)
-	check(data)
+String outpath = args.out ?: '/Users/suderman/Desktop/OpenNLP'
+File outdir = new File(outpath)
+if (!outdir.exists()) {
+	if (!outdir.mkdirs()) {
+		println "Unable to create ${outpath}"
+		return
+	}
 }
 
-summarize(data)
-println  new Container(data.payload).toPrettyJson()
+def services = []
+services << provider.tokenizer
+services << provider.splitter
+services << provider.tagger
+services << provider.ner
+
+def index = masc.text.list()
+index.each { key ->
+	Data data = masc.text.get(key)
+	try {
+		services.each { service ->
+			println "Calling ${service.endpoint}"
+			data = service.execute(data)
+			check(data)
+		}
+		def container = new Container(data.payload)
+		File outfile = new File(outdir, "${key}.json")
+		outfile.text = container.toPrettyJson()	
+		println "Wrote ${outfile.path}"
+	}
+	catch (Throwable t) {
+		println "ERROR: ${key} ${t.message}"
+	}
+}
+
+println "Done."
+

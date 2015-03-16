@@ -35,7 +35,10 @@ write = { file, contents ->
  * object.
  */
 getType = { data ->
-	return DiscriminatorRegistry.get(data.discriminator)
+	if (data instanceof Data) {
+		return DiscriminatorRegistry.get(data.discriminator)
+	}
+	return DiscriminatorRegistry.get(data)
 }
 
 /*

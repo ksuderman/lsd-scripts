@@ -108,7 +108,7 @@ producesRequires = { service ->
 }
 
 /*
- * Checks that a data object is not null, does not contain and error code, and
+ * Checks that a data object is not null, does not contain an error code, and
  * (optionally) that the discriminator is of the given type.
  */
 check = { data, type=null ->
@@ -128,8 +128,8 @@ check = { data, type=null ->
 }
 
 /*
- * Checks that each of the values present in requires is also present
- * in actual.
+ * Checks that each of the values present in 'required' is also present
+ * in 'actual'.
  */
 checkArgs = { actual, required ->
 	boolean result = true

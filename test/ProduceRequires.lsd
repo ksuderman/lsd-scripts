@@ -4,6 +4,9 @@ include 'Stanford'
 include 'OpenNLP'
 include 'Common'
 
+BRANDEIS = "http://eldrad.cs-i.brandeis.edu:8080"
+VASSAR = "http://grid.anc.org:8080"
+
 void printAll(serviceType) {
 	serviceType.each { service ->
 		printProducesRequires(service)
@@ -11,10 +14,23 @@ void printAll(serviceType) {
 	}
 }
 
+void generateHTML(serviceType) {
+	println "<table><tr><th>Service ID</th><th>Requires</th><th>Produces</th><tr>"
+	serviceType.keySet().sort().each { name ->
+		def service = serviceType[name]
+		def id = service.endpoint.split("/")[-1]
+		String requires = service.requires().collect{ getType(it) }.join(", ")
+		String produces = service.produces().collect{ getType(it) }.join(", ")
+		println "<tr><td>${id}</td><td>$requires</td><td>$produces</td></tr>"
+	}
+	println "</table>"
+}
+
 def gate = GateServices.new(Nodes.vassar, '1.3.5')
 def opennlp = OpenNLPServices.new()
 def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
 
+/*
 println "GATE Services"
 printAll(gate)
 
@@ -23,3 +39,28 @@ printAll(stanford)
 
 println "OpenNLP Services"
 printAll(opennlp)
+*/
+
+println """<html>
+<head>
+	<title>LAPPS Service Requirements</title>
+	<link type="text/css" rel="stylesheet" href="lapps.css"/>
+</head>
+<body>
+<div>
+<h1>GATE</h1>
+<p>These services are available from the Vassar service manager.</p>
+"""
+
+generateHTML(gate)
+
+println "<h1>Stanford NLP<h1>"
+println "<p>These services are available from the Vassar service manager.</p>"
+
+generateHTML(stanford)
+
+println "<h1>OpenNLP</h1>"
+println "<p>These services are available from the Brandeis service manager.</p>"
+generateHTML(opennlp)
+println "</div>\n</html>"
+

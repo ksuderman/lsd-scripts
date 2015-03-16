@@ -1,22 +1,53 @@
 
 include 'LAPPS'
-include 'Stanford'
+include 'Masc'
 include 'Common'
-include 'TestData'
-include 'Summary'
+include 'Stanford'
 
-def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
+def masc = MascData.new(Nodes.vassar, '1.4.2')
+def provider = StanfordServices.new(Nodes.vassar, '1.4.0')
 
-def services = []
-services << stanford.tokenizer
-services << stanford.splitter
-services << stanford.tagger
-services << stanford.ner
-
-services.each { service ->
-	println "Calling ${service.endpoint}"
-	data = service.execute(data)
-	check(data)
+String outpath = args.out ?: '/Users/suderman/Desktop/Stanford'
+File outdir = new File(outpath)
+if (!outdir.exists()) {
+	if (!outdir.mkdirs()) {
+		println "Unable to create ${outpath}"
+		return
+	}
 }
 
-summarize(data)
+def services = []
+services << provider.tokenizer
+services << provider.splitter
+services << provider.tagger
+services << provider.ner
+
+def failed = []
+def index = masc.text.list()
+index[0..0].each { key ->
+	Data data = masc.text.get(key)
+	try {
+		services.each { service ->
+			println "Calling ${service.endpoint}"
+			data = service.execute(data)
+			check(data)
+		}
+		def container = new Container(data.payload)
+		File outfile = new File(outdir, "${key}.json")
+		outfile.text = container.toPrettyJson()	
+		println "Wrote ${outfile.path}"
+	}
+	catch (Throwable t) {
+		String message = "${key} ${t.message}"
+		println "ERROR: $message"
+		failed << message
+	}
+}
+
+if (failed.size() > 0) {
+	println "The following files had errors"
+	failed.each { println it }
+}
+
+println "Done."
+

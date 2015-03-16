@@ -1,5 +1,5 @@
 // The URL to the LDC's Gigaword DataSource.
-ldcUrl='http://grid.ldc.upenn.edu:8080/doc_service/services/DocumentDataSource'
+ldcUrl='http://grid.ldc.upenn.edu:8181/doc_service/services/DocumentDataSource'
 
 // We are not accessing the service through the service manager so we do not
 // need a username or password.

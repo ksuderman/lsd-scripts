@@ -1,65 +1,95 @@
+import MascIndex
 
 include 'LAPPS'
 include 'Masc'
+include 'Common'
+include 'Converters'
 include 'Gate'
 include 'Stanford'
-include 'Brandeis'
+include 'OpenNLP'
 
-def gate = GateServices.new(Nodes.vassar, '1.3.5')
-def stanford = StanfordServices.new(Nodes.vassar, '1.4.0')
 def masc = MascData.new(Nodes.vassar, '1.4.2')
 
-[gate, stanford, masc].each { map ->
-	map.each { name, service ->
-		println service.endpoint
+convert = null
+provider = null
+String outpath = null
+
+
+if (args.gate) {
+	provider = GateServices.new(Nodes.vassar, "1.3.5")
+	convert = ConverterServices.new(Nodes.vassar, "0.4.0")
+	outpath = '/Users/suderman/Desktop/Gate'
+}
+else if (args.stanford) {
+	provider = StanfordServices.new(Nodes.vassar, '1.4.0')
+	outpath = '/Users/suderman/Desktop/Stanford'
+}
+else if (args.opennlp) {
+	provider = OpenNLPServices.new()
+	outpath = '/Users/suderman/Desktop/OpenNLP'
+}
+else {
+	println "Unknown service type."
+	return
+}
+
+File outdir = new File(outpath)
+if (!outdir.exists()) {
+	if (!outdir.mkdirs()) {
+		println "Unable to create ${outpath}"
+		return
 	}
 }
 
-/**
-def text = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascTextSource', null, null)
-def json = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascJsonSource', null, null)
-def jsonText = new DataSourceClient('http://grid.anc.org:9080/MascDataSource/1.4.2/services/MascJsonTextSource', null, null)
-
-def index = text.list()
-def key = 'MASC3-0202' //index[11]
-
-def data = json.get(key)
-Container container = new Container(data.payload)
-def neStep = find(container, "f.ne")
-if (neStep == null) {
-	println "Named entities not found."
-	return	
+def services = []
+if (args.gate) {
+	services << provider.tokenizer
+	services << provider.gazetteer
+	services << provider.splitter
+	services << provider.tagger
+	services << provider.ner
+	services << convert.gate2json
+}
+else {
+	services << provider.tokenizer
+	services << provider.splitter
+	services << provider.tagger
+	services << provider.ner
 }
 
-Container neContainer = new Container(false)
-neContainer.text = container.text
-neContainer.language = container.language
-neContainer.steps.add(neStep)
-println neContainer.toPrettyJson()
-
-
-ProcessingStep find(Container container, String type) {
-	for (ProcessingStep step : container.getSteps()) {
-		Map metadata = step.getMetadata()
-		String aType = metadata.get("annotationType")
-		if (type != null && type.equals(aType)) {
-			return step
+def timer = new org.anc.util.StopWatch()
+def index = new MascIndex()
+index.load("MascIndex.tsv")
+int count = 0
+def failed = []
+def keys = masc.text.list()
+keys.each { key ->
+	try {
+		Data data = masc.text.get(key)
+		print "${++count}\t${key}\t${index.getWordCount(key)}"
+		timer.start()
+		services.each { service ->
+			//println "Calling ${service.endpoint}"
+			data = service.execute(data)
+			check(data)
 		}
+		timer.stop()
+		def container = new Container(data.payload)
+		File outfile = new File(outdir, "${key}.json")
+		outfile.text = container.toPrettyJson()	
+		println "\t${timer.toString()}"
 	}
-	return null
+	catch (Throwable t) {
+		String message = "${key} ${t.message}"
+		println "\t${timer.toString()}\t${t.message}"
+		failed << message
+	}
 }
-*/
 
-/*
-def node = Nodes.vassar
-def masc = MascData.new(node, '1.4.2')
+if (failed.size() > 0) {
+	println "The following files had errors"
+	failed.each { println it }
+}
 
-def index = masc.gold.list()
-def key = index[0]
-def data = masc.gold.get(key)
-//println new Container(data.payload).toPrettyJson()
-println "Gold service endpoint is: ${masc.gold.endpoint}"
-*/
+println "Done."
 
-
-// http://grid.anc.org:8080/service_manager/invoker/anc:masc.gold_1.4.2
