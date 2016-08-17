@@ -4,9 +4,11 @@ Nodes = [
 	vassar: [id:'anc', server:servers.vassar],
 	localhost: [id:'picard', server:servers.localhost],
 	brandeis: [id:'brandeis_eldrad_grid_1', server:servers.brandeis],
+	aws: [id:'lapps', server:servers.aws],
 	getNode: { 
 		if (args.vassar) return Nodes.vassar
 		if (args.brandeis) return Nodes.brandeis
+		if (args.aws) return Nodes.aws
 		return Nodes.localhost
 	} 
 ]

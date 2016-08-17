@@ -27,8 +27,15 @@ servers.ldc = Server {
 	url  'http://grid.ldc.upenn.edu:8080'
 	username 'operator'
 	password 'operator'
-
 }
+
+// This is Testing 3
+servers.aws = Server {
+	url  'http://ec2-52-23-237-161.compute-1.amazonaws.com:8080'
+	username 'operator'
+	password 'operator'
+}
+
 
 if (args.server) {
 	def serverName = args.server

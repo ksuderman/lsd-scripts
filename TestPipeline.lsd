@@ -1,0 +1,56 @@
+/*
+ *
+ */
+
+include 'LAPPS'
+include 'Masc'
+include 'Common'
+
+//println args
+//println args['id']
+    
+def node = Nodes.aws
+
+def masc = MascData.new(node, '2.2.0')
+
+def provider = 'stanfordnlp'
+def service = 'tokenizer'
+def version = '2.0.1'
+    
+def tokenizer = Service {
+    server node.server
+    name "${node.id}:${provider}.${service}_${version}"
+}
+
+provider = 'stanford'
+service = 'tagger'
+version = '2.1.0'
+
+def tagger = Service {
+    server node.server
+    name "${node.id}:${provider}.${service}_${version}"
+}
+
+provider = 'stanfordnlp'
+service = 'dependencyparser'
+version = '2.0.1'
+
+def parser = Service {
+    server node.server
+    name "${node.id}:${provider}.${service}_${version}"
+}
+
+
+def data = masc.text.get("MASC3-0202")
+
+println "Running tokenizer";
+data = tokenizer.execute(data)
+//println data
+
+println "Running tagger";
+data = tagger.execute(data)
+//println data
+
+println "Running parser";
+data = parser.execute(data)
+//println data
