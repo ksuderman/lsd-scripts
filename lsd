@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eu
+
+VERSION=1.2.2-SNAPSHOT
+VERSION=2.0.0-SNAPSHOT
+HEAP_SIZE=-Xmx4G
+JAR=$HOME/bin/lsd-$VERSION.jar
+
+CLASSPATH=$JAR:./
+java $HEAP_SIZE -cp $CLASSPATH org.anc.lapps.dsl.LappsDsl  $@
+
